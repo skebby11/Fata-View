@@ -1,21 +1,35 @@
-<?php include('functions.php') ?>
+<?php include('functions.php');
+
+$goto = $_GET['goto']; ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Fata Streaming - Register</title>
 	<link rel="stylesheet" type="text/css" href="style.css?v1.1.47">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<style>
+	@media (min-width: 992px) { 
+		.header {
+			max-width: 970px;
+		}
+		.menu {
+			max-width: 970px;
+		}
+		form {
+			max-width: 970px;
+		}
+	</style>
+	
 </head>
 <body>
 	<div class="header">
-		<!--<img src="img/skedata1.png" width="80%">	-->
+		<img src="FATASlogo.png">	
 	</div>
 	<div class="menu">
-<!--		<ul>
+		<ul>
  		 <li><a href="index.php">Home</a></li>
-  		 <li><a href="myfiles.php">My files</a></li>
-  		 <li><a href="settings.php">Settings</a></li>
-		</ul>-->
+		</ul>
 		
 		<!-- logged in user information -->
 		<div class="profile_info" align="right"> 
@@ -49,11 +63,14 @@
 			<label>Confirm password</label>
 			<input type="password" name="password_2">
 		</div>
+		
+		<input type="text" name="goto" style="visibility: hidden" value="<?php echo $goto; ?>">
+		
 		<div class="input-group">
 			<button type="submit" class="btn blue" name="register_btn">Register</button>
 		</div>
 		<p>
-			Already a member? <a href="login.php">Sign in</a>
+			Already a member? <a href="login.php?goto=<?php echo $goto; ?>">Sign in</a>
 		</p>
 	</form>
 </body>

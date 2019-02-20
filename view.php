@@ -3,28 +3,33 @@
 $v = $_GET['v'];
 $s = $_GET['s'];
 $p = $_GET['p'];
-
-
 include('functions.php');
-
+$idutente = $_SESSION['user']['id'];
 if(!empty($v)){
-$epdetailsquery = "SELECT stagione, episodio, serie, titolo FROM episodi where link='$v'";
+$epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi where link='$v'";
 }
-
 if(!empty($p)){
-$epdetailsquery = "SELECT stagione, episodio, serie, titolo FROM episodi where linksv='$p'";
+$epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi where linksv='$p'";
 }
-
 $epdetailsresult = mysqli_query($db, $epdetailsquery);
-
     while($row = mysqli_fetch_assoc($epdetailsresult)) {
+	$epid = $row["id"];
 	$stagione = $row["stagione"];
 	$episodio = $row["episodio"];
 	$idserie = $row["serie"];
 	$titolo = $row["titolo"];
 	} 
-?>
-
+// call the seenep() function if seenep_btn is clicked
+	if (isset($_POST["seenep_btn"])) {
+		seenep();
+	}
+function seenep() {
+	global $db, $idserie, $epid;
+	$idutente = $_SESSION['user']['id'];
+	$addsenepquery = "INSERT into epseen (user, serie, epid) VALUES('$idutente', '$idserie', '$epid')";
+	mysqli_query($db, $addsenepquery);
+	echo $addsenepquery;
+} ?>
 <!-- 
 
 Fata Streaming 2018 / Made by www.sebastianoriva.it
@@ -37,13 +42,12 @@ ESKERE
 <head>
 <title>Fata Streaming - <?php echo $stagione . "X" . $episodio . " - " .$titolo; ?></title>
 <link rel="icon" href="/favicon.ico" type="image/png"/>
-<link href="fatastyle.css?1.1" rel="stylesheet" type="text/css">
+<link href="fatastyle.css?1.2" rel="stylesheet" type="text/css">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Guarda online gratuitamente le tue serie preferite su Fata Streaming">
 <meta http-equiv="Content-Language" content="it" />
-
 
 <!-- Block Right 
 <script language="Javascript1.2">
@@ -88,10 +92,10 @@ document.oncontextmenu=new Function("return false");
 	</div><br>
          
      <script>	
-	$.get( "https://api.openload.co/1/file/info?file=<?php echo $v; php?>&login=7f53b6aa27b38c73&key=euZmu1Un", function( response ) {
+	$.get( "https://api.openload.co/1/file/info?file=<?php echo $v; ?>&login=7f53b6aa27b38c73&key=euZmu1Un", function( response ) {
 	$("#msg").text(response.msg);
     $("#status").text(response.status);
-    $("#episodio").text(response.result.<?php echo $v; php?>.name);
+    $("#episodio").text(response.result.<?php echo $v; ?>.name);
 	}, "json" );
 	  </script>
 
@@ -110,7 +114,6 @@ document.oncontextmenu=new Function("return false");
 		</script>
 		
 		<?php 	
-
 				if(!empty($s)){
       			echo "<div class='main-container'>";
 				}
@@ -133,8 +136,6 @@ document.oncontextmenu=new Function("return false");
     				});
 				</script>-->
 				
-				 
-				
 				<?php 	
 
 				if(!empty($s || $v || $p)){
@@ -155,31 +156,38 @@ document.oncontextmenu=new Function("return false");
 					<h3 style='color:fff'>Probabilmente hai seguito un collegamento sbagliato.</h3></div>";
 				}
 				?>
-  	  
     	  <!--</div>--><br><br>
-		
-		
 				<?php  if (isset($_SESSION['user'])) : ?>
-		
-					<div class="epselection">
-					
-					<strong style="color: white;">Ciao, <?php echo $_SESSION['user']['username']; ?></strong>
-
-					<small> <br> <a href="index.php?logout='1'" style="color: red;">logout</a> </small>
-						
-					
-						
+					<div class="epscontainer">
+					<div class="logged">
+						<strong style="color: white;">Ciao, <?php echo $_SESSION['user']['username']; ?></strong>
+						<small> <br> <a href="index.php?logout='1'" style="color: red;">logout</a> </small>
 					</div>
-		
-		
+					<h3>Hai finito di vedere questo episodio?</h3>
+					<form action="" method="POST">
+						<input type="submit" value="S&igrave" name="seenep_btn">
+					</form>
+					<div class="seeneps">	
+					<?php 
+					$epsseen = "SELECT epid FROM epseen where SERIE='$idserie' AND user='$idutente' ORDER BY epid ASC";
+					$epsseenresult = mysqli_query($db, $epsseen);
+					if (mysqli_num_rows($epsseenresult) > 0) {
+						echo "<hr><h4>Episodi gi&agrave visti:</h4>";
+					while($row = mysqli_fetch_assoc($epsseenresult)) { // output data of each row
+						$selectid =  $row["epid"];
+						$selectseps = "SELECT stagione, episodio FROM episodi where id='$selectid'";
+						$selectsepsresult = mysqli_query($db, $selectseps);
+						while($row = mysqli_fetch_assoc($selectsepsresult)) {
+							echo "<span>" . $row["stagione"] . "X" . $row["episodio"] ."</span>";
+						}}}?>
+					</div>	
+					</div>
 				<?php else : ?>
-				
-				<strong style="color: white;">Esegui il <a href="login.php" style="color: white; text-decoration: underline;">login</a> per tenere traccia degli episodi visti</strong>
-
+				<div class="notlogged">
+					<strong style="color: white;">Esegui il <a href="login.php?goto=<?php if(!empty($v)){$goto = "v=" . $v;} if(!empty($p)){$goto = "p=" . $p;}; echo $goto; ?>" style="color: white; text-decoration: underline;">login</a> per tenere traccia degli episodi visti</strong>
+				</div>
 				<?php endif ?>
-		
 		<div class="footer" style="height: 200px;"> </div>
-		
       </div>
 </body>
 </center>

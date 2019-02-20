@@ -39,6 +39,7 @@
 		$email       =  e($_POST['email']);
 		$password_1  =  e($_POST['password_1']);
 		$password_2  =  e($_POST['password_2']);
+		$goto = e($_POST['goto']);
 
 		// form validation: ensure that the form is correctly filled
 		if (empty($username)) { 
@@ -75,6 +76,14 @@
 
 				$_SESSION['user'] = getUserById($logged_in_user_id); // put logged in user in session
 				$_SESSION['success']  = "You are now logged in";
+				
+				// view.php specific redirect if there's a goto link
+					if(empty($goto)){
+						header('location: index.php');
+					} else {
+					header('location: view.php?' . $goto . '');
+					}
+				
 				header('location: index.php');				
 			}
 
@@ -94,11 +103,12 @@
 
 	// LOGIN USER
 	function login(){
-		global $db, $username, $errors;
+		global $db, $username, $goto, $errors;
 
 		// grap form values
 		$username = e($_POST['username']);
 		$password = e($_POST['password']);
+		$goto = e($_POST['goto']);
 
 		// make sure form is filled properly
 		if (empty($username)) {
@@ -126,8 +136,13 @@
 				}else{
 					$_SESSION['user'] = $logged_in_user;
 					$_SESSION['success']  = "You are now logged in";
-
-					header('location: index.php');
+						
+					// view.php specific redirect if there's a goto link
+					if(empty($goto)){
+						header('location: index.php');
+					} else {
+					header('location: view.php?' . $goto . '');
+					}
 				}
 			}else {
 				array_push($errors, "Wrong username/password combination");
