@@ -1,0 +1,101 @@
+<?php
+include('functions.php');
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home - Fata Streaming</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.2">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<style>
+		.serie {
+			align-self: flex-start;
+			text-align: center;
+		}
+	</style>
+	
+</head>
+<body>
+
+	<div class="header">
+		<img src="assets/img/FATASlogo.png">
+	</div>
+		<div class="menu">
+		<ul>
+ 		 <li><a href="/">Home</a></li>
+ 		 <li><a class="active" href="lista-serie">Serie</a></li>
+ 		 <li><a href="lista-film">Film</a></li>
+		</ul>
+		<!-- logged in user information -->
+		<div class="profile_info" align="right"> 
+
+			<div>
+				<?php  if (isset($_SESSION['user'])) : ?>
+					<strong><?php echo $_SESSION['user']['username']; ?></strong>
+
+					<small>
+						<i  style="color: #888;">(<?php echo ucfirst($_SESSION['user']['user_type']); ?>)</i> 
+						<br>
+						<a href="?logout='1'" style="color: red;">logout</a>
+					</small>
+
+				<?php else : ?>
+				<ul class="login">
+ 		 		<li class="login"><a href="login">Login</a></li>
+  		 		<li class="login"><a href="register">Signup</a></li>
+				</ul>
+
+				<?php endif ?>
+			</div>
+		</div>
+	</div>
+
+	<form>
+		
+		<style>
+			.allseriesrow {
+				width: 100%;
+			}
+			.serierow {
+				width: 100%;
+				max-height: 250px;;
+				vertical-align: top;
+				margin: 25px 0;
+			}
+			.serierow img{
+				width: 18%;
+				height: auto;
+				display: inline-block;
+			}
+			.serierow p{
+				width: 70%;
+				display: inline-block;
+				vertical-align: top;
+				margin: 0 17px;
+			}
+		</style>
+		
+		<h3 class="lasttext">Tutte le serie</h3>
+		<div class="allseriesrow">
+		<?php
+		$query = "SELECT id, nome, descr, poster, stagioni FROM serie ORDER BY id DESC LIMIT 5";
+		$result = mysqli_query($db,$query);
+		while($row = mysqli_fetch_assoc($result)) {
+			echo "<div class='serierow'><a href='serie?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p><strong>" . $row["nome"] ."</strong><br><br>" . substr($row["descr"], 0, 500) ."...</p></a></div>";
+		}
+		
+				
+		?>
+		</div>
+		
+	</form>
+	
+	<div class="footer">
+	
+	</div>
+
+</body>
+</html>
