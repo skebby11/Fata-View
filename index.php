@@ -109,6 +109,7 @@ include('functions.php');
 			
 			$query1 = "SELECT * FROM `episodi` WHERE id > $epid1 AND serie= $idserie1 LIMIT 1 ";
 			$result1 = mysqli_query($db,$query1);
+			if (mysqli_num_rows($result1) > 0) {	
 			while($row = mysqli_fetch_assoc($result1)) {
 			$idep = $row["id"];
 			$stagionen = $row["stagione"];
@@ -129,8 +130,10 @@ include('functions.php');
 				$nomeserie = $row["nome"];
 				}	
 			}
+				
 			
 			echo "<div class='serie'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
+			}
 			}
 			
 			while($row = mysqli_fetch_assoc($resultep2)) {
@@ -139,6 +142,7 @@ include('functions.php');
 			
 			$query1 = "SELECT * FROM `episodi` WHERE id > $epid2 AND serie= $idserie2 ORDER BY id LIMIT 1 ";
 			$result1 = mysqli_query($db,$query1);
+			if (mysqli_num_rows($result1) > 0) {
 			while($row = mysqli_fetch_assoc($result1)) {
 			$idep = $row["id"];
 			$stagionen = $row["stagione"];
@@ -162,6 +166,7 @@ include('functions.php');
 			}
 			
 			echo "<div class='serie'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
+			}
 		}
 			
 			while($row = mysqli_fetch_assoc($resultep3)) {
@@ -170,6 +175,7 @@ include('functions.php');
 			
 			$query1 = "SELECT * FROM `episodi` WHERE id > $epid3 AND serie= $idserie3 ORDER BY id LIMIT 1 ";
 			$result1 = mysqli_query($db,$query1);
+			if (mysqli_num_rows($result1) > 0) {
 			while($row = mysqli_fetch_assoc($result1)) {
 			$idep = $row["id"];
 			$stagionen = $row["stagione"];
@@ -193,6 +199,7 @@ include('functions.php');
 			}
 			
 			echo "<div class='serie'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
+			}
 		}
 		
 			while($row = mysqli_fetch_assoc($resultep4)) {
@@ -201,6 +208,7 @@ include('functions.php');
 			
 			$query1 = "SELECT * FROM `episodi` WHERE id > $epid4 AND serie= $idserie4 ORDER BY id LIMIT 1 ";
 			$result1 = mysqli_query($db,$query1);
+			if (mysqli_num_rows($result1) > 0) {
 			while($row = mysqli_fetch_assoc($result1)) {
 			$idep = $row["id"];
 			$stagionen = $row["stagione"];
@@ -224,6 +232,7 @@ include('functions.php');
 			}
 			
 			echo "<div class='serie'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
+			}
 		}
 		
 		}
