@@ -1,25 +1,14 @@
 <?php
 include('functions.php');
-
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Home - Fata Streaming</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.2">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<style>
-		.serie {
-			align-self: flex-start;
-			text-align: center;
-		}
-	</style>
-	
 </head>
 <body>
-
 	<div class="header">
 		<img src="assets/img/FATASlogo.png">
 	</div>
@@ -28,6 +17,7 @@ include('functions.php');
  		 <li><a class="active" href="/">Home</a></li>
  		 <li><a href="lista-serie">Serie</a></li>
  		 <li><a href="lista-film">Film</a></li>
+		 <li class="search"><form action="search" method="post"><input type="text" name="s" placeholder="Cerca film e serie..."></form></li>
 		</ul>
 		<!-- logged in user information -->
 		<div class="profile_info" align="right"> 
@@ -246,12 +236,9 @@ include('functions.php');
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
 			echo "<div class='serie'><a href='serie?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p>" . $row["nome"] ."</p></a></div>";
-		}
-		
-				
+		}		
 		?>
 		</div>
-		
 		
 		<h3 class="lasttext">Ultimi episodi aggiunti:</h3>
 		<div class="lastseries">

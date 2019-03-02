@@ -49,8 +49,45 @@ $_SESSION['success']  = "EPISODIO AGGIUNTO!";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
+	<link rel="stylesheet" type="text/css" href="css/admin.css">
+	
+	<style>
+.ui-autocomplete { position: absolute; cursor: default; background:#CCC }   
+
+/* workarounds */
+html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+.ui-menu {
+    list-style:none;
+    padding: 2px;
+    margin: 0;
+    display:block;
+    float: left;
+}
+.ui-menu .ui-menu {
+    margin-top: -3px;
+}
+.ui-menu .ui-menu-item {
+    margin:0;
+    padding: 0;
+    zoom: 1;
+    float: left;
+    clear: left;
+    width: 100%;
+}
+.ui-menu .ui-menu-item a {
+    text-decoration:none;
+    display:block;
+    padding:.2em .4em;
+    line-height:1.5;
+    zoom:1;
+}
+.ui-menu .ui-menu-item a.ui-state-hover,
+.ui-menu .ui-menu-item a.ui-state-active {
+    font-weight: normal;
+    margin: -1px;
+}
+	</style>
 	
 
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -94,7 +131,30 @@ echo "    ];
 </head>
 
 <body>
-	
+	<div class="head"><div class="logo">FATA STREAMING</div></div>
+
+<div class="sx no-print">
+	<ul class="sx_menu">
+	<li class="parent">
+		<a class="menu_element product active" href="addep.php"> Episodio</a>
+	</li>
+	<li class="parent">
+		<a class="menu_element category" href="addserie.php">Serie</a>
+	</li>
+	<li class="parent">
+		<a class="menu_element " href="addfilm.php"> Film</a>
+	</li>
+	</ul>	
+</div>
+
+<div class="dx">
+		<div class="title">
+			<div class="container">
+				<h1>Aggiungi EPISODIO</h1>
+			</div>
+		</div>
+		<div class="container">
+		<div class="content">
 <div class="container">
 	
 	<!-- notification message -->
@@ -110,11 +170,8 @@ echo "    ];
 			</div>
 		<?php endif ?>
 	
-	
-<a href="addserie.php"><h2 style="padding-top: 50px">Aggiungi serie</h2></a>
 
-
-<form action="addep.php" method="post" style="padding-top: 120px;">
+<form action="" method="post" style="padding-top: 40px;">
 
 	Stagione: <input type="text" name="stagione"><br><br>
 	Episodio: <input type="text" name="episodio"><br><br>
@@ -127,5 +184,8 @@ echo "    ];
 
 </form>
 	
+</div>
+</div>
+</div>
 </div>
 </body>

@@ -1,12 +1,15 @@
 <?php
 include('functions.php');
 
+
+$keyword = $_POST["s"];
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Lista film - Fata Streaming</title>
+	<title>Risultati ricerca - Fata Streaming</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -19,7 +22,7 @@ include('functions.php');
 		<ul>
  		 <li><a href="/">Home</a></li>
  		 <li><a href="lista-serie">Serie</a></li>
- 		 <li><a class="active" href="lista-film">Film</a></li>
+ 		 <li><a href="lista-film">Film</a></li>
 		 <li class="search"><form action="search" method="post"><input type="text" name="s" placeholder="Cerca film e serie..."></form></li>
 		</ul>
 		<!-- logged in user information -->
@@ -47,49 +50,31 @@ include('functions.php');
 	</div>
 
 	<form>
-		<h3 class="lasttext">Tutte i film</h3>
+		<h3 class="lasttext">Risultati della ricerca</h3>
 		<div class="allseriesrow">
-			
-		<style>
-			.pages span{
-				    background-color: #00aeef;
-					border: none;
-					color: white;
-					padding: 5px 13px;
-					text-align: center;
-					text-decoration: none;
-					display: inline-block;
-					font-size: 16px;
-					margin: 4px 2px;
-					border-radius: 8px;
-			}	
-		</style>
 		<?php
-		$results_per_page = 4;
+		$results_per_page = 10;
 				
 			if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
 			$start_from = ($page-1) * $results_per_page;
-			$query = "SELECT * FROM film ORDER BY ID DESC LIMIT $start_from, ".$results_per_page;
+				
+			$query = "SELECT id, nome, descr, poster FROM serie WHERE nome LIKE '%" . 
+           $keyword . "%'
+           UNION
+           SELECT id, titolo, descr, poster as type FROM film WHERE titolo LIKE '%" . 
+           $keyword . "%'  ORDER BY ID DESC LIMIT $start_from, ".$results_per_page;
+
 
 				
 		$result = mysqli_query($db,$query);
-		while($row = mysqli_fetch_assoc($result)) {
-			echo "<div class='serierow'><a href='film?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p><strong>" . $row["nome"] ."</strong><br><br>" . substr($row["descr"], 0, 500) ."...</p></a></div>";
-		}
-		echo "<div class='pages'>";
-		$sql = "SELECT COUNT(ID) AS total FROM film";
-		$result = mysqli_query($db,$sql);
-		while($row = mysqli_fetch_assoc($result)) {
-		$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
-		}
-		for ($i=1; $i<=$total_pages; $i++) {  // print links for all pages
-					echo "<a href='lista-film?page=".$i."'";
-					if ($i==$page)  echo " class='curPage'";
-					echo "><span>".$i."</span></a> "; 
-		};
-		echo "</div>";
 		
-				
+		if (mysqli_num_rows($result) > 0) {
+		while($row = mysqli_fetch_assoc($result)) {
+			echo "<div class='serierow'><a href='serie?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p><strong>" . $row["nome"] ."</strong><br><br>" . substr($row["descr"], 0, 500) ."...</p></a></div>";
+		}
+		} else {
+			echo "Nessun risultato trovato :(";
+		}
 		?>
 		</div>
 		

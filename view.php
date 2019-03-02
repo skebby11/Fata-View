@@ -28,6 +28,7 @@ function seenep() {
 	$idutente = $_SESSION['user']['id'];
 	$addsenepquery = "INSERT into epseen (user, serie, epid) VALUES('$idutente', '$idserie', '$epid')";
 	mysqli_query($db, $addsenepquery);
+	header('Location: /');
 } ?>
 <!-- 
 

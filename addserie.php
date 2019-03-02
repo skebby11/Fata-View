@@ -43,7 +43,8 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link rel="stylesheet" type="text/css" href="css/admin.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 		
 	
 	<title>Aggiungi serie</title>
@@ -62,30 +63,7 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
 </head>
 
 <body>
-	<div class="head"><div class="logo">FATA STREAMING</div></div>
-
-<div class="sx no-print">
-	<ul class="sx_menu">
-	<li class="parent">
-		<a class="menu_element product " href="addep.php"> Episodio</a>
-	</li>
-	<li class="parent">
-		<a class="menu_element category active" href="addserie.php">Serie</a>
-	</li>
-	<li class="parent">
-		<a class="menu_element " href="addfilm.php"> Film</a>
-	</li>
-	</ul>	
-</div>
-
-<div class="dx">
-		<div class="title">
-			<div class="container">
-				<h1>Aggiungi SERIE</h1>
-			</div>
-		</div>
-		<div class="container">
-		<div class="content">
+	
 <div class="container">
 	
 	<!-- notification message -->
@@ -100,8 +78,10 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
 				<br>
 			</div>
 		<?php endif ?>
+	
+<h2 style="padding-top: 50px">SERIE</h2>
 
-<form action="?pg=serie" method="post" style="padding-top: 40px;">
+<form action="addserie.php" method="post" style="padding-top: 40px;">
 
 	ID (fac.): <input type="text" name="id"><br><br>
 	Nome serie: <input type="text" name="nome" style="width:300px"><br><br>
@@ -113,8 +93,5 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
 
 </form>
 	
-</div>
-</div>
-</div>
 </div>
 </body>

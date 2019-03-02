@@ -10,26 +10,27 @@ if ($idutente != 2) {
 }
 
 $id = $_POST["id"];
-$nome = e($_POST["nome"]);
+$titolo = e($_POST["nome"]);
 $descr = e($_POST["descr"]);
 $poster = $_POST["poster"];
-$stagioni = $_POST["stagioni"];
+$link = $_POST["link"];
+$linksv = $_POST["linksv"];
 
 // form validation: ensure that the form is correctly filled
 
-		if (empty($nome)) { 
-			array_push($errors, "Nome is required"); 
+		if (empty($titolo)) { 
+			array_push($errors, "Titolo is required"); 
 		}
 		if (empty($descr)) { 
 			array_push($errors, "Descrizione is required"); 
 		}
-		if (empty($stagioni)) {
-			array_push($errors, "Inserisci il numero di stagioni");
+		if (empty($poster)) {
+			array_push($errors, "Poster e' necessario");
 		}
 
 if (count($errors) == 0) {
-$query = "INSERT INTO serie (nome, descr, poster, stagioni) 
-						  VALUES('$nome', '$descr', '$poster', '$stagioni')";
+$query = "INSERT INTO film (titolo, descr, poster, link, linksv) 
+						  VALUES('$nome', '$descr', '$poster', '$linksv')";
 mysqli_query($db, $query);
 
 $_SESSION['success']  = "SERIE AGGIUNTA!";
@@ -44,7 +45,8 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
+	<link rel="stylesheet" type="text/css" href="css/admin.css">
 		
 	
 	<title>Aggiungi film</title>
@@ -63,7 +65,30 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
 </head>
 
 <body>
-	
+	<div class="head"><div class="logo">FATA STREAMING</div></div>
+
+<div class="sx no-print">
+	<ul class="sx_menu">
+	<li class="parent">
+		<a class="menu_element product " href="addep.php"> Episodio</a>
+	</li>
+	<li class="parent">
+		<a class="menu_element category" href="addserie.php">Serie</a>
+	</li>
+	<li class="parent">
+		<a class="menu_element active" href="addfilm.php"> Film</a>
+	</li>
+	</ul>	
+</div>
+
+<div class="dx">
+		<div class="title">
+			<div class="container">
+				<h1>Aggiungi FILM</h1>
+			</div>
+		</div>
+		<div class="container">
+		<div class="content">
 <div class="container">
 	
 	<!-- notification message -->
@@ -78,20 +103,22 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
 				<br>
 			</div>
 		<?php endif ?>
-	
-<a href="addep.php"><h2 style="padding-top: 50px">Aggiungi episodio</h2></a>
 
-<form action="addserie.php" method="post" style="padding-top: 120px;">
+<form action="addfilm.php" method="post" style="padding-top: 30px;">
 
 	ID (fac.): <input type="text" name="id"><br><br>
-	Nome serie: <input type="text" name="nome" style="width:300px"><br><br>
+	Titolo: <input type="text" name="nome" style="width:300px"><br><br>
 	Descrizione: <input type="text" name="descr" style="height: 200px; width: 300px"><br><br>
 	Poster: <input type="text" name="poster" style="width:300px"><br><br>
-	N. stagioni: <input type="text" name="stagioni"><br><br><br>
+	Link OL: <input type="text" name="link" style="width:300px"><br><br>
+	Link SV: <input type="text" name="linksv"><br><br><br>
 	
 	<input type="submit" name="Invia" value="Invia">
 
 </form>
 	
+</div>			
+</div>
+</div>
 </div>
 </body>

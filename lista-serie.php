@@ -6,16 +6,9 @@ include('functions.php');
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home - Fata Streaming</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.2">
+	<title>Lista serie - Fata Streaming</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<style>
-		.serie {
-			align-self: flex-start;
-			text-align: center;
-		}
-	</style>
 	
 </head>
 <body>
@@ -28,6 +21,7 @@ include('functions.php');
  		 <li><a href="/">Home</a></li>
  		 <li><a class="active" href="lista-serie">Serie</a></li>
  		 <li><a href="lista-film">Film</a></li>
+		 <li class="search"><form action="search" method="post"><input type="text" name="s" placeholder="Cerca film e serie..."></form></li>
 		</ul>
 		<!-- logged in user information -->
 		<div class="profile_info" align="right"> 
@@ -54,47 +48,8 @@ include('functions.php');
 	</div>
 
 	<form>
-		
-		<style>
-			.allseriesrow {
-				width: 100%;
-			}
-			.serierow {
-				width: 100%;
-				max-height: 250px;;
-				vertical-align: top;
-				margin: 25px 0;
-			}
-			.serierow img{
-				width: 18%;
-				height: auto;
-				display: inline-block;
-			}
-			.serierow p{
-				width: 70%;
-				display: inline-block;
-				vertical-align: top;
-				margin: 0 17px;
-			}
-		</style>
-		
 		<h3 class="lasttext">Tutte le serie</h3>
 		<div class="allseriesrow">
-			
-		<style>
-			.pages span{
-				    background-color: #00aeef;
-					border: none;
-					color: white;
-					padding: 5px 13px;
-					text-align: center;
-					text-decoration: none;
-					display: inline-block;
-					font-size: 16px;
-					margin: 4px 2px;
-					border-radius: 8px;
-			}	
-		</style>
 		<?php
 		$results_per_page = 4;
 				
