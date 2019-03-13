@@ -76,9 +76,12 @@ $query = "SELECT nome, descr, poster FROM serie WHERE id =$idserie";
 			margin-top: 50px;
 			font-size: 110%;
 			color: #fff;
+			display: inline-block;
+			max-width: 100%;
 		}
 		.epsds a {
 			color: #00aeef;
+			text-decoration: none;
 		}
 		.stagname{
 			font-size: 120%;
@@ -86,9 +89,35 @@ $query = "SELECT nome, descr, poster FROM serie WHERE id =$idserie";
 			margin-bottom: 25px;
 			text-transform: uppercase;
 		}
+		
 		.ep {
-			text-align: left;
-			margin-top: 10px;
+			margin: 10px 5px;
+			border: 1px solid white;
+			width: 23%;
+			height: 150px;
+			display: inline-block;
+			text-align: center;
+			vertical-align: middle;
+			border-radius: 4px 4px 0px 0px;
+		}
+		
+		.ep:hover {
+			transition: opacity .15s ease-in-out;
+			-moz-transition: opacity .15s ease-in-out;
+			-webkit-transition: opacity .15s ease-in-out;
+			background-color: rgba(0, 0, 0, 0.6);
+			cursor: pointer;
+		}
+		
+		.ep p.link {
+		  visibility: hidden;
+		}
+		.ep:hover > p.link {
+		  visibility: visible;
+		}
+
+		.ep:hover > p.info {
+		  visibility: hidden;
 		}
 	</style>
 		<h1 class="stagname"><? echo $nomestag ?></h1>
@@ -118,16 +147,24 @@ $epresult = mysqli_query($db, $epquery);
 	$link = $row["link"];
 	$linksv = $row["linksv"];
 	
-	if(!empty($linksv)) {
+	if(empty($link)) {
+		$link = "<a href='view?p=$linksv' target='__blank'>Speedvideo</a>";
+		$sv='';
+	} elseif (!empty($link)) {
+		$link = "<a href='view?v=$link' target='__blank'>Openload</a>";
+		if(!empty($linksv)){
 		$sv = " / <a href='view?p=$linksv' target='__blank'>Speedvideo</a>";
-	} else {
-		$sv = "";
-	};
+		} else {
+			$sv = '';
+		}
+	}
 		
-	echo "<div class='ep'><strong> " . $season . "X" . $ep . "</strong> - " . $titolo . " <a href='view?v=$link' target='__blank'>Openload</a>$sv</div>";
+		
+		
+	echo "<div class='ep'><p class='info'><strong> " . $season . "X" . $ep . "</strong> <br><br> " . $titolo . "</p><p class='link'> ".$link, $sv."</p></div>";
 	
 	} ?>
-		</div>
+	</div>
 
 	</form>
 	
