@@ -1,4 +1,11 @@
 RewriteEngine On
+
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 RewriteRule ^view$ /view.php [L]
 RewriteRule ^serie$ /serie.php [L]
 RewriteRule ^login$ /login.php [L]
