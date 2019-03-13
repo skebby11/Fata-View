@@ -50,7 +50,21 @@ include('functions.php');
 			<h2 class="love">CIAO AMMMMMORE <span>❤❤❤❤❤</span></h2>
 		
 		<?php endif ?>
-		
+		<style>
+		/* Solve problem on a non-solid background */
+		.serie img:hover { 
+		  outline: 3px solid #00aeef; 
+		} 
+
+		/* Solve problem where border size changes on hover */
+		.serie img { 
+		  border: 0px solid ; 
+		  border-color: #00aeef;
+		} 
+		.serie img:hover { 
+		  outline: 2px solid #00aeef; 
+		} 
+		</style>
 		
 		<?php
 			
@@ -243,7 +257,7 @@ include('functions.php');
 		<h3 class="lasttext">Ultimi episodi aggiunti:</h3>
 		<div class="lastseries">
 		<?php
-		$query = "SELECT id, stagione, episodio, titolo, serie, link FROM episodi ORDER BY id DESC LIMIT 5";
+		$query = "SELECT id, stagione, episodio, titolo, serie, link, linksv FROM episodi ORDER BY id DESC LIMIT 5";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
 			

@@ -50,6 +50,7 @@ include('functions.php');
 	<form>
 		<h3 class="lasttext">Tutte le serie</h3>
 		<div class="allseriesrow">
+		<style> .serierow, .serierow p{margin-bottom: 50px!important}</style>
 		<?php
 		$results_per_page = 4;
 				
