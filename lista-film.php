@@ -47,7 +47,7 @@ include('functions.php');
 	</div>
 
 	<form>
-		<h3 class="lasttext">Tutte i film</h3>
+		<h3 class="lasttext">Tutti i film</h3>
 		<div class="allseriesrow">
 			
 		<style>
