@@ -1,10 +1,11 @@
 RewriteEngine On
-
-RewriteEngine On
 RewriteBase /
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule . /404.php [L,R=301]
+ErrorDocument 404 /404.php
 
 RewriteRule ^view$ /view.php [L]
 RewriteRule ^serie$ /serie.php [L]
@@ -14,3 +15,4 @@ RewriteRule ^register$ /register.php [L]
 RewriteRule ^lista-film$ /lista-film.php [L]
 RewriteRule ^lista-serie$ /lista-serie.php [L]
 RewriteRule ^search$ /search.php [L]
+RewriteRule ^404$ /404.php [L]

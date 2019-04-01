@@ -6,15 +6,14 @@ include('../functions.php');
 $idutente = $_SESSION['user']['id'];
 
 if ($idutente != 2) {
-	header('location: index.php');
+	header('location: ../login');
 }
 
-$id = $_POST["id"];
 $titolo = e($_POST["nome"]);
 $descr = e($_POST["descr"]);
-$poster = $_POST["poster"];
-$link = $_POST["link"];
-$linksv = $_POST["linksv"];
+$poster = e($_POST["poster"]);
+$link = e($_POST["link"]);
+$linksv = e($_POST["linksv"]);
 
 // form validation: ensure that the form is correctly filled
 
@@ -30,11 +29,12 @@ $linksv = $_POST["linksv"];
 
 if (count($errors) == 0) {
 $query = "INSERT INTO film (titolo, descr, poster, link, linksv) 
-						  VALUES('$nome', '$descr', '$poster', '$linksv')";
+						  VALUES('$titolo', '$descr', '$poster', '$link', '$linksv')";
 mysqli_query($db, $query);
 
-$_SESSION['success']  = "SERIE AGGIUNTA!";
+$_SESSION['success']  = "FILM AGGIUNTO!";
 }
+
 
 ?>
 
@@ -70,13 +70,16 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
 <div class="sx no-print">
 	<ul class="sx_menu">
 	<li class="parent">
-		<a class="menu_element product " href="addep.php"> Episodio</a>
+		<a class="menu_element product " href="addep.php">Aggiungi Episodio</a>
 	</li>
 	<li class="parent">
-		<a class="menu_element category" href="addserie.php">Serie</a>
+		<a class="menu_element category" href="addserie.php">Aggiungi Serie</a>
 	</li>
 	<li class="parent">
-		<a class="menu_element active" href="addfilm.php"> Film</a>
+		<a class="menu_element active" href="addfilm.php">Aggiungi Film</a>
+	</li>
+	<li class="parent">
+		<a class="menu_element product " href="editep.php?action=view">Modifica Episodi</a>
 	</li>
 	</ul>	
 </div>
@@ -106,7 +109,6 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
 
 <form action="addfilm.php" method="post" style="padding-top: 30px;">
 
-	ID (fac.): <input type="text" name="id"><br><br>
 	Titolo: <input type="text" name="nome" style="width:300px"><br><br>
 	Descrizione: <input type="text" name="descr" style="height: 200px; width: 300px"><br><br>
 	Poster: <input type="text" name="poster" style="width:300px"><br><br>

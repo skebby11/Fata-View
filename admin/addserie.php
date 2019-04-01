@@ -6,7 +6,7 @@ include('../functions.php');
 $idutente = $_SESSION['user']['id'];
 
 if ($idutente != 2) {
-	header('location: index.php');
+	header('location: ../login');
 }
 
 $id = $_POST["id"];
@@ -67,13 +67,16 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
 <div class="sx no-print">
 	<ul class="sx_menu">
 	<li class="parent">
-		<a class="menu_element product " href="addep.php"> Episodio</a>
+		<a class="menu_element product " href="addep.php">Aggiungi Episodio</a>
 	</li>
 	<li class="parent">
-		<a class="menu_element category active" href="addserie.php">Serie</a>
+		<a class="menu_element category active" href="addserie.php">Aggiungi Serie</a>
 	</li>
 	<li class="parent">
-		<a class="menu_element " href="addfilm.php"> Film</a>
+		<a class="menu_element " href="addfilm.php">Aggiungi Film</a>
+	</li>
+	<li class="parent">
+		<a class="menu_element product " href="editep.php?action=view">Modifica Episodi</a>
 	</li>
 	</ul>	
 </div>
