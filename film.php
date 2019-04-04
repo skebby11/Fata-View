@@ -130,12 +130,12 @@ $query = "SELECT * FROM film WHERE id =$idfilm";
 
 	
 	if(empty($link)) {
-		$link = "<a href='view?p=$linksv' target='__blank'>Speedvideo</a>";
+		$link = "<a href='view-film?p=$linksv' target='__blank'>Speedvideo</a>";
 		$sv='';
 	} elseif (!empty($link)) {
-		$link = "<a href='view?v=$link' target='__blank'>Openload</a>";
+		$link = "<a href='view-film?v=$link' target='__blank'>Openload</a>";
 		if(!empty($linksv)){
-		$sv = " / <a href='view?p=$linksv' target='__blank'>Speedvideo</a>";
+		$sv = " / <a href='view-film?p=$linksv' target='__blank'>Speedvideo</a>";
 		} else {
 			$sv = '';
 		}
