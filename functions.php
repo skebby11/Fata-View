@@ -1,7 +1,9 @@
 <?php 
-	$lifetime=2592000;
-	session_start();
-	setcookie(session_name("FATA"),session_id(),time()+$lifetime);
+
+	session_set_cookie_params(2592000,"/");
+	session_start([
+    'cookie_lifetime' => 2592000,
+	]);
 
 	// connect to database
 	$db = mysqli_connect('localhost', 'fatastreaming2', '', 'my_fatastreaming2');
