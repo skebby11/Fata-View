@@ -3,18 +3,18 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 
-// includiamo database.php e episodio.php per poterli usare
+// include database.php and episodio.php in order to use them
 include_once '../config/database.php';
 include_once '../models/episodio.php';
-// creiamo un nuovo oggetto Database e ci colleghiamo al nostro database
+// create a new DB object and connect to our DB
 $database = new Database();
 $db = $database->getConnection();
-// Creiamo un nuovo oggetto Episodio
+// Create a new Episode object
 $ep = new Episodio($db);
-// query products
+// Query products
 $stmt = $ep->read();
 $num = $stmt->rowCount();
-// se vengono trovati episodi nel database
+// If we find any episode 
 if($num>0){
     // array di episodi
     $episodi_arr = array();

@@ -1,13 +1,13 @@
 <?php
 class Database
 	{
-	// credenziali
+	// top secret db credentials
 	private $host = "localhost";
 	private $db_name = "my_fatastreaming2";
 	private $username = "fatastreaming2";
 	private $password = "";
 	public $conn;
-	// connessione al database
+	// DB connection
 	public function getConnection()
 		{
 		$this->conn = null;

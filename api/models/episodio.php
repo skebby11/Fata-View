@@ -3,7 +3,7 @@ class Episodio
 	{
 	private $conn;
 	private $table_name = "episodi";
-	// proprietà di un episodio
+	// propriety of an episode 
 	public $id;
 	public $stagione;
 	public $episodio;
@@ -11,12 +11,12 @@ class Episodio
 	public $titolo;
 	public $link;
 	public $linksv;
-	// costruttore
+	// constructor
 	public function __construct($db)
 		{
 		$this->conn = $db;
 		}
-	// READ episodi
+	// READ episodes
 	function read()
 		{
 		// select all
@@ -29,8 +29,8 @@ class Episodio
 		$stmt->execute();
 		return $stmt;
 		}
-	// CREARE LIBRO
-	// AGGIORNARE LIBRO
-	// CANCELLARE LIBRO
+	// CREARE EPISODIO
+	// AGGIORNARE EPISODIO
+	// CANCELLARE EPISODIO
 	}
 ?>
