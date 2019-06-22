@@ -3,6 +3,8 @@
 $v = $_GET['v'];
 $s = $_GET['s'];
 $p = $_GET['p'];
+$vs = $_GET['vs'];
+
 include('functions.php');
 $idutente = $_SESSION['user']['id'];
 if(!empty($v)){
@@ -10,6 +12,9 @@ $epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi whe
 }
 if(!empty($p)){
 $epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi where linksv='$p'";
+}
+if(!empty($vs)){
+$epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi where linkverys='$vs'";
 }
 $epdetailsresult = mysqli_query($db, $epdetailsquery);
     while($row = mysqli_fetch_assoc($epdetailsresult)) {
@@ -98,6 +103,14 @@ document.oncontextmenu=new Function("return false");
     $("#episodio").text(response.result.<?php echo $v; ?>.name);
 	}, "json" );
 	  </script>
+	   
+     <script>	
+	$.get( "https://api.verystream.com/file/info?file=<?php echo $vs; ?>&login=920e4e64bfafd40ac359&key=9Z9vL2iQtFX", function( response ) {
+	$("#msg").text(response.msg);
+    $("#status").text(response.status);
+    $("#episodio").text(response.result.<?php echo $vs; ?>.name);
+	}, "json" );
+	  </script>
 
 	<div class="titlewrap">
 		<h1 style="color: darkgray"><?php echo $stagione . "X" . $episodio . " - " .$titolo; ?></h2>
@@ -114,10 +127,7 @@ document.oncontextmenu=new Function("return false");
 		</script>
 		
 		<?php 	
-				if(!empty($s)){
-      			echo "<div class='main-container'>";
-				}
-				if(!empty($v)){
+				if(!empty($s || $v || $vs)){
       			echo "<div class='main-container'>";
 				}
 				else{
@@ -138,7 +148,7 @@ document.oncontextmenu=new Function("return false");
 				
 				<?php 	
 
-				if(!empty($s || $v || $p)){
+				if(!empty($s || $v || $p || $vs)){
 				if(!empty($s)){
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
    				  </span><iframe src='https://streamango.com/embed/$s'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
@@ -150,6 +160,10 @@ document.oncontextmenu=new Function("return false");
 				if(!empty($v)){
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
    				  </span><iframe src='https://openload.co/embed/$v'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
+				}
+				if(!empty($vs)){
+      			echo "<span class='play1' id='play1' onclick='hide()' ;>
+   				  </span><iframe src='https://verystream.com/e/$vs'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
 				}}
 				else{
 					echo "</a><h1 style='color:fff'>Si &egrave verificato un errore</h1>
@@ -158,6 +172,12 @@ document.oncontextmenu=new Function("return false");
 				?>
     	  <!--</div>--><br><br>
 				<?php  if (isset($_SESSION['user'])) : ?>
+		
+		<style>
+		.epscontainer {
+			width: 90%;
+			max-width: 600px;		
+			}</style>
 					<div class="epscontainer">
 					<div class="logged">
 						<strong style="color: white;">Ciao, <?php echo $_SESSION['user']['username']; ?></strong>

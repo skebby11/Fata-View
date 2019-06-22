@@ -45,9 +45,9 @@ include('functions.php');
 
 	<form>
 		
-		<?php  if ($_SESSION['user']['id']== 3) : ?>  <!--   A lovely greeting to my girl    -->
+		<?php  if ($_SESSION['user']['id']== 3) : ?>  <!--   A lovely greeting to my girl, registered with ID 3   -->
 		
-			<h2 class="love">CIAO AMMMMMORE <span>❤❤❤❤❤</span></h2>
+			<h2 class="love">CIAO <br> CHE FAI <br> <span>❤</span></h2>
 		
 		<?php endif ?>
 		<style>
@@ -257,7 +257,7 @@ include('functions.php');
 		<h3 class="lasttext">Ultimi episodi aggiunti:</h3>
 		<div class="lastseries">
 		<?php
-		$query = "SELECT id, stagione, episodio, titolo, serie, link, linksv FROM episodi ORDER BY id DESC LIMIT 5";
+		$query = "SELECT id, stagione, episodio, titolo, serie, link, linksv, linkverys FROM episodi ORDER BY id DESC LIMIT 5";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
 			
@@ -266,11 +266,11 @@ include('functions.php');
 		$epn = $row["episodio"];
 		$nomeep = $row["titolo"];
 		$serien = $row["serie"];
-		if(!$row["link"]){
-				$link = "p=".$row["linksv"];
-			} else {
-				$link = "v=".$row["link"];
-			}
+		$link = $row["link"];
+		$linksv = $row["linksv"];
+		$linkverys = $row["linkverys"];
+			
+		
 			
 		$query1 = "SELECT id, nome, poster FROM serie WHERE id='". $serien ."'";
 		$result1 = mysqli_query($db,$query1);
@@ -279,7 +279,15 @@ include('functions.php');
 		$poster = $row["poster"];
 		$nomeserie = $row["nome"];
 		}
-
+			
+		if(!empty($link)){
+			$link = "v=".$link;
+		} elseif (!empty($linksv)){
+			$link = "p=".$linksv;
+		} elseif (!empty($linkverys)) {
+			$link = "vs=".$linkverys;
+		}
+		
 			echo "<div class='serie'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagn."X".$epn." - ".$nomeep."</p></a></div>";
 		}
 				

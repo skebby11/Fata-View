@@ -16,6 +16,8 @@ $idserie = $_POST["idserie"];
 $titolo = e($_POST["titolo"]);
 $link = $_POST["link"];
 $linksv = $_POST["linksv"];
+$linkverys = $_POST["linkverys"];
+
 
 // form validation: ensure that the form is correctly filled
 		if (empty($stagione)) { 
@@ -33,8 +35,8 @@ $linksv = $_POST["linksv"];
 
 
 if (count($errors) == 0) {
-$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv) 
-						  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv')";
+$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkverys) 
+						  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkverys')";
 mysqli_query($db, $query); 
 
 $_SESSION['success']  = "EPISODIO AGGIUNTO!";
@@ -180,8 +182,9 @@ echo "    ];
 	Episodio: <input type="text" name="episodio"><br><br>
 	ID serie: <input type="text" name="idserie" id="idserie"><br><br>
 	Titolo: <input type="text" name="titolo"><br><br>
-	Link OL: <input type="text" name="link"><br><br>
-	Link SV: <input type="text" name="linksv"><br><br><br>
+	OpenLoad: <input type="text" name="link"><br><br>
+	SpeedVideo: <input type="text" name="linksv"><br><br>
+	VeryStream: <input type="text" name="linkverys"><br><br><br>
 	
 	<input type="submit" name="Invia" value="Invia">
 
