@@ -203,7 +203,7 @@ form, .content {
 .del,.hover-del:hover{color:#fff!important;background-color:#C40609}
 .delbtn {padding: 4px 8px; margin-top: 2px;}
 .footer, a.a {font-size:13px;text-align:center;color: #231F20;margin-top: 25px;}
-a.footer {
+.footer a{
 	color: #231F20;
 }
 .myfile img {

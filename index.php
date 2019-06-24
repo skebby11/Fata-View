@@ -47,7 +47,7 @@ include('functions.php');
 		
 		<?php  if ($_SESSION['user']['id']== 3) : ?>  <!--   A lovely greeting to my girl, registered with ID 3   -->
 		
-			<h2 class="love">CIAO <br> CHE FAI <br> <span>❤</span></h2>
+			<h2 class="love">CIAO AMORE HO CAMBIATO LA SCRITTA<br> <!--<span>❤</span>--></h2>
 		
 		<?php endif ?>
 		<style>
@@ -318,7 +318,7 @@ include('functions.php');
 	</form>
 	
 	<div class="footer">
-	
+		&copy <?php echo $year ?> | <a href="api">API</a> | This project is open source on <a href="https://github.com/skebby11/Fata-View/" target="_blank">GitHub</a> | Made by <a href="https://www.sebastianoriva.it" target="_blank">Sebastiano Riva</a>
 	</div>
 
 </body>
