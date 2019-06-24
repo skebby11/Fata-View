@@ -49,7 +49,7 @@ ul {
 }
 
 ul.login {
-	width: 70%;
+	width: 100%!important;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -93,7 +93,7 @@ width: 70%;
 	height: 25px;
 }
 .profile_info {
-		width: 30%;
+		width: 26%;
 		display: inline-block;
 }
 .menu form{

@@ -5,7 +5,7 @@ include('functions.php');
 <html>
 <head>
 	<title>Home - Fata Streaming</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.3">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -120,10 +120,15 @@ include('functions.php');
 			$episodion = $row["episodio"];
 			$serieid = $row["serie"];
 			$titolo = $row["titolo"];
-			if(!$row["link"]){
-				$link = "p=".$row["linksv"];
-			} else {
-				$link = "v=".$row["link"];
+			$link = $row["link"];
+			$linksv = $row["linksv"];
+			$linkverys = $row["linkverys"];
+			if(!empty($link)){
+			$link = "v=".$link;
+			} elseif (!empty($linksv)){
+				$link = "p=".$linksv;
+			} elseif (!empty($linkverys)) {
+				$link = "vs=".$linkverys;
 			}
 				
 				$query2 = "SELECT nome, poster FROM serie WHERE id='". $serieid ."'";
@@ -153,10 +158,15 @@ include('functions.php');
 			$episodion = $row["episodio"];
 			$serieid = $row["serie"];
 			$titolo = $row["titolo"];
-			if(!$row["link"]){
-				$link = "p=".$row["linksv"];
-			} else {
-				$link = "v=".$row["link"];
+			$link = $row["link"];
+			$linksv = $row["linksv"];
+			$linkverys = $row["linkverys"];
+			if(!empty($link)){
+			$link = "v=".$link;
+			} elseif (!empty($linksv)){
+				$link = "p=".$linksv;
+			} elseif (!empty($linkverys)) {
+				$link = "vs=".$linkverys;
 			}
 				
 				$query2 = "SELECT nome, poster FROM serie WHERE id='". $serieid ."'";
@@ -186,10 +196,15 @@ include('functions.php');
 			$episodion = $row["episodio"];
 			$serieid = $row["serie"];
 			$titolo = $row["titolo"];
-			if(!$row["link"]){
-				$link = "p=".$row["linksv"];
-			} else {
-				$link = "v=".$row["link"];
+			$link = $row["link"];
+			$linksv = $row["linksv"];
+			$linkverys = $row["linkverys"];
+			if(!empty($link)){
+			$link = "v=".$link;
+			} elseif (!empty($linksv)){
+				$link = "p=".$linksv;
+			} elseif (!empty($linkverys)) {
+				$link = "vs=".$linkverys;
 			}
 				
 				$query2 = "SELECT nome, poster FROM serie WHERE id='". $serieid ."'";
@@ -219,10 +234,15 @@ include('functions.php');
 			$episodion = $row["episodio"];
 			$serieid = $row["serie"];
 			$titolo = $row["titolo"];
-			if(!$row["link"]){
-				$link = "p=".$row["linksv"];
-			} else {
-				$link = "v=".$row["link"];
+			$link = $row["link"];
+			$linksv = $row["linksv"];
+			$linkverys = $row["linkverys"];
+			if(!empty($link)){
+			$link = "v=".$link;
+			} elseif (!empty($linksv)){
+				$link = "p=".$linksv;
+			} elseif (!empty($linkverys)) {
+				$link = "vs=".$linkverys;
 			}
 				
 				$query2 = "SELECT nome, poster FROM serie WHERE id='". $serieid ."'";
