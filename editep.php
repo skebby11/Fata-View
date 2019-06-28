@@ -22,14 +22,14 @@ mysqli_query($db, $query);
 if(isset($_POST['aggiornaep'])){
 	$selepid = $_POST['selepid'];
 	$upstagione = $_POST["upstagione"];
-	$upepisodio = $_POST['upepisodio'];
+	$epepisodio = $_POST['epepisodio'];
 	$upserie = $_POST['upserie'];
 	$uptitolo = e($_POST['uptitolo']);
 	$uplink = e($_POST['uplink']);
 	$uplinksv = e($_POST['uplinksv']);
 	$uplinkvery = e($_POST['uplinkvery']);
 	
-	$query = "UPDATE episodi SET stagione = " . $upstagione . ", episodio = '$upepisodio', serie = ".$_POST['upserie']." , titolo = '$uptitolo', link = '".$_POST['uplink']."', linksv = '$uplinksv', linkverys = '$uplinkvery' WHERE id = $selepid";
+	$query = "UPDATE episodi SET stagione = " . $upstagione . ", episodio = ".$_POST['upepisodio'].", serie = ".$_POST['upserie']." , titolo = '$uptitolo', link = '".$_POST['uplink']."', linksv = '".$_POST['uplinksv'].", linkverys = '".$_POST['uplinkvery']."' WHERE id = $selepid";
 	mysqli_query($db, $query);
 	$_SESSION['success']  = "Episodio aggiornato";
 }
@@ -199,9 +199,9 @@ tr:nth-child(even) {
     <th>episodio</th>
     <th>serie</th>
     <th>titolo</th>
-    <th>openload</th>
-    <th>speedvideo</th>
-    <th>verystream</th>
+    <th>link</th>
+    <th>linksv</th>
+    <th>linkverys</th>
     <th></th>
   </tr>
 	
@@ -219,7 +219,7 @@ tr:nth-child(even) {
     <td>".$row['link']."</td>
     <td>".$row['linksv']."</td>
 	<td>".$row['linkverys']."</td>
-    <td><a class='button_hover' href='editep.php?action=edit&id_ep=".$row['id']."'>Modifica</a></td>
+    <td><a href='editep.php?action=edit&id_ep=".$row['id']."'><input type='submit' value='Modifica'></td>
   </tr>
 					";
 				}
@@ -245,7 +245,7 @@ tr:nth-child(even) {
 				}
 			}
 	?>
-	<a class="button_hover" href="editep.php?action=view">Indietro</a><br><br><br>
+	
 	<form action="editep.php?action=view" method="post">
 	<input value="<? echo $epid ?>" name="selepid" style="display: none">
 	<strong>Stagione</strong> <br><input id='editor1' name="upstagione" value="<?php echo $stagione ?>"><br><br>
@@ -254,9 +254,9 @@ tr:nth-child(even) {
 	<strong>Titolo</strong> <br><input id='editor4' name="uptitolo" value="<?php echo $titolo ?>"><br><br>
 	<strong>Link Open Load</strong> <br><input id='editor5' name="uplink" value="<?php echo $link ?>"><br><br>
 	<strong>Link Speed Video</strong> <br><input id='editor6' name="uplinksv" value="<?php echo $linksv ?>"><br><br>
-	<strong>Link VeryStream</strong> <br><input id='editor7' name="uplinkvery" value="<?php echo $linkverys ?>"><br><br><br>
+	<strong>Link VeryStream</strong> <br><input id='editor7' name="uplinkvery" value="<?php echo $linkverys ?>"><br><br>
 	
-	<button type="submit" name="aggiornaep" value="Salva">Salva</button>
+	<input type="submit" name="aggiornaep" value="Salva">
 	</form>
 	
 	

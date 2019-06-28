@@ -19,7 +19,7 @@ if ($idutente != 2) {
 <div class="head"><div class="logo">FATA STREAMING</div></div>
 
 <div class="sx no-print">
-	<ul class="sx_menu">
+	<ul class="sx_menu" style="height:30%; ">
 	<li class="parent">
 		<a class="menu_element product " href="addep.php">Aggiungi Episodio</a>
 	</li>
@@ -32,7 +32,16 @@ if ($idutente != 2) {
 	<li class="parent">
 		<a class="menu_element product " href="editep.php?action=view">Modifica Episodi</a>
 	</li>
-	</ul>	
+	</ul>
+	<div style="float: left; height: 65%; margin: 2px; padding: 10px; width: 100%; position:relative; ">
+	<ul class="sx_menu" >
+	<div style='position:absolute;bottom:0;'>
+		<a class="menu_element product " href="../">Torna al sito</a>
+	</div>
+	
+
+	</ul>
+	</div>
 </div>
 
 <div class="dx">

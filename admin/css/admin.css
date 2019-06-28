@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
-@import url(font-awesome.css);
-@import url(checkbox.css);
+/*@import url(font-awesome.css);*/
 body {
 	margin: 0px;
 	background:#F0F2F5;
@@ -75,7 +74,6 @@ ul.child {
     float: left;
     background: #3C3C3C;
     display: none;
-	z-index:+1000;
 }
 ul.child li {
     float: left;

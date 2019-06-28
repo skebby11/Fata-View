@@ -104,7 +104,8 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
 			</div>
 		<?php endif ?>
 
-<form action="?pg=serie" method="post" style="padding-top: 40px;">
+<a class="button_hover" href="../admin">Indietro</a><br><br><br>
+<form action="" method="post" style="padding-top: 40px;">
 
 	ID (fac.): <input type="text" name="id"><br><br>
 	Nome serie: <input type="text" name="nome" style="width:300px"><br><br>
@@ -112,7 +113,7 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
 	Poster: <input type="text" name="poster" style="width:300px"><br><br>
 	N. stagioni: <input type="text" name="stagioni"><br><br><br>
 	
-	<input type="submit" name="Invia" value="Invia">
+	<button type="submit" name="Invia" value="Invia">Invia</button>
 
 </form>
 	

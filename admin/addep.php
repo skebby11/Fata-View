@@ -176,6 +176,7 @@ echo "    ];
 		<?php endif ?>
 	
 
+<a class="button_hover" href="../admin">Indietro</a><br><br><br>
 <form action="" method="post" style="padding-top: 40px;">
 
 	Stagione: <input type="text" name="stagione"><br><br>
@@ -186,7 +187,7 @@ echo "    ];
 	SpeedVideo: <input type="text" name="linksv"><br><br>
 	VeryStream: <input type="text" name="linkverys"><br><br><br>
 	
-	<input type="submit" name="Invia" value="Invia">
+	<button type="submit" name="Invia" value="Invia">Invia</button>
 
 </form>
 	

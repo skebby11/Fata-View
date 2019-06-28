@@ -107,6 +107,7 @@ $_SESSION['success']  = "FILM AGGIUNTO!";
 			</div>
 		<?php endif ?>
 
+<a class="button_hover" href="../admin">Indietro</a><br><br><br>
 <form action="addfilm.php" method="post" style="padding-top: 30px;">
 
 	Titolo: <input type="text" name="nome" style="width:300px"><br><br>
@@ -115,7 +116,7 @@ $_SESSION['success']  = "FILM AGGIUNTO!";
 	Link OL: <input type="text" name="link" style="width:300px"><br><br>
 	Link SV: <input type="text" name="linksv"><br><br><br>
 	
-	<input type="submit" name="Invia" value="Invia">
+	<button type="submit" name="Invia" value="Invia">Invia</button>
 
 </form>
 	
