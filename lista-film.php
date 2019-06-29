@@ -74,7 +74,7 @@ include('functions.php');
 				
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
-			echo "<div class='serierow'><a href='film?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p><strong>" . $row["nome"] ."</strong><br><br>" . substr($row["descr"], 0, 500) ."...</p></a></div>";
+			echo "<div class='serierow'><a href='film?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p><strong>" . $row["titolo"] ."</strong><br><br>" . substr($row["descr"], 0, 500) ."...</p></a></div>";
 		}
 		echo "<div class='pages'>";
 		$sql = "SELECT COUNT(ID) AS total FROM film";
