@@ -9,12 +9,14 @@ include('functions.php');
 $idutente = $_SESSION['user']['id'];
 if(!empty($v)){
 $epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi where link='$v'";
+$openload = 1;
 }
 if(!empty($p)){
 $epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi where linksv='$p'";
 }
 if(!empty($vs)){
 $epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi where linkverys='$vs'";
+$verystream = 1;
 }
 $epdetailsresult = mysqli_query($db, $epdetailsquery);
     while($row = mysqli_fetch_assoc($epdetailsresult)) {
@@ -29,10 +31,11 @@ $epdetailsresult = mysqli_query($db, $epdetailsquery);
 		seenep();
 	}
 function seenep() {
-	global $db, $idserie, $epid;
+	global $db, $idserie, $epid, $time;
 	$idutente = $_SESSION['user']['id'];
-	$addsenepquery = "INSERT into epseen (user, serie, epid) VALUES('$idutente', '$idserie', '$epid')";
+	$addsenepquery = "INSERT into epseen (user, serie, epid, date) VALUES('$idutente', '$idserie', '$epid', '$time')";
 	mysqli_query($db, $addsenepquery);
+	$_SESSION['success']  = "Ora puoi guardare i prossimi episodi...";
 	header('Location: /');
 } ?>
 <!-- 
@@ -96,6 +99,7 @@ document.oncontextmenu=new Function("return false");
 	</script>	
 	</div><br>
          
+	<?php if($openload = 1): ?>
      <script>	
 	$.get( "https://api.openload.co/1/file/info?file=<?php echo $v; ?>&login=7f53b6aa27b38c73&key=euZmu1Un", function( response ) {
 	$("#msg").text(response.msg);
@@ -103,7 +107,9 @@ document.oncontextmenu=new Function("return false");
     $("#episodio").text(response.result.<?php echo $v; ?>.name);
 	}, "json" );
 	  </script>
+	<?php endif; ?>
 	   
+	<?php if($verystream = 1): ?>
      <script>	
 	$.get( "https://api.verystream.com/file/info?file=<?php echo $vs; ?>&login=920e4e64bfafd40ac359&key=9Z9vL2iQtFX", function( response ) {
 	$("#msg").text(response.msg);
@@ -111,6 +117,7 @@ document.oncontextmenu=new Function("return false");
     $("#episodio").text(response.result.<?php echo $vs; ?>.name);
 	}, "json" );
 	  </script>
+	<?php endif; ?>
 
 	<div class="titlewrap">
 		<h1 style="color: darkgray"><?php echo $stagione . "X" . $episodio . " - " .$titolo; ?></h2>
@@ -177,7 +184,7 @@ document.oncontextmenu=new Function("return false");
 		.epscontainer {
 			width: 90%;
 			max-width: 600px;		
-			}</style>
+		}</style>
 					<div class="epscontainer">
 					<div class="logged">
 						<strong style="color: white;">Ciao, <?php echo $_SESSION['user']['username']; ?></strong>
@@ -189,16 +196,17 @@ document.oncontextmenu=new Function("return false");
 					</form>
 					<div class="seeneps">	
 					<?php 
-					$epsseen = "SELECT epid FROM epseen where SERIE='$idserie' AND user='$idutente' ORDER BY epid ASC";
+					$epsseen = "SELECT epid, date FROM epseen where SERIE='$idserie' AND user='$idutente' ORDER BY epid ASC";
 					$epsseenresult = mysqli_query($db, $epsseen);
 					if (mysqli_num_rows($epsseenresult) > 0) {
-						echo "<hr><h4>Episodi gi&agrave visti:</h4>";
+						echo "<hr><h4>Episodi gi&agrave visti:</h4><small>TIP: Passa il cursore sull'episodio per sapere quando l'hai visto</small><br><br>";
 					while($row = mysqli_fetch_assoc($epsseenresult)) { // output data of each row
 						$selectid =  $row["epid"];
+						$seendate = $row["date"];
 						$selectseps = "SELECT stagione, episodio FROM episodi where id='$selectid'";
 						$selectsepsresult = mysqli_query($db, $selectseps);
 						while($row = mysqli_fetch_assoc($selectsepsresult)) {
-							echo "<span>" . $row["stagione"] . "X" . $row["episodio"] ."</span>";
+							echo "<span title='$seendate'>" . $row["stagione"] . "X" . $row["episodio"] ."</span>";
 						}}}?>
 					</div>	
 					</div>
