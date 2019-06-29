@@ -14,6 +14,7 @@ $descr = e($_POST["descr"]);
 $poster = e($_POST["poster"]);
 $link = e($_POST["link"]);
 $linksv = e($_POST["linksv"]);
+$linkverys = e($_POST["linkverys"]);
 
 // form validation: ensure that the form is correctly filled
 
@@ -28,8 +29,8 @@ $linksv = e($_POST["linksv"]);
 		}
 
 if (count($errors) == 0) {
-$query = "INSERT INTO film (titolo, descr, poster, link, linksv) 
-						  VALUES('$titolo', '$descr', '$poster', '$link', '$linksv')";
+$query = "INSERT INTO film (titolo, descr, poster, link, linksv, linkverys) 
+						  VALUES('$titolo', '$descr', '$poster', '$link', '$linksv', '$linkverys')";
 mysqli_query($db, $query);
 
 $_SESSION['success']  = "FILM AGGIUNTO!";
@@ -111,10 +112,11 @@ $_SESSION['success']  = "FILM AGGIUNTO!";
 <form action="addfilm.php" method="post" style="padding-top: 30px;">
 
 	Titolo: <input type="text" name="nome" style="width:300px"><br><br>
-	Descrizione: <input type="text" name="descr" style="height: 200px; width: 300px"><br><br>
+	Descrizione: <input type="text" name="descr" style="width: 500px"><br><br>
 	Poster: <input type="text" name="poster" style="width:300px"><br><br>
-	Link OL: <input type="text" name="link" style="width:300px"><br><br>
-	Link SV: <input type="text" name="linksv"><br><br><br>
+	OpenLoad: <input type="text" name="link" style="width:300px"><br><br>
+	SpeedVideo: <input type="text" name="linksv"><br><br>
+	VeryStream: <input type="text" name="linkverys"><br><br><br>
 	
 	<button type="submit" name="Invia" value="Invia">Invia</button>
 

@@ -14,9 +14,9 @@ $stagione = $_POST["stagione"];
 $episodio = $_POST["episodio"];
 $idserie = $_POST["idserie"];
 $titolo = e($_POST["titolo"]);
-$link = $_POST["link"];
-$linksv = $_POST["linksv"];
-$linkverys = $_POST["linkverys"];
+$link = e($_POST["link"]);
+$linksv = e($_POST["linksv"]);
+$linkverys = e($_POST["linkverys"]);
 
 
 // form validation: ensure that the form is correctly filled
