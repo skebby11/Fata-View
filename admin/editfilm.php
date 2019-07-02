@@ -13,25 +13,24 @@ $action = $_GET["action"];
 
 
 if (count($errors) == 0) {
-$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkverys) 
-						  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkverys')";
+$query = "INSERT INTO film (titolo, descr, poster link, linksv, linkverys, ) 
+						  VALUES('$titolo', '$descr', '$poster', '$link', '$linksv', '$linkverys')";
 mysqli_query($db, $query); 
 
 }
 
-if(isset($_POST['aggiornaep'])){
-	$selepid = $_POST['selepid'];
-	$upstagione = $_POST["upstagione"];
-	$upepisodio = $_POST['upepisodio'];
-	$upserie = $_POST['upserie'];
+if(isset($_POST['aggiornafilm'])){
+	$selfilmid = $_POST['selfilmid'];
+	$updescr = e($_POST["updescr"]);
+	$upposter = $_POST['upposter'];
 	$uptitolo = e($_POST['uptitolo']);
 	$uplink = e($_POST['uplink']);
 	$uplinksv = e($_POST['uplinksv']);
 	$uplinkvery = e($_POST['uplinkvery']);
 	
-	$query = "UPDATE episodi SET stagione = " . $upstagione . ", episodio = '$upepisodio', serie = ".$_POST['upserie']." , titolo = '$uptitolo', link = '".$_POST['uplink']."', linksv = '$uplinksv', linkverys = '$uplinkvery' WHERE id = $selepid";
+	$query = "UPDATE film SET titolo = '$uptitolo', descr = '$updescr' , poster = '$upposter', link = '$uplink', linksv = '$uplinksv', linkverys = '$uplinkvery' WHERE id = $selfilmid";
 	mysqli_query($db, $query);
-	$_SESSION['success']  = "Episodio aggiornato";
+	$_SESSION['success']  = "Film aggiornato";
 }
 
 ?>
@@ -140,18 +139,18 @@ echo "    ];
 		<a class="menu_element " href="addfilm.php">Aggiungi Film</a>
 	</li>
 	<li class="parent">
-		<a class="menu_element product active" href="editep.php?action=view">Modifica Episodi</a>
-	</li>	
-	<li class="parent">
-		<a class="menu_element product " href="editfilm.php?action=view">Modifica Film</a>
+		<a class="menu_element product" href="editep.php?action=view">Modifica Episodi</a>
 	</li>
-	</ul>
+	<li class="parent">
+		<a class="menu_element product active" href="editfilm.php?action=view">Modifica Film</a>
+	</li>
+	</ul>	
 </div>
 
 <div class="dx">
 		<div class="title">
 			<div class="container">
-				<h1>Modifica EPISODIO</h1>
+				<h1>Modifica FILM</h1>
 			</div>
 		</div>
 		<div class="container">
@@ -193,36 +192,34 @@ tr:nth-child(even) {
 </head>
 <body>
 
-<h2>Lista episodi</h2>
+<h2>Lista film</h2>
 
 <table>
   <tr>
     <th>id</th>
-    <th>stagione</th>
-    <th>episodio</th>
-    <th>serie</th>
     <th>titolo</th>
+    <th>descr</th>
+    <th>poster</th>
     <th>openload</th>
     <th>speedvideo</th>
     <th>verystream</th>
     <th></th>
   </tr>
 	
-<?php $query="SELECT * FROM episodi ORDER BY id DESC";
+<?php $query="SELECT * FROM film ORDER BY id DESC";
 	  $results = mysqli_query($db, $query);
 			if (mysqli_num_rows($results) > 0) {
 				while($row = mysqli_fetch_assoc($results)) {
 					$selepid = $row['id'];
 					echo "  <tr>
     <td><b>".$row['id']."</b></td>
-    <td>".$row['stagione']."</td>
-    <td>".$row['episodio']."</td>
-    <td>".$row['serie']."</td>
     <td>".$row['titolo']."</td>
+    <td>".substr($row["descr"], 0, 50)."</td>
+    <td>".$row['poster']."</td>
     <td>".$row['link']."</td>
     <td>".$row['linksv']."</td>
 	<td>".$row['linkverys']."</td>
-    <td><a class='button_hover' href='editep.php?action=edit&id_ep=".$row['id']."'>Modifica</a></td>
+    <td><a class='button_hover' href='editfilm.php?action=edit&id_film=".$row['id']."'>Modifica</a></td>
   </tr>
 					";
 				}
@@ -233,33 +230,31 @@ tr:nth-child(even) {
 <?php elseif ($action=="edit") : ?>
 	
 	<?php
-	$epid = $_GET['id_ep'];
-	$query = "SELECT * FROM episodi WHERE id = $epid";
+	$filmid = $_GET['id_film'];
+	$query = "SELECT * FROM film WHERE id = $filmid";
 	$results = mysqli_query($db, $query);
 			if (mysqli_num_rows($results) > 0) {
 				while($row = mysqli_fetch_assoc($results)) {
-					$stagione = $row['stagione'];
-					$episodio = $row['episodio'];
-					$serie = $row['serie'];
 					$titolo = $row['titolo'];
+					$descr = $row['descr'];
+					$poster = $row['poster'];
 					$link = $row['link'];
 					$linksv = $row['linksv'];
 					$linkverys = $row['linkverys'];
 				}
 			}
 	?>
-	<a class="button_hover" href="editep.php?action=view">Indietro</a><br><br><br>
-	<form action="editep.php?action=view" method="post">
-	<input value="<? echo $epid ?>" name="selepid" style="display: none">
-	<strong>Stagione</strong> <br><input id='editor1' name="upstagione" value="<?php echo $stagione ?>"><br><br>
-	<strong>Episodio</strong> <br><input id='editor2' name="upepisodio" value="<?php echo $episodio ?>"><br><br>
-	<strong>Serie</strong> <br><input id='editor3' name="upserie" value="<?php echo $serie ?>"><br><br>
-	<strong>Titolo</strong> <br><input id='editor4' name="uptitolo" value="<?php echo $titolo ?>"><br><br>
+	<a class="button_hover" href="editfilm.php?action=view">Indietro</a><br><br><br>
+	<form action="editfilm.php?action=view" method="post">
+	<input value="<? echo $filmid ?>" name="selfilmid" style="display: none">
+	<strong>Titolo</strong> <br><input id='editor2' name="uptitolo" value="<?php echo $titolo ?>"><br><br>
+	<strong>Descrizione</strong> <br><input id='editor3' name="updescr" value="<?php echo $descr ?>"><br><br>
+	<strong>Poster</strong> <br><input id='editor4' name="upposter" value="<?php echo $poster ?>"><br><br>
 	<strong>Link Open Load</strong> <br><input id='editor5' name="uplink" value="<?php echo $link ?>"><br><br>
 	<strong>Link Speed Video</strong> <br><input id='editor6' name="uplinksv" value="<?php echo $linksv ?>"><br><br>
 	<strong>Link VeryStream</strong> <br><input id='editor7' name="uplinkvery" value="<?php echo $linkverys ?>"><br><br><br>
 	
-	<button type="submit" name="aggiornaep" value="Salva">Salva</button>
+	<button type="submit" name="aggiornafilm" value="Salva">Salva</button>
 	</form>
 	
 	

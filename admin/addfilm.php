@@ -32,7 +32,6 @@ if (count($errors) == 0) {
 $query = "INSERT INTO film (titolo, descr, poster, link, linksv, linkverys) 
 						  VALUES('$titolo', '$descr', '$poster', '$link', '$linksv', '$linkverys')";
 mysqli_query($db, $query);
-
 $_SESSION['success']  = "FILM AGGIUNTO!";
 }
 
@@ -81,6 +80,9 @@ $_SESSION['success']  = "FILM AGGIUNTO!";
 	</li>
 	<li class="parent">
 		<a class="menu_element product " href="editep.php?action=view">Modifica Episodi</a>
+	</li>
+	<li class="parent">
+		<a class="menu_element product " href="editfilm.php?action=view">Modifica Film</a>
 	</li>
 	</ul>	
 </div>

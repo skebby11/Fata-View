@@ -149,6 +149,9 @@ echo "    ];
 	<li class="parent">
 		<a class="menu_element product " href="editep.php?action=view">Modifica Episodi</a>
 	</li>
+	<li class="parent">
+		<a class="menu_element product " href="editfilm.php?action=view">Modifica Film</a>
+	</li>
 	</ul>	
 </div>
 
