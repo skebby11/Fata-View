@@ -5,7 +5,7 @@ include('functions.php');
 <html>
 <head>
 	<title>Home - Fata Streaming</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.3">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.4">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -266,7 +266,7 @@ include('functions.php');
 		<h3 class="lasttext">Ultime serie aggiunte:</h3>
 		<div class="lastseries">
 		<?php
-		$query = "SELECT id, nome, descr, poster, stagioni FROM serie ORDER BY id DESC LIMIT 5";
+		$query = "SELECT id, nome, descr, poster, stagioni FROM serie ORDER BY id DESC LIMIT 4";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
 			echo "<div class='serie'><a href='serie?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p>" . $row["nome"] ."</p></a></div>";
@@ -277,7 +277,7 @@ include('functions.php');
 		<h3 class="lasttext">Ultimi episodi aggiunti:</h3>
 		<div class="lastseries">
 		<?php
-		$query = "SELECT id, stagione, episodio, titolo, serie, link, linksv, linkverys FROM episodi ORDER BY id DESC LIMIT 5";
+		$query = "SELECT id, stagione, episodio, titolo, serie, link, linksv, linkverys FROM episodi ORDER BY id DESC LIMIT 4";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
 			

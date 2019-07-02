@@ -320,6 +320,7 @@ input[type="text"]:disabled {
 .serie img{
 	width: 100%;
 	height: auto;
+	max-width: 250px;
 }
 
 .serie p{
