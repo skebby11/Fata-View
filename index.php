@@ -5,7 +5,7 @@ include('functions.php');
 <html>
 <head>
 	<title>Home - Fata Streaming</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.4">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.5.24.43">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -44,6 +44,7 @@ include('functions.php');
 	</div>
 
 	<form>
+	  <div class="container">
 		
 		<?php  if ($_SESSION['user']['id']== 3) : ?>  <!--   A lovely greeting to my girl, registered with ID 3   -->
 		
@@ -263,7 +264,7 @@ include('functions.php');
 		?>
 		</div>
 		
-		<h3 class="lasttext">Ultime serie aggiunte:</h3>
+		<h3 class="lasttext">Ultime serie aggiunte</h3>
 		<div class="lastseries">
 		<?php
 		$query = "SELECT id, nome, descr, poster, stagioni FROM serie ORDER BY id DESC LIMIT 4";
@@ -274,7 +275,7 @@ include('functions.php');
 		?>
 		</div>
 		
-		<h3 class="lasttext">Ultimi episodi aggiunti:</h3>
+		<h3 class="lasttext">Ultimi episodi aggiunti</h3>
 		<div class="lastseries">
 		<?php
 		$query = "SELECT id, stagione, episodio, titolo, serie, link, linksv, linkverys FROM episodi ORDER BY id DESC LIMIT 4";
@@ -314,7 +315,7 @@ include('functions.php');
 		?>
 		</div>
 
-		
+	  </div>
 	</form>
 	
 	<div class="footer">

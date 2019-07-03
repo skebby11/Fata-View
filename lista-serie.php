@@ -7,7 +7,7 @@ include('functions.php');
 <html>
 <head>
 	<title>Lista serie - Fata Streaming</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.5.24.43">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 </head>
@@ -48,9 +48,9 @@ include('functions.php');
 	</div>
 
 	<form>
+	  <div class="container">
 		<h3 class="lasttext">Tutte le serie</h3>
 		<div class="allseriesrow">
-		<style> .serierow, .serierow p{margin-bottom: 50px!important}</style>
 		<?php
 		$results_per_page = 4;
 				
@@ -79,7 +79,7 @@ include('functions.php');
 				
 		?>
 		</div>
-		
+	  </div>
 	</form>
 	
 	<div class="footer">

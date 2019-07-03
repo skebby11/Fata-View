@@ -5,10 +5,10 @@ $goto = $_GET['goto']; ?>
 <html>
 <head>
 	<title>Fata Streaming - Register</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?v1.1.47">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.5.24.43">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<style>
+<!--	<style>
 	@media (min-width: 992px) { 
 		.header {
 			max-width: 970px;
@@ -19,7 +19,7 @@ $goto = $_GET['goto']; ?>
 		form {
 			max-width: 970px;
 		}
-	</style>
+	</style>-->
 	
 </head>
 <body>
@@ -46,7 +46,7 @@ $goto = $_GET['goto']; ?>
 	</div>
 	
 	<form method="post" action="register">
-
+	<div class="container">
 		<?php echo display_error(); ?>
 
 		<div class="input-group">
@@ -74,6 +74,7 @@ $goto = $_GET['goto']; ?>
 		<p>
 			Already a member? <a href="login?goto=<?php echo $goto; ?>">Sign in</a>
 		</p>
+		</div>
 	</form>
 </body>
 </html>

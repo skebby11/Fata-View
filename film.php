@@ -14,6 +14,7 @@ $query = "SELECT * FROM film WHERE id =$idfilm";
 		$poster = $row["poster"];
 		$link = $row["link"];
 		$linksv = $row["linksv"];
+		$linkverys = $row["linkverys"];
 }
  
 ?>
@@ -22,7 +23,7 @@ $query = "SELECT * FROM film WHERE id =$idfilm";
 <html>
 <head>
 	<title><?php echo $titolo ?> - Fata Streaming</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?v1.1.49">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.5.24.43">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -60,67 +61,8 @@ $query = "SELECT * FROM film WHERE id =$idfilm";
 	</div>
 
 	<form>
-		
-	<style>
-		.poster {
-			margin: 20px 0;
-			margin-right: 30px;
-			width: 40%;
-			height: auto;
-			display: inline-block;
-			vertical-align: top;
-		}	
-		.descr {
-			display: inline-block;
-			max-width: 50%;
-		} 
-		.epsds {
-			margin-top: 50px;
-			font-size: 110%;
-			color: #fff;
-			display: inline-block;
-			max-width: 100%;
-		}
-		.ep a {
-			color: #00aeef;
-			text-decoration: none;
-		}
-		.stagname{
-			font-size: 120%;
-			margin-top: 40px;
-			margin-bottom: 25px;
-			text-transform: uppercase;
-		}
-		
-		.ep {
-			margin: 10px 5px;
-			width: 100%;
-			height: 150px;
-			display: inline-block;
-			text-align: center;
-			vertical-align: middle;
-			border-radius: 4px 4px 0px 0px;
-		}
-		
-		.ep:hover {
-			transition: opacity .15s ease-in-out;
-			-moz-transition: opacity .15s ease-in-out;
-			-webkit-transition: opacity .15s ease-in-out;
-			background-color: rgba(0, 0, 0, 0.6);
-			cursor: pointer;
-		}
-		
-		.ep p.link {
-		  visibility: hidden;
-		}
-		.ep:hover > p.link {
-		  visibility: visible;
-		}
+		<div class="container">
 
-		.ep:hover > p.info {
-		  visibility: hidden;
-		}
-	</style>
 		<h1 class="stagname"><? echo $titolo ?></h1>
 		
 		<img class="poster" src="<?php echo $poster ?> " alt="<?php echo $titolo?> poster">
@@ -139,13 +81,15 @@ $query = "SELECT * FROM film WHERE id =$idfilm";
 		} else {
 			$sv = '';
 		}
+	} if(!empty($linkverys)) {
+		$link = "<a href='view-film?vs=$linkverys' target='__blank'>VeryStream</a>";
 	}
 		
 		
 		
-	echo "<div class='ep'><p class='info'><strong> " . $titolo . "</strong> <br></p><p class='link'> ".$link, $sv."</p></div>";
+	echo "<div class='ep'><p class='info'><strong> " . $titolo . "</strong><br> <br></p><p class='link'> ".$link, $sv."</p></div>";
  ?>
-
+		</div>
 	</form>
 	
 	<div class="footer">

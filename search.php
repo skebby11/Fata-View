@@ -10,7 +10,7 @@ $keyword = $_POST["s"];
 <html>
 <head>
 	<title>Risultati ricerca - Fata Streaming</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.5.24.43">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
