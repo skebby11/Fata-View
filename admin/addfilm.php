@@ -9,6 +9,7 @@ if ($idutente != 2) {
 	header('location: ../login');
 }
 
+if(isset($_POST["addfilm"])) {
 $titolo = e($_POST["nome"]);
 $descr = e($_POST["descr"]);
 $poster = e($_POST["poster"]);
@@ -16,6 +17,37 @@ $link = e($_POST["link"]);
 $linksv = e($_POST["linksv"]);
 $linkverys = e($_POST["linkverys"]);
 
+	
+ // get file name (not including path)
+$filename = @basename($_FILES["posterupload"]['name']);
+
+// filename of temp uploaded file
+$tmp_filename = $_FILES["posterupload"]['tmp_name'];
+
+$file_ext = @strtolower(@strrchr($filename,"."));
+if (@strpos($file_ext,'.') === false) { // no dot? strange
+	array_push($errors, "Suspicious file name or could not determine file extension."); 
+}
+
+$file_ext = @substr($file_ext, 1); // remove dot
+
+// destination filename, rename if set to
+$dest_filename = $filename;
+$dest_filename =  mt_rand(1000, 9999). '-' . $filename;
+
+// get size
+$filesize = filesize($tmp_filename); // filesize($tmp_filename);
+
+// ingore empty input fields
+if ($filename!="") {
+
+// destination path - you can choose any file name here (e.g. random)
+$path = "../poster/" . $dest_filename; 
+	
+	
+
+if(move_uploaded_file($_FILES["posterupload"]['tmp_name'],$path)) {
+	
 // form validation: ensure that the form is correctly filled
 
 		if (empty($titolo)) { 
@@ -33,8 +65,12 @@ $query = "INSERT INTO film (titolo, descr, poster, link, linksv, linkverys)
 						  VALUES('$titolo', '$descr', '$poster', '$link', '$linksv', '$linkverys')";
 mysqli_query($db, $query);
 $_SESSION['success']  = "FILM AGGIUNTO!";
+} else {
+	echo "errore";
 }
-
+}
+}
+}
 
 ?>
 
@@ -121,9 +157,9 @@ $_SESSION['success']  = "FILM AGGIUNTO!";
 	Poster: <input type="text" name="poster" style="width:300px"><br><br>
 	OpenLoad: <input type="text" name="link" style="width:300px"><br><br>
 	SpeedVideo: <input type="text" name="linksv"><br><br>
-	VeryStream: <input type="text" name="linkverys"><br><br><br>
+	VeryStream: <input type="file" name="posterupload" id="posterupload"><br><br><br>
 	
-	<button type="submit" name="Invia" value="Invia">Invia</button>
+	<button type="submit" name="addfilm" value="Invia">Invia</button>
 
 </form>
 	
