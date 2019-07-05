@@ -9,14 +9,12 @@ include('functions.php');
 $idutente = $_SESSION['user']['id'];
 if(!empty($v)){
 $epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi where link='$v'";
-$openload = 1;
 }
 if(!empty($p)){
 $epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi where linksv='$p'";
 }
 if(!empty($vs)){
 $epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi where linkverys='$vs'";
-$verystream = 1;
 }
 $epdetailsresult = mysqli_query($db, $epdetailsquery);
     while($row = mysqli_fetch_assoc($epdetailsresult)) {
@@ -99,7 +97,7 @@ document.oncontextmenu=new Function("return false");
 	</script>	
 	</div><br>
          
-	<?php if($openload = 1): ?>
+	<?php if(!empty($v)): ?>
      <script>	
 	$.get( "https://api.openload.co/1/file/info?file=<?php echo $v; ?>&login=7f53b6aa27b38c73&key=euZmu1Un", function( response ) {
 	$("#msg").text(response.msg);
@@ -109,7 +107,7 @@ document.oncontextmenu=new Function("return false");
 	  </script>
 	<?php endif; ?>
 	   
-	<?php if($verystream = 1): ?>
+	<?php if(!empty($vs)): ?>
      <script>	
 	$.get( "https://api.verystream.com/file/info?file=<?php echo $vs; ?>&login=920e4e64bfafd40ac359&key=9Z9vL2iQtFX", function( response ) {
 	$("#msg").text(response.msg);

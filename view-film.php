@@ -3,6 +3,7 @@
 $v = $_GET['v'];
 $s = $_GET['s'];
 $p = $_GET['p'];
+$vs = $_GET['vs'];
 include('functions.php');
 $idutente = $_SESSION['user']['id'];
 if(!empty($v)){
@@ -10,6 +11,9 @@ $filmdetailsquery = "SELECT id, titolo, descr, poster FROM film where link='$v'"
 }
 if(!empty($p)){
 $filmdetailsquery = "SELECT id, titolo, descr, poster FROM film where linksv='$p'";
+}
+if(!empty($vs)){
+$filmdetailsquery = "SELECT id, titolo, descr, poster FROM film where linkverys='$vs'";
 }
 $filmdetailsresult = mysqli_query($db, $filmdetailsquery);
     while($row = mysqli_fetch_assoc($filmdetailsresult)) {
@@ -81,6 +85,7 @@ document.oncontextmenu=new Function("return false");
 	</script>	
 	</div><br>
          
+	 <?php if(!empty($v)): ?>
      <script>	
 	$.get( "https://api.openload.co/1/file/info?file=<?php echo $v; ?>&login=7f53b6aa27b38c73&key=euZmu1Un", function( response ) {
 	$("#msg").text(response.msg);
@@ -88,6 +93,17 @@ document.oncontextmenu=new Function("return false");
     $("#episodio").text(response.result.<?php echo $v; ?>.name);
 	}, "json" );
 	  </script>
+	<?php endif; ?>
+	   
+	<?php if(!empty($vs)): ?>
+	 <script>	
+	$.get( "https://api.verystream.com/file/info?file=<?php echo $vs; ?>&login=920e4e64bfafd40ac359&key=9Z9vL2iQtFX", function( response ) {
+	$("#msg").text(response.msg);
+    $("#status").text(response.status);
+    $("#episodio").text(response.result.<?php echo $vs; ?>.name);
+	}, "json" );
+	  </script>
+	<?php endif; ?>
 
 	<div class="titlewrap">
 		<h1 style="color: darkgray"><?php echo $titolo ?></h2>
@@ -104,10 +120,7 @@ document.oncontextmenu=new Function("return false");
 		</script>
 		
 		<?php 	
-				if(!empty($s)){
-      			echo "<div class='main-container'>";
-				}
-				if(!empty($v)){
+				if(!empty($s || $v || $vs)){
       			echo "<div class='main-container'>";
 				}
 				else{
@@ -128,7 +141,7 @@ document.oncontextmenu=new Function("return false");
 				
 				<?php 	
 
-				if(!empty($s || $v || $p)){
+				if(!empty($s || $v || $p || $vs)){
 				if(!empty($s)){
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
    				  </span><iframe src='https://streamango.com/embed/$s'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
@@ -140,6 +153,10 @@ document.oncontextmenu=new Function("return false");
 				if(!empty($v)){
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
    				  </span><iframe src='https://openload.co/embed/$v'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
+				}
+				if(!empty($vs)){
+      			echo "<span class='play1' id='play1' onclick='hide()' ;>
+   				  </span><iframe src='https://verystream.com/e/$vs'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
 				}}
 				else{
 					echo "</a><h1 style='color:fff'>Si &egrave verificato un errore</h1>
