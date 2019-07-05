@@ -9,11 +9,45 @@ if ($idutente != 2) {
 	header('location: ../login');
 }
 
+if(isset($_POST["addserie"])) {
 $id = $_POST["id"];
 $nome = e($_POST["nome"]);
 $descr = e($_POST["descr"]);
 $poster = $_POST["poster"];
 $stagioni = $_POST["stagioni"];
+
+
+
+ // get file name (not including path)
+$filename = @basename($_FILES["posterupload"]['name']);
+
+// filename of temp uploaded file
+$tmp_filename = $_FILES["posterupload"]['tmp_name'];
+
+$file_ext = @strtolower(@strrchr($filename,"."));
+if (@strpos($file_ext,'.') === false) { // no dot? strange
+	array_push($errors, "Suspicious file name or could not determine file extension."); 
+}
+
+$file_ext = @substr($file_ext, 1); // remove dot
+
+// destination filename, rename if set to
+$dest_filename = $filename;
+$dest_filename =  mt_rand(1000, 9999). '-' . $filename;
+
+// get size
+$filesize = filesize($tmp_filename); // filesize($tmp_filename);
+
+// ingore empty input fields
+if ($filename!="") {
+
+// destination path - you can choose any file name here (e.g. random)
+$path = "../poster/" . $dest_filename; 
+	
+	
+
+if(move_uploaded_file($_FILES["posterupload"]['tmp_name'],$path)) {
+	
 
 // form validation: ensure that the form is correctly filled
 
@@ -29,12 +63,16 @@ $stagioni = $_POST["stagioni"];
 
 if (count($errors) == 0) {
 $query = "INSERT INTO serie (nome, descr, poster, stagioni) 
-						  VALUES('$nome', '$descr', '$poster', '$stagioni')";
+						  VALUES('$nome', '$descr', '/poster/$dest_filename', '$stagioni')";
 mysqli_query($db, $query);
 
 $_SESSION['success']  = "SERIE AGGIUNTA!";
+} else {
+	echo "errore";
 }
-
+}
+}
+}
 ?>
 
 <head>
@@ -108,15 +146,15 @@ $_SESSION['success']  = "SERIE AGGIUNTA!";
 		<?php endif ?>
 
 <a class="button_hover" href="../admin">Indietro</a><br><br><br>
-<form action="" method="post" style="padding-top: 40px;">
+<form action="addserie.php" method="post" style="padding-top: 40px;" enctype="multipart/form-data">
 
 	ID (fac.): <input type="text" name="id"><br><br>
 	Nome serie: <input type="text" name="nome" style="width:300px"><br><br>
 	Descrizione: <input type="text" name="descr" style="height: 200px; width: 300px"><br><br>
-	Poster: <input type="text" name="poster" style="width:300px"><br><br>
-	N. stagioni: <input type="text" name="stagioni"><br><br><br>
+	N. stagioni: <input type="text" name="stagioni"><br><br>
+	Poster: <input type="file" name="posterupload" id="posterupload"><br><br><br>
 	
-	<button type="submit" name="Invia" value="Invia">Invia</button>
+	<button type="submit" name="addserie" value="Invia">Invia</button>
 
 </form>
 	
