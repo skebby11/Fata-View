@@ -13,7 +13,7 @@ $action = $_GET["action"];
 
 
 if (count($errors) == 0) {
-$query = "INSERT INTO film (titolo, descr, poster link, linksv, linkverys, ) 
+$query = "INSERT INTO film (titolo, descr, poster, link, linksv, linkverys) 
 						  VALUES('$titolo', '$descr', '$poster', '$link', '$linksv', '$linkverys')";
 mysqli_query($db, $query); 
 
@@ -87,7 +87,7 @@ html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% i
 	
 	<!--<script src="../ckeditor/ckeditor.js"></script>-->
 	
-	<title>Aggiungi episodio</title>
+	<title>Modifica film</title>
 
 <?php
 
@@ -95,11 +95,11 @@ echo "<script>  $( function() {
     var availableTags = [
 	";
 
-$query = "SELECT nome, id FROM serie";
+$query = "SELECT titolo, id FROM film";
 			$results = mysqli_query($db, $query);
 			if (mysqli_num_rows($results) > 0) {
 				while($row = mysqli_fetch_assoc($results)) {
-					echo "'" . $row['nome'] . " - " . $row['id'] . "',
+					echo "'" . $row['titolo'] . " - " . $row['id'] . "',
 					";
 				}
 			}
@@ -143,6 +143,9 @@ echo "    ];
 	</li>
 	<li class="parent">
 		<a class="menu_element product active" href="editfilm.php?action=view">Modifica Film</a>
+	</li>
+	<li class="parent">
+		<a class="menu_element product " href="editserie.php?action=view">Modifica Serie</a>
 	</li>
 	</ul>	
 </div>

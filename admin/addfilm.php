@@ -84,6 +84,9 @@ $_SESSION['success']  = "FILM AGGIUNTO!";
 	<li class="parent">
 		<a class="menu_element product " href="editfilm.php?action=view">Modifica Film</a>
 	</li>
+	<li class="parent">
+		<a class="menu_element product " href="editserie.php?action=view">Modifica Serie</a>
+	</li>
 	</ul>	
 </div>
 

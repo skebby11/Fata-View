@@ -35,6 +35,9 @@ if ($idutente != 2) {
 	<li class="parent">
 		<a class="menu_element product " href="editfilm.php?action=view">Modifica Film</a>
 	</li>
+	<li class="parent">
+		<a class="menu_element product " href="editserie.php?action=view">Modifica Serie</a>
+	</li>
 	</ul>
 	<div style="float: left; height: 65%; margin: 2px; padding: 10px; width: 100%; position:relative; ">
 	<ul class="sx_menu" >
