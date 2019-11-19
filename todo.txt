@@ -1,0 +1,12 @@
+- [x] Series and films page listed in 5 results pages
+- [x] Mouse hover effect on posters
+- [x] Progress bar in serie.php
+- [x] Search page
+- [x] Film page
+- [x] Better UI in serie.php
+- [x] Mark episodes as seen system
+- [] Registration and password reset e-mail
+- [x] CMS to add and edit content
+- [x] Poster uploader in CMS
+- [x] Larger container in front-end
+- [] Mobile responsive
