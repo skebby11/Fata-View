@@ -120,7 +120,7 @@ $seriedetailsresult = mysqli_query($db, $seriedetailsquery);
 	$seasons = $row["stagioni"];
 	}
 
-$epquery = "SELECT stagione, episodio, titolo, link, linksv, linkverys FROM episodi WHERE serie='$idserie' ORDER BY stagione ASC, episodio ASC";
+$epquery = "SELECT * FROM episodi WHERE serie='$idserie' ORDER BY stagione ASC, episodio ASC";
 $epresult = mysqli_query($db, $epquery);
 
     while($row = mysqli_fetch_assoc($epresult)) {
@@ -130,38 +130,29 @@ $epresult = mysqli_query($db, $epquery);
 	$link = $row["link"];
 	$linksv = $row["linksv"];
 	$linkverys = $row["linkverys"];
+	$linkmd = $row["linkmd"];
+	$linkgu = $row["linkgu"];
 	
-	if(empty($link)) {  // empty OL
+	if(!empty($linksv)) {  // empty OL	
 		
+		$link = "<a href='view?sv=$linksv' target='__blank'>Speedvideo</a>";
 		
-		$link = "<a href='view?p=$linksv' target='__blank'>Speedvideo</a>";
-		$sv='';
-		$vs='';
-		
-		if(empty($linksv)) {   // empty OL + empty SV = YES VERYSTREAM
-			$link = "<a href='view?vs=$linkverys' target='__blank'>VeryStream</a>";
+		if(!empty($linkmd)) {
+			$link = "<a href='view?sv=$linksv' target='__blank'>Speedvideo</a> / <a href='view?gu=$linkmd' target='__blank'>MixDrop</a>";	
 		}
 		
+	} elseif (!empty($linkmd)) {  // md YES
 		
-	} elseif (!empty($link)) {  // OL YES
+		$link = "<a href='view?md=$linkmd' target='__blank'>MixDrop</a>";	
 		
-		
-		$link = "<a href='view?v=$link' target='__blank'>Openload</a>";
-		
-		
-		if(!empty($linksv)){    // OL yes + SP yes
-		$sv = " / <a href='view?p=$linksv' target='__blank'>Speedvideo</a>";
-		$vs = '';
-			
-			
-		}else {   // OL yes + SP no
-			$sv = '';
+		if(!empty($linkgu)){    // md yes + gu yes
+		$link = "<a href='view?md=$linkmd' target='__blank'>MixDrop</a> / <a href='view?gu=$linkgu' target='__blank'>GoUnlimited</a>";	
 		}
 	}
 		
 		
 		
-	echo "<div class='ep'><p class='info'><strong> " . $season . "X" . $ep . "</strong> <br><br> " . $titolo . "</p><p class='link'> ".$link, $sv."</p></div>";
+	echo "<div class='ep'><p class='info'><strong> " . $season . "X" . $ep . "</strong> <br><br> " . $titolo . "</p><p class='link'> ".$link."</p></div>";
 	
 	} ?>
 	</div>

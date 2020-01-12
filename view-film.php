@@ -5,9 +5,9 @@
 $v = $_GET['v']; // openload
 $s = $_GET['s']; // streamango
 $p = $_GET['p']; // speedvideo
-$vs = $_GET['vs']; // verystream
+$vs = $_GET['sv']; // speedvideo
 $md = $_GET['md']; // mixdrop
-$gu = $_GET['gu']; // mixdrop
+$gu = $_GET['gu']; // gounl
 
 
 include('functions.php');
@@ -18,9 +18,16 @@ $filmdetailsquery = "SELECT id, titolo, descr, poster FROM film where link='$v'"
 if(!empty($p)){
 $filmdetailsquery = "SELECT id, titolo, descr, poster FROM film where linksv='$p'";
 }
-if(!empty($vs)){
-$filmdetailsquery = "SELECT id, titolo, descr, poster FROM film where linkverys='$vs'";
+if(!empty($sv)){
+$filmdetailsquery = "SELECT id, titolo, descr, poster FROM film where linksv='$sv'";
 }
+if(!empty($md)){
+$filmdetailsquery = "SELECT id, titolo, descr, poster FROM film where linkmd='$md'";
+}
+if(!empty($gu)){
+$filmdetailsquery = "SELECT id, titolo, descr, poster FROM film where linkgu='$gu'";
+}
+
 $filmdetailsresult = mysqli_query($db, $filmdetailsquery);
     while($row = mysqli_fetch_assoc($filmdetailsresult)) {
 	$filmid = $row["id"];
@@ -126,7 +133,7 @@ document.oncontextmenu=new Function("return false");
 		</script>
 		
 		<?php 	
-				if(!empty($s || $v || $vs)){
+				if(!empty($s || $v || $vs|| $md|| $gu)){
       			echo "<div class='main-container'>";
 				}
 				else{
@@ -147,7 +154,7 @@ document.oncontextmenu=new Function("return false");
 				
 				<?php 	
 
-				if(!empty($s || $v || $p || $vs || $md || $gu)){
+				if(!empty($s || $v || $p || $sv || $md || $gu)){
 				if(!empty($s)){
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
    				  </span><iframe src='https://streamango.com/embed/$s'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
@@ -160,14 +167,14 @@ document.oncontextmenu=new Function("return false");
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
    				  </span><iframe src='https://openload.co/embed/$v'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
 				}
-				if(!empty($vs)){ // verystream
+				if(!empty($sv)){ // speedvideo
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
-   				  </span><iframe src='https://verystream.com/e/$vs'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
-				}}
+   				  </span><iframe src='https://speedvideo.net/$sv'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
+				}
 				if(!empty($md)){ //mixdrop
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
    				  </span><iframe src='http://mixdrop.co/e/$md'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
-				}}
+				}
 				if(!empty($gu)){ // go unlimited
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
    				  </span><iframe src='https://gounlimited.to/embed-$gu.html'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";

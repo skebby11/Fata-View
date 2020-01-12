@@ -17,6 +17,8 @@ $titolo = e($_POST["titolo"]);
 $link = e($_POST["link"]);
 $linksv = e($_POST["linksv"]);
 $linkverys = e($_POST["linkverys"]);
+$linkmd = e($_POST["linkmd"]);
+$linkgu = e($_POST["linkgu"]);
 
 
 // form validation: ensure that the form is correctly filled
@@ -35,11 +37,12 @@ $linkverys = e($_POST["linkverys"]);
 
 
 if (count($errors) == 0) {
-$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkverys) 
-						  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkverys')";
+$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkverys, linkmd, linkgu) 
+						  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkverys', '$linkmd', '$linkgu')";
 mysqli_query($db, $query); 
 
 $_SESSION['success']  = "EPISODIO AGGIUNTO!";
+	echo $query;
 
 }
 
@@ -194,7 +197,9 @@ echo "    ];
 	Titolo: <input type="text" name="titolo"><br><br>
 	OpenLoad: <input type="text" name="link"><br><br>
 	SpeedVideo: <input type="text" name="linksv"><br><br>
-	VeryStream: <input type="text" name="linkverys"><br><br><br>
+	VeryStream: <input type="text" name="linkverys"><br><br>
+	MixDrop: <input type="text" name="linkmd"><br><br>
+	GoUnlimited: <input type="text" name="linkgu"><br><br><br>
 	
 	<button type="submit" name="Invia" value="Invia">Invia</button>
 

@@ -15,6 +15,8 @@ $query = "SELECT * FROM film WHERE id =$idfilm";
 		$link = $row["link"];
 		$linksv = $row["linksv"];
 		$linkverys = $row["linkverys"];
+		$linkmd = $row["linkmd"];
+		$linkgu = $row["linkgu"];
 }
  
 ?>
@@ -71,20 +73,35 @@ $query = "SELECT * FROM film WHERE id =$idfilm";
 <?php	
 
 	
-	if(empty($link)) {
-		$link = "<a href='view-film?p=$linksv' target='__blank'>Speedvideo</a>";
-		$sv='';
-	} elseif (!empty($link)) {
-		$link = "<a href='view-film?v=$link' target='__blank'>Openload</a>";
-		if(!empty($linksv)){
-		$sv = " / <a href='view-film?p=$linksv' target='__blank'>Speedvideo</a>";
-		} else {
-			$sv = '';
+	if(!empty($linksv)) { // YES SPEEDVIDEO
+		if(!empty($linkmd)) { // SV + MIXDROP
+			$link = "<a href='view-film?sv=$linksv' target='__blank'>Speedvideo</a> / <a href='view-film?md=$linkmd' target='__blank'>MixDrop</a>";
+		} elseif (!empty($linkgu)){  // MIXDROP + GOUNL
+			$link = "<a href='view-film?sv=$linksv' target='__blank'>Speedvideo</a> / <a href='view-film?gu=$linkgu' target='__blank'>GoUnlimited</a>";
+		} else { // JUST SV
+			$link = "<a href='view-film?sv=$linksv' target='__blank'>Speedvideo</a>";
 		}
-	} if(!empty($linkverys)) {
-		$link = "<a href='view-film?vs=$linkverys' target='__blank'>VeryStream</a>";
 	}
-		
+				
+	if(!empty($linkmd)) {  // YES MIXDROP
+		if(!empty($linksv)) {  // MIXDROP + SPEEDVIDEO
+			$link = "<a href='view-film?md=$linkmd' target='__blank'>MixDrop</a> / <a href='view-film?sv=$linksv' target='__blank'>SpeedVideo</a>";
+		} elseif (!empty($linkgu)){  // MIXDROP + GOUNL
+			$link = "<a href='view-film?md=$linkmd' target='__blank'>MixDrop</a> / <a href='view-film?gu=$linkgu' target='__blank'>GoUnlimited</a>";
+		} else {  // JUST MIXDROP
+			$link = "<a href='view-film?md=$linkmd' target='__blank'>MixDrop</a>";
+		}
+	}
+			
+	if(!empty($linkgu)) {  // YES GOUNL
+		if(!empty($linksv)) {  // GOUNL + SPEEDVIDEO
+			$link = "<a href='view-film?gu=$linkgu' target='__blank'>GoUnlimited</a> / <a href='view-film?sv=$linksv' target='__blank'>SpeedVideo</a>";
+		} elseif (!empty($linkgu)){  // GOUNL + MIXDROP
+			$link = "<a href='view-film?gu=$linkgu' target='__blank'>GoUnlimited</a> / <a href='view-film?md=$linkmd' target='__blank'>MixDrop</a>";
+		} else {  // JUST GOUNL
+			$link = "<a href='view-film?gu=$linkgu' target='__blank'>GoUnlimited</a>";
+		}
+	}
 		
 		
 	echo "<div class='ep'><p class='info'><strong> " . $titolo . "</strong><br> <br></p><p class='link'> ".$link, $sv."</p></div>";

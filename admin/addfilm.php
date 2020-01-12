@@ -10,14 +10,15 @@ if ($idutente != 2) {
 }
 
 if(isset($_POST["addfilm"])) {
-$titolo = e($_POST["nome"]);
-$descr = e($_POST["descr"]);
-$poster = e($_POST["poster"]);
-$link = e($_POST["link"]);
-$linksv = e($_POST["linksv"]);
-$linkverys = e($_POST["linkverys"]);
-
 	
+$titolo = e($_POST["titolo"]);
+$descr = e($_POST["descr"]);
+$linksv = e($_POST["linksv"]); // speedvideo
+$linkverys = e($_POST["linkverys"]); // verystream
+$linkmd = e($_POST["linkmd"]); // mix drop
+$linkgu = e($_POST["linkgu"]); // goun
+	
+
  // get file name (not including path)
 $filename = @basename($_FILES["posterupload"]['name']);
 
@@ -38,33 +39,33 @@ $dest_filename =  mt_rand(1000, 9999). '-' . $filename;
 // get size
 $filesize = filesize($tmp_filename); // filesize($tmp_filename);
 
+	
 // ingore empty input fields
 if ($filename!="") {
 
 // destination path - you can choose any file name here (e.g. random)
 $path = "../poster/" . $dest_filename; 
 	
-	
 
 if(move_uploaded_file($_FILES["posterupload"]['tmp_name'],$path)) {
 	
-// form validation: ensure that the form is correctly filled
 
+// form validation: ensure that the form is correctly filled
 		if (empty($titolo)) { 
-			array_push($errors, "Titolo is required"); 
+			array_push($errors, "Title is required"); 
 		}
 		if (empty($descr)) { 
 			array_push($errors, "Descrizione is required"); 
 		}
-		if (empty($poster)) {
-			array_push($errors, "Poster e' necessario");
-		}
+
 
 if (count($errors) == 0) {
-$query = "INSERT INTO film (titolo, descr, poster, link, linksv, linkverys) 
-						  VALUES('$titolo', '$descr', '$poster', '$link', '$linksv', '$linkverys')";
-mysqli_query($db, $query);
+$query = "INSERT INTO film (titolo, descr, poster, link, linksv, linkverys, linkmd, linkgu) 
+						  VALUES('$titolo', '$descr', '/poster/$dest_filename', '$link', '$linksv', '$linkverys', '$linkmd', '$linkgu')";
+mysqli_query($db, $query); 
+
 $_SESSION['success']  = "FILM AGGIUNTO!";
+	
 } else {
 	echo "errore";
 }
@@ -80,13 +81,74 @@ $_SESSION['success']  = "FILM AGGIUNTO!";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
 	
 	<link rel="stylesheet" type="text/css" href="css/admin.css">
-		
+	
+	<style>
+.ui-autocomplete { position: absolute; cursor: default; background:#CCC }   
+
+/* workarounds */
+html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+.ui-menu {
+    list-style:none;
+    padding: 2px;
+    margin: 0;
+    display:block;
+    float: left;
+}
+.ui-menu .ui-menu {
+    margin-top: -3px;
+}
+.ui-menu .ui-menu-item {
+    margin:0;
+    padding: 0;
+    zoom: 1;
+    float: left;
+    clear: left;
+    width: 100%;
+}
+.ui-menu .ui-menu-item a {
+    text-decoration:none;
+    display:block;
+    padding:.2em .4em;
+    line-height:1.5;
+    zoom:1;
+}
+.ui-menu .ui-menu-item a.ui-state-hover,
+.ui-menu .ui-menu-item a.ui-state-active {
+    font-weight: normal;
+    margin: -1px;
+}
+	</style>
+	
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	<title>Aggiungi film</title>
 
+<?php
+
+echo "<script>  $( function() {
+    var availableTags = [
+	";
+
+$query = "SELECT tiolo, id FROM film";
+			$results = mysqli_query($db, $query);
+			if (mysqli_num_rows($results) > 0) {
+				while($row = mysqli_fetch_assoc($results)) {
+					echo "'" . $row['titolo'] . " - " . $row['id'] . "',
+					";
+				}
+			}
+echo "    ];
+    $( '#idserie' ).autocomplete({
+      source: availableTags
+    });
+  } );</script>";
+
+?>
+	
 <style>
 
 	.success {
@@ -112,13 +174,17 @@ $_SESSION['success']  = "FILM AGGIUNTO!";
 		<a class="menu_element category" href="addserie.php">Aggiungi Serie</a>
 	</li>
 	<li class="parent">
-		<a class="menu_element active" href="addfilm.php">Aggiungi Film</a>
+
+		<a class="menu_element active " href="addfilm.php">Aggiungi Film</a>
 	</li>
 	<li class="parent">
 		<a class="menu_element product " href="editep.php?action=view">Modifica Episodi</a>
 	</li>
 	<li class="parent">
 		<a class="menu_element product " href="editfilm.php?action=view">Modifica Film</a>
+	</li>
+	<li class="parent">
+		<a class="menu_element product " href="editserie.php?action=view">Modifica Serie</a>
 	</li>
 	<li class="parent">
 		<a class="menu_element product " href="editserie.php?action=view">Modifica Serie</a>
@@ -148,22 +214,25 @@ $_SESSION['success']  = "FILM AGGIUNTO!";
 				<br>
 			</div>
 		<?php endif ?>
+	
 
 <a class="button_hover" href="../admin">Indietro</a><br><br><br>
-<form action="addfilm.php" method="post" style="padding-top: 30px;">
+<form action="" method="post" style="padding-top: 40px;"  enctype="multipart/form-data">
 
-	Titolo: <input type="text" name="nome" style="width:300px"><br><br>
-	Descrizione: <input type="text" name="descr" style="width: 500px"><br><br>
-	Poster: <input type="text" name="poster" style="width:300px"><br><br>
-	OpenLoad: <input type="text" name="link" style="width:300px"><br><br>
+	Titolo: <input type="text" name="titolo"><br><br>
+	Descrizione: <input type="text" name="descr"><br><br>
+	Poster: <input type="file" name="posterupload" id="posterupload"><br><br>
+	OpenLoad: <input type="text" name="link"><br><br>
 	SpeedVideo: <input type="text" name="linksv"><br><br>
-	VeryStream: <input type="file" name="posterupload" id="posterupload"><br><br><br>
+	VeryStream: <input type="text" name="linkverys"><br><br>
+	MixDrop: <input type="text" name="linkmd"><br><br>
+	GoUnlimited: <input type="text" name="linkgu"><br><br><br>
 	
 	<button type="submit" name="addfilm" value="Invia">Invia</button>
 
 </form>
 	
-</div>			
+</div>
 </div>
 </div>
 </div>

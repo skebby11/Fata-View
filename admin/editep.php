@@ -13,8 +13,8 @@ $action = $_GET["action"];
 
 
 if (count($errors) == 0) {
-$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkverys) 
-						  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkverys')";
+$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkverys, linkmd, linkgu) 
+						  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkverys', '$linkmd', '$linkgu')";
 mysqli_query($db, $query); 
 
 }
@@ -28,8 +28,10 @@ if(isset($_POST['aggiornaep'])){
 	$uplink = e($_POST['uplink']);
 	$uplinksv = e($_POST['uplinksv']);
 	$uplinkvery = e($_POST['uplinkvery']);
+	$uplinkmd = e($_POST['uplinkmd']);
+	$uplinkgu = e($_POST['uplinkgu']);
 	
-	$query = "UPDATE episodi SET stagione = " . $upstagione . ", episodio = '$upepisodio', serie = ".$_POST['upserie']." , titolo = '$uptitolo', link = '".$_POST['uplink']."', linksv = '$uplinksv', linkverys = '$uplinkvery' WHERE id = $selepid";
+	$query = "UPDATE episodi SET stagione = " . $upstagione . ", episodio = '$upepisodio', serie = ".$_POST['upserie']." , titolo = '$uptitolo', link = '".$_POST['uplink']."', linksv = '$uplinksv', linkverys = '$uplinkvery', linkmd = '$uplinkmd', linkgu = '$uplinkgu' WHERE id = $selepid";
 	mysqli_query($db, $query);
 	$_SESSION['success']  = "Episodio aggiornato";
 }
@@ -208,6 +210,8 @@ tr:nth-child(even) {
     <th>openload</th>
     <th>speedvideo</th>
     <th>verystream</th>
+	<th>mixdrop</th>
+	<th>gounlimited</th>
     <th></th>
   </tr>
 	
@@ -225,6 +229,8 @@ tr:nth-child(even) {
     <td>".$row['link']."</td>
     <td>".$row['linksv']."</td>
 	<td>".$row['linkverys']."</td>
+    <td>".$row['linkmd']."</td>
+    <td>".$row['linkgu']."</td>
     <td><a class='button_hover' href='editep.php?action=edit&id_ep=".$row['id']."'>Modifica</a></td>
   </tr>
 					";
@@ -248,6 +254,8 @@ tr:nth-child(even) {
 					$link = $row['link'];
 					$linksv = $row['linksv'];
 					$linkverys = $row['linkverys'];
+					$linkmd = $row['linkmd'];
+					$linkgu = $row['linkgu'];
 				}
 			}
 	?>
@@ -260,7 +268,9 @@ tr:nth-child(even) {
 	<strong>Titolo</strong> <br><input id='editor4' name="uptitolo" value="<?php echo $titolo ?>"><br><br>
 	<strong>Link Open Load</strong> <br><input id='editor5' name="uplink" value="<?php echo $link ?>"><br><br>
 	<strong>Link Speed Video</strong> <br><input id='editor6' name="uplinksv" value="<?php echo $linksv ?>"><br><br>
-	<strong>Link VeryStream</strong> <br><input id='editor7' name="uplinkvery" value="<?php echo $linkverys ?>"><br><br><br>
+	<strong>Link VeryStream</strong> <br><input id='editor7' name="uplinkvery" value="<?php echo $linkverys ?>"><br><br>
+	<strong>Link MixDrop</strong> <br><input id='editor8' name="uplinkmd" value="<?php echo $linkmd ?>"><br><br>
+	<strong>Link GoUnl</strong> <br><input id='editor9' name="uplinkgu" value="<?php echo $linkgu ?>"><br><br><br>
 	
 	<button type="submit" name="aggiornaep" value="Salva">Salva</button>
 	</form>

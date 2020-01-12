@@ -13,9 +13,9 @@ $action = $_GET["action"];
 
 
 if (count($errors) == 0) {
-$query = "INSERT INTO film (titolo, descr, poster, link, linksv, linkverys) 
-						  VALUES('$titolo', '$descr', '$poster', '$link', '$linksv', '$linkverys')";
-mysqli_query($db, $query); 
+$query = "INSERT INTO film (titolo, descr, poster, link, linksv, linkverys, linkmd, linkgu) 
+						  VALUES('$titolo', '$descr', '$poster', '$link', '$linksv', '$linkverys', '$linkmd', '$linkgu')";
+//mysqli_query($db, $query); 
 
 }
 
@@ -27,8 +27,10 @@ if(isset($_POST['aggiornafilm'])){
 	$uplink = e($_POST['uplink']);
 	$uplinksv = e($_POST['uplinksv']);
 	$uplinkvery = e($_POST['uplinkvery']);
+	$uplinkmd = e($_POST['uplinkmd']);
+	$uplinkgu = e($_POST['uplinkgu']);
 	
-	$query = "UPDATE film SET titolo = '$uptitolo', descr = '$updescr' , poster = '$upposter', link = '$uplink', linksv = '$uplinksv', linkverys = '$uplinkvery' WHERE id = $selfilmid";
+	$query = "UPDATE film SET titolo = '$uptitolo', descr = '$updescr' , poster = '$upposter', link = '$uplink', linksv = '$uplinksv', linkverys = '$uplinkvery', linkmd = '$uplinkmd', linkgu = '$uplinkgu' WHERE id = $selfilmid";
 	mysqli_query($db, $query);
 	$_SESSION['success']  = "Film aggiornato";
 }
@@ -206,6 +208,8 @@ tr:nth-child(even) {
     <th>openload</th>
     <th>speedvideo</th>
     <th>verystream</th>
+	<th>mixdrop</th>
+	<th>gounlimited</th>
     <th></th>
   </tr>
 	
@@ -222,6 +226,8 @@ tr:nth-child(even) {
     <td>".$row['link']."</td>
     <td>".$row['linksv']."</td>
 	<td>".$row['linkverys']."</td>
+    <td>".$row['linkmd']."</td>
+    <td>".$row['linkgu']."</td>
     <td><a class='button_hover' href='editfilm.php?action=edit&id_film=".$row['id']."'>Modifica</a></td>
   </tr>
 					";
@@ -244,6 +250,8 @@ tr:nth-child(even) {
 					$link = $row['link'];
 					$linksv = $row['linksv'];
 					$linkverys = $row['linkverys'];
+					$linkmd = $row['linkmd'];
+					$linkgu = $row['linkgu'];
 				}
 			}
 	?>
@@ -255,7 +263,9 @@ tr:nth-child(even) {
 	<strong>Poster</strong> <br><input id='editor4' name="upposter" value="<?php echo $poster ?>"><br><br>
 	<strong>Link Open Load</strong> <br><input id='editor5' name="uplink" value="<?php echo $link ?>"><br><br>
 	<strong>Link Speed Video</strong> <br><input id='editor6' name="uplinksv" value="<?php echo $linksv ?>"><br><br>
-	<strong>Link VeryStream</strong> <br><input id='editor7' name="uplinkvery" value="<?php echo $linkverys ?>"><br><br><br>
+	<strong>Link VeryStream</strong> <br><input id='editor7' name="uplinkvery" value="<?php echo $linkverys ?>"><br><br>
+	<strong>Link MixDrop</strong> <br><input id='editor6' name="uplinkmd" value="<?php echo $linkmd ?>"><br><br>
+	<strong>Link GoUnl</strong> <br><input id='editor6' name="uplinkgu" value="<?php echo $linkgu ?>"><br><br><br>
 	
 	<button type="submit" name="aggiornafilm" value="Salva">Salva</button>
 	</form>

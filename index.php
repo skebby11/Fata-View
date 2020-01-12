@@ -278,7 +278,7 @@ include('functions.php');
 		<h3 class="lasttext">Ultimi episodi aggiunti</h3>
 		<div class="lastseries">
 		<?php
-		$query = "SELECT id, stagione, episodio, titolo, serie, link, linksv, linkverys FROM episodi ORDER BY id DESC LIMIT 4";
+		$query = "SELECT * FROM episodi ORDER BY id DESC LIMIT 4";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
 			
@@ -290,6 +290,8 @@ include('functions.php');
 		$link = $row["link"];
 		$linksv = $row["linksv"];
 		$linkverys = $row["linkverys"];
+		$linkmd = $row["linkmd"];
+		$linkgu = $row["linkgu"];
 			
 		
 			
@@ -304,9 +306,9 @@ include('functions.php');
 		if(!empty($link)){
 			$link = "v=".$link;
 		} elseif (!empty($linksv)){
-			$link = "p=".$linksv;
-		} elseif (!empty($linkverys)) {
-			$link = "vs=".$linkverys;
+			$link = "sv=".$linksv;
+		} elseif (!empty($linkmd)) {
+			$link = "md=".$linkmd;
 		}
 		
 			echo "<div class='serie'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagn."X".$epn." - ".$nomeep."</p></a></div>";
