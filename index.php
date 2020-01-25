@@ -288,6 +288,17 @@ include('functions.php');
 		?>
 		</div>
 		
+		<h3 class="lasttext">Ultimi film aggiunti</h3>
+		<div class="lastseries">
+		<?php
+		$query = "SELECT * FROM film ORDER BY id DESC LIMIT 4";
+		$result = mysqli_query($db,$query);
+		while($row = mysqli_fetch_assoc($result)) {
+			echo "<div class='serie'><a href='film?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p>" . $row["titolo"] ."</p></a></div>";
+		}		
+		?>
+		</div>
+		
 		<h3 class="lasttext">Ultimi episodi aggiunti</h3>
 		<div class="lastseries">
 		<?php
