@@ -124,12 +124,15 @@ include('functions.php');
 			$link = $row["link"];
 			$linksv = $row["linksv"];
 			$linkverys = $row["linkverys"];
+			$linkmd = $row["linkmd"];
+			$linkgu = $row["linkgu"];
+				
 			if(!empty($link)){
-			$link = "v=".$link;
+				$link = "v=".$link;
 			} elseif (!empty($linksv)){
-				$link = "p=".$linksv;
-			} elseif (!empty($linkverys)) {
-				$link = "vs=".$linkverys;
+				$link = "sv=".$linksv;
+			} elseif (!empty($linkmd)) {
+				$link = "md=".$linkmd;
 			}
 				
 				$query2 = "SELECT nome, poster FROM serie WHERE id='". $serieid ."'";
@@ -162,12 +165,15 @@ include('functions.php');
 			$link = $row["link"];
 			$linksv = $row["linksv"];
 			$linkverys = $row["linkverys"];
+			$linkmd = $row["linkmd"];
+			$linkgu = $row["linkgu"];
+				
 			if(!empty($link)){
-			$link = "v=".$link;
+				$link = "v=".$link;
 			} elseif (!empty($linksv)){
-				$link = "p=".$linksv;
-			} elseif (!empty($linkverys)) {
-				$link = "vs=".$linkverys;
+				$link = "sv=".$linksv;
+			} elseif (!empty($linkmd)) {
+				$link = "md=".$linkmd;
 			}
 				
 				$query2 = "SELECT nome, poster FROM serie WHERE id='". $serieid ."'";
@@ -200,12 +206,15 @@ include('functions.php');
 			$link = $row["link"];
 			$linksv = $row["linksv"];
 			$linkverys = $row["linkverys"];
+			$linkmd = $row["linkmd"];
+			$linkgu = $row["linkgu"];
+				
 			if(!empty($link)){
-			$link = "v=".$link;
+				$link = "v=".$link;
 			} elseif (!empty($linksv)){
-				$link = "p=".$linksv;
-			} elseif (!empty($linkverys)) {
-				$link = "vs=".$linkverys;
+				$link = "sv=".$linksv;
+			} elseif (!empty($linkmd)) {
+				$link = "md=".$linkmd;
 			}
 				
 				$query2 = "SELECT nome, poster FROM serie WHERE id='". $serieid ."'";
@@ -238,12 +247,16 @@ include('functions.php');
 			$link = $row["link"];
 			$linksv = $row["linksv"];
 			$linkverys = $row["linkverys"];
+			$linkmd = $row["linkmd"];
+			$linkgu = $row["linkgu"];
+				
+				
 			if(!empty($link)){
-			$link = "v=".$link;
+				$link = "v=".$link;
 			} elseif (!empty($linksv)){
-				$link = "p=".$linksv;
-			} elseif (!empty($linkverys)) {
-				$link = "vs=".$linkverys;
+				$link = "sv=".$linksv;
+			} elseif (!empty($linkmd)) {
+				$link = "md=".$linkmd;
 			}
 				
 				$query2 = "SELECT nome, poster FROM serie WHERE id='". $serieid ."'";
