@@ -195,7 +195,7 @@ echo "    ];
 	Episodio: <input type="text" name="episodio"><br><br>
 	ID serie: <input type="text" name="idserie" id="idserie"><br><br>
 	Titolo: <input type="text" name="titolo"><br><br>
-	OpenLoad: <input type="text" name="link"><br><br>
+	Supervideo: <input type="text" name="link"><br><br>
 	SpeedVideo: <input type="text" name="linksv"><br><br>
 	VeryStream: <input type="text" name="linkverys"><br><br>
 	MixDrop: <input type="text" name="linkmd"><br><br>

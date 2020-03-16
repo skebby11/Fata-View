@@ -5,7 +5,7 @@
 $v = $_GET['v']; // openload
 $s = $_GET['s']; // streamango
 $p = $_GET['p']; // speedvideo
-$vs = $_GET['sv']; // speedvideo
+$sv = $_GET['sv']; // speedvideo
 $md = $_GET['md']; // mixdrop
 $gu = $_GET['gu']; // gounl
 

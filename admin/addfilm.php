@@ -84,70 +84,11 @@ $_SESSION['success']  = "FILM AGGIUNTO!";
 	
 	<link rel="stylesheet" type="text/css" href="css/admin.css">
 	
-	<style>
-.ui-autocomplete { position: absolute; cursor: default; background:#CCC }   
-
-/* workarounds */
-html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
-.ui-menu {
-    list-style:none;
-    padding: 2px;
-    margin: 0;
-    display:block;
-    float: left;
-}
-.ui-menu .ui-menu {
-    margin-top: -3px;
-}
-.ui-menu .ui-menu-item {
-    margin:0;
-    padding: 0;
-    zoom: 1;
-    float: left;
-    clear: left;
-    width: 100%;
-}
-.ui-menu .ui-menu-item a {
-    text-decoration:none;
-    display:block;
-    padding:.2em .4em;
-    line-height:1.5;
-    zoom:1;
-}
-.ui-menu .ui-menu-item a.ui-state-hover,
-.ui-menu .ui-menu-item a.ui-state-active {
-    font-weight: normal;
-    margin: -1px;
-}
-	</style>
-	
 
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	<title>Aggiungi film</title>
-
-<?php
-
-echo "<script>  $( function() {
-    var availableTags = [
-	";
-
-$query = "SELECT tiolo, id FROM film";
-			$results = mysqli_query($db, $query);
-			if (mysqli_num_rows($results) > 0) {
-				while($row = mysqli_fetch_assoc($results)) {
-					echo "'" . $row['titolo'] . " - " . $row['id'] . "',
-					";
-				}
-			}
-echo "    ];
-    $( '#idserie' ).autocomplete({
-      source: availableTags
-    });
-  } );</script>";
-
-?>
 	
 <style>
 
@@ -222,7 +163,7 @@ echo "    ];
 	Titolo: <input type="text" name="titolo"><br><br>
 	Descrizione: <input type="text" name="descr"><br><br>
 	Poster: <input type="file" name="posterupload" id="posterupload"><br><br>
-	OpenLoad: <input type="text" name="link"><br><br>
+	Supervideo: <input type="text" name="link"><br><br>
 	SpeedVideo: <input type="text" name="linksv"><br><br>
 	VeryStream: <input type="text" name="linkverys"><br><br>
 	MixDrop: <input type="text" name="linkmd"><br><br>

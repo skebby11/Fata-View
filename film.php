@@ -83,7 +83,7 @@ $query = "SELECT * FROM film WHERE id =$idfilm";
 		}
 	}
 				
-	if(!empty($linkmd)) {  // YES MIXDROP
+	elseif(!empty($linkmd)) {  // YES MIXDROP
 		if(!empty($linksv)) {  // MIXDROP + SPEEDVIDEO
 			$link = "<a href='view-film?md=$linkmd' target='__blank'>MixDrop</a> / <a href='view-film?sv=$linksv' target='__blank'>SpeedVideo</a>";
 		} elseif (!empty($linkgu)){  // MIXDROP + GOUNL
@@ -93,13 +93,21 @@ $query = "SELECT * FROM film WHERE id =$idfilm";
 		}
 	}
 			
-	if(!empty($linkgu)) {  // YES GOUNL
+	elseif(!empty($linkgu)) {  // YES GOUNL
 		if(!empty($linksv)) {  // GOUNL + SPEEDVIDEO
 			$link = "<a href='view-film?gu=$linkgu' target='__blank'>GoUnlimited</a> / <a href='view-film?sv=$linksv' target='__blank'>SpeedVideo</a>";
 		} elseif (!empty($linkgu)){  // GOUNL + MIXDROP
 			$link = "<a href='view-film?gu=$linkgu' target='__blank'>GoUnlimited</a> / <a href='view-film?md=$linkmd' target='__blank'>MixDrop</a>";
 		} else {  // JUST GOUNL
 			$link = "<a href='view-film?gu=$linkgu' target='__blank'>GoUnlimited</a>";
+		}
+	}
+				
+	elseif(!empty($link)) { // SUPERVIDEO SI
+		$link = "<a href='view?sv=$link' target='__blank'>Supervideo</a>";
+		
+		if(!empty($linkmd)) {
+			$link = "<a href='view?sv=$linksv' target='__blank'>Speedvideo</a> / <a href='view?gu=$linkmd' target='__blank'>MixDrop</a>";	
 		}
 	}
 		

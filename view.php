@@ -2,7 +2,7 @@
 
 // variabile player utilizzato
 
-$v = $_GET['v']; // openload
+$v = $_GET['v']; // supervideo
 $s = $_GET['s']; // streamango
 $p = $_GET['p']; // speedvideo
 $sv = $_GET['sv']; // speedvideo
@@ -110,12 +110,12 @@ document.oncontextmenu=new Function("return false");
          
 	<?php if(!empty($v)): ?>
      <script>	
-	$.get( "https://api.openload.co/1/file/info?file=<?php echo $v; ?>&login=7f53b6aa27b38c73&key=euZmu1Un", function( response ) {
-	$("#msg").text(response.msg);
-    $("#status").text(response.status);
-    $("#episodio").text(response.result.<?php echo $v; ?>.name);
-	}, "json" );
-	  </script>
+//	$.get( "https://api.openload.co/1/file/info?file=<?php //echo $v; ?>&login=7f53b6aa27b38c73&key=euZmu1Un", function( response ) {
+//	$("#msg").text(response.msg);
+//    $("#status").text(response.status);
+//    $("#episodio").text(response.result.<?php //echo $v; ?>.name);
+//	}, "json" );
+//	  </script>
 	<?php endif; ?>
 	   
 	<?php if(!empty($vs)): ?>
@@ -175,7 +175,7 @@ document.oncontextmenu=new Function("return false");
 				}
 				if(!empty($v)){ // openload
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
-   				  </span><iframe src='https://openload.co/embed/$v'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
+   				  </span><iframe src='https://supervideo.tv/embed-$v.html' scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
 				}
 				if(!empty($sv)){ // speedvideo
       			echo "<span class='play1' id='play1' onclick='hide()' ;>

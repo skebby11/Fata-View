@@ -150,6 +150,15 @@ $epresult = mysqli_query($db, $epquery);
 		}
 	}
 		
+	elseif(!empty($link)) { // SUPERVIDEO SI
+		$link = "<a href='view?sv=$link' target='__blank'>Supervideo</a>";
+		
+		if(!empty($linkmd)) {
+			$link = "<a href='view?sv=$linksv' target='__blank'>Supervideo</a> / <a href='view?gu=$linkmd' target='__blank'>MixDrop</a>";	
+		}
+	}
+	
+		
 		
 		
 	echo "<div class='ep'><p class='info'><strong> " . $season . "X" . $ep . "</strong> <br><br> " . $titolo . "</p><p class='link'> ".$link."</p></div>";

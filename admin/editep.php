@@ -207,7 +207,7 @@ tr:nth-child(even) {
     <th>episodio</th>
     <th>serie</th>
     <th>titolo</th>
-    <th>openload</th>
+    <th>supervideo</th>
     <th>speedvideo</th>
     <th>verystream</th>
 	<th>mixdrop</th>
@@ -266,7 +266,7 @@ tr:nth-child(even) {
 	<strong>Episodio</strong> <br><input id='editor2' name="upepisodio" value="<?php echo $episodio ?>"><br><br>
 	<strong>Serie</strong> <br><input id='editor3' name="upserie" value="<?php echo $serie ?>"><br><br>
 	<strong>Titolo</strong> <br><input id='editor4' name="uptitolo" value="<?php echo $titolo ?>"><br><br>
-	<strong>Link Open Load</strong> <br><input id='editor5' name="uplink" value="<?php echo $link ?>"><br><br>
+	<strong>Link Supervideo</strong> <br><input id='editor5' name="uplink" value="<?php echo $link ?>"><br><br>
 	<strong>Link Speed Video</strong> <br><input id='editor6' name="uplinksv" value="<?php echo $linksv ?>"><br><br>
 	<strong>Link VeryStream</strong> <br><input id='editor7' name="uplinkvery" value="<?php echo $linkverys ?>"><br><br>
 	<strong>Link MixDrop</strong> <br><input id='editor8' name="uplinkmd" value="<?php echo $linkmd ?>"><br><br>
