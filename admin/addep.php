@@ -57,42 +57,9 @@ $_SESSION['success']  = "EPISODIO AGGIUNTO!";
 	
 	<link rel="stylesheet" type="text/css" href="css/admin.css">
 	
-	<style>
-.ui-autocomplete { position: absolute; cursor: default; background:#CCC }   
-
-/* workarounds */
-html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
-.ui-menu {
-    list-style:none;
-    padding: 2px;
-    margin: 0;
-    display:block;
-    float: left;
-}
-.ui-menu .ui-menu {
-    margin-top: -3px;
-}
-.ui-menu .ui-menu-item {
-    margin:0;
-    padding: 0;
-    zoom: 1;
-    float: left;
-    clear: left;
-    width: 100%;
-}
-.ui-menu .ui-menu-item a {
-    text-decoration:none;
-    display:block;
-    padding:.2em .4em;
-    line-height:1.5;
-    zoom:1;
-}
-.ui-menu .ui-menu-item a.ui-state-hover,
-.ui-menu .ui-menu-item a.ui-state-active {
-    font-weight: normal;
-    margin: -1px;
-}
-	</style>
+    <link rel="stylesheet" href="assets/chosen/docsupport/style.css">
+    <link rel="stylesheet" href="assets/chosen/docsupport/prism.css">
+    <link rel="stylesheet" href="assets/chosen/chosen.css">
 	
 
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -100,27 +67,7 @@ html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% i
 	
 	<title>Aggiungi episodio</title>
 
-<?php
 
-echo "<script>  $( function() {
-    var availableTags = [
-	";
-
-$query = "SELECT nome, id FROM serie";
-			$results = mysqli_query($db, $query);
-			if (mysqli_num_rows($results) > 0) {
-				while($row = mysqli_fetch_assoc($results)) {
-					echo "'" . $row['nome'] . " - " . $row['id'] . "',
-					";
-				}
-			}
-echo "    ];
-    $( '#idserie' ).autocomplete({
-      source: availableTags
-    });
-  } );</script>";
-
-?>
 	
 <style>
 
@@ -193,7 +140,22 @@ echo "    ];
 
 	Stagione: <input type="text" name="stagione"><br><br>
 	Episodio: <input type="text" name="episodio"><br><br>
-	ID serie: <input type="text" name="idserie" id="idserie"><br><br>
+	ID serie: <select data-placeholder="Seleziona la serie" class="chosen-select" tabindex="2">
+				<option value=""></option>
+				<?php
+				$query = "SELECT nome, id FROM serie";
+						$results = mysqli_query($db, $query);
+						if (mysqli_num_rows($results) > 0) {
+							while($row = mysqli_fetch_assoc($results)) {
+								echo "<option value='" . $row['id'] . "'>" . $row['nome'] . "</option>',
+								";
+							}
+						}
+	
+				?>
+				</select>
+					
+					<br><br>
 	Titolo: <input type="text" name="titolo"><br><br>
 	Supervideo: <input type="text" name="link"><br><br>
 	SpeedVideo: <input type="text" name="linksv"><br><br>
@@ -209,4 +171,10 @@ echo "    ];
 </div>
 </div>
 </div>
+	
+  <script src="assets/chosen/docsupport/jquery-3.2.1.min.js" type="text/javascript"></script>
+  <script src="assets/chosen/chosen.jquery.js" type="text/javascript"></script>
+  <script src="assets/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
+  <script src="assets/chosen/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
+	
 </body>
