@@ -43,11 +43,40 @@ $query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, 
 						  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkverys', '$linkmd', '$linkgu')";
 mysqli_query($db, $query); 
 	
-	echo $query;
 
 $_SESSION['success']  = "EPISODIO AGGIUNTO!";
-	echo $query;
 	
+	
+// Invia messaggio Telegram
+	
+  $nomeserie = "SELECT nome, poster FROM serie WHERE id=$idserie";
+  $result = mysqli_query($db, $nomeserie);
+	
+  while($row = mysqli_fetch_assoc($result)) {
+  	$nomeserie = $row["nome"];
+  	$poster = $row["poster"];
+  }
+	
+  $botToken="1250602787:AAELRszwAOyJM2uKCt8TdNCdqfgQg81epJ4";
+
+  $website="https://api.telegram.org/bot".$botToken;
+  $chatId=-1001315498220;  //** ===>>>NOTE: this chatId MUST be the chat_id of a person, NOT another bot chatId !!!**
+  $params=[
+      'chat_id'=>$chatId, 
+      'parse_mode' => 'markdown',
+      'text'=>"[​​​​​​​​​​​](https://fatastreaming2.altervista.org$poster)E' appena stato aggiunto l'episodio $stagione X $episodio della serie $nomeserie.
+Guardalo ora su https://fatastreaming2.altervista.org/serie?id=$idserie",
+  ];
+  $ch = curl_init($website . '/sendMessage');
+  curl_setopt($ch, CURLOPT_HEADER, false);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, ($params));
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+  $result = curl_exec($ch);
+  curl_close($ch);
+
+}
 
 ?>
 
