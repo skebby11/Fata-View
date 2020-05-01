@@ -45,7 +45,10 @@ if(isset($_POST['aggiornaep'])){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	
-	<link rel="stylesheet" type="text/css" href="css/admin.css">
+    <link rel="stylesheet" href="assets/chosen/docsupport/style.css">
+    <link rel="stylesheet" href="assets/chosen/docsupport/prism.css">
+    <link rel="stylesheet" href="assets/chosen/chosen.css">
+	<link rel="stylesheet" type="text/css" href="css/admin.css?0.004">
 	
 	<style>
 .ui-autocomplete { position: absolute; cursor: default; background:#CCC }   
@@ -128,30 +131,11 @@ echo "    ];
 </head>
 
 <body>
-	<div class="head"><div class="logo">FATA STREAMING</div></div>
 
-<div class="sx no-print">
-	<ul class="sx_menu">
-	<li class="parent">
-		<a class="menu_element product" href="addep.php">Aggiungi Episodio</a>
-	</li>
-	<li class="parent">
-		<a class="menu_element category" href="addserie.php">Aggiungi Serie</a>
-	</li>
-	<li class="parent">
-		<a class="menu_element " href="addfilm.php">Aggiungi Film</a>
-	</li>
-	<li class="parent">
-		<a class="menu_element product active" href="editep.php?action=view">Modifica Episodi</a>
-	</li>	
-	<li class="parent">
-		<a class="menu_element product " href="editfilm.php?action=view">Modifica Film</a>
-	</li>
-	<li class="parent">
-		<a class="menu_element product " href="editserie.php?action=view">Modifica Serie</a>
-	</li>
-	</ul>
-</div>
+<?php include('sections/head.php'); ?>
+<?php 
+	$activepage = "editep";
+	include('sections/leftbar.php'); ?>
 
 <div class="dx">
 		<div class="title">

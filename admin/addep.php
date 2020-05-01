@@ -3,6 +3,8 @@
 
 include('../functions.php');
 
+
+
 $idutente = $_SESSION['user']['id'];
 
 if ($idutente != 2) {
@@ -40,11 +42,12 @@ if (count($errors) == 0) {
 $query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkverys, linkmd, linkgu) 
 						  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkverys', '$linkmd', '$linkgu')";
 mysqli_query($db, $query); 
+	
+	echo $query;
 
 $_SESSION['success']  = "EPISODIO AGGIUNTO!";
 	echo $query;
-
-}
+	
 
 ?>
 
@@ -53,13 +56,12 @@ $_SESSION['success']  = "EPISODIO AGGIUNTO!";
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	
-	<link rel="stylesheet" type="text/css" href="css/admin.css">
 	
     <link rel="stylesheet" href="assets/chosen/docsupport/style.css">
     <link rel="stylesheet" href="assets/chosen/docsupport/prism.css">
     <link rel="stylesheet" href="assets/chosen/chosen.css">
+	
+	<link rel="stylesheet" type="text/css" href="css/admin.css?0.004">
 	
 
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -83,33 +85,12 @@ $_SESSION['success']  = "EPISODIO AGGIUNTO!";
 </head>
 
 <body>
-	<div class="head"><div class="logo">FATA STREAMING</div></div>
 
-<div class="sx no-print">
-	<ul class="sx_menu">
-	<li class="parent">
-		<a class="menu_element product active" href="addep.php">Aggiungi Episodio</a>
-	</li>
-	<li class="parent">
-		<a class="menu_element category" href="addserie.php">Aggiungi Serie</a>
-	</li>
-	<li class="parent">
-		<a class="menu_element " href="addfilm.php">Aggiungi Film</a>
-	</li>
-	<li class="parent">
-		<a class="menu_element product " href="editep.php?action=view">Modifica Episodi</a>
-	</li>
-	<li class="parent">
-		<a class="menu_element product " href="editfilm.php?action=view">Modifica Film</a>
-	</li>
-	<li class="parent">
-		<a class="menu_element product " href="editserie.php?action=view">Modifica Serie</a>
-	</li>
-	<li class="parent">
-		<a class="menu_element product " href="editserie.php?action=view">Modifica Serie</a>
-	</li>
-	</ul>	
-</div>
+<?php include('sections/head.php'); ?>
+	
+<?php
+	$activepage = "addep";
+	include('sections/leftbar.php'); ?>
 
 <div class="dx">
 		<div class="title">
@@ -140,7 +121,7 @@ $_SESSION['success']  = "EPISODIO AGGIUNTO!";
 
 	Stagione: <input type="text" name="stagione"><br><br>
 	Episodio: <input type="text" name="episodio"><br><br>
-	ID serie: <select data-placeholder="Seleziona la serie" class="chosen-select" tabindex="2">
+	ID serie: <select data-placeholder="Seleziona la serie" class="chosen-select" tabindex="2" name="idserie">
 				<option value=""></option>
 				<?php
 				$query = "SELECT nome, id FROM serie";

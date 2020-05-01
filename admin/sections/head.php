@@ -1,0 +1,1 @@
+<div class="head"><a href="/"><div class="logo">FATA STREAMING</div></a></div>
