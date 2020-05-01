@@ -5,10 +5,52 @@ include('functions.php');
 <html>
 <head>
 	<title>Home - Fata Streaming</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.5.24.43">
+	
+	<script
+    type="text/javascript"
+    src="//code.jquery.com/jquery-2.1.0.js"></script>
+	
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?0.0.1">
+	
+	
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.5.25">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<style>
+	/* modal */
+		.close-modal {
+			background-color: #00aeef;
+			background: #00aeef;
+			color: #fff;
+		}
+		.btn-telegram {
+			
+		}
+	</style>
 </head>
 <body>
+	
+<!-- Modal -->
+<div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="memberModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                 <h4 class="modal-title" id="memberModalLabel">Grazie di essere un utente Fata Streaming</h4>
+
+            </div>
+            <div class="modal-body">
+                <p>Stiamo continuando a lavorare per migliorare sempre di pi&ugrave; il servizio di Fata Streaming.</p>
+                  <BR>   <p>Da oggi puoi entrare nel nostro canale Telegram per rimanere aggiornato con tutte le uscite del sito.</p> <br>
+                <a href="https://t.me/fatastreaming" target="_blank" style="color: #00aeef"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1024px-Telegram_logo.svg.png" width="40px" alt=""> Entra ora</a>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn close-modal" data-dismiss="modal">Chiudi</button>
+            </div>
+        </div>
+    </div>
+</div>
+	
 	<div class="header">
 		<img src="assets/img/FATASlogo.png">
 	</div>
@@ -48,7 +90,8 @@ include('functions.php');
 		
 		<?php  if ($_SESSION['user']['id']== 3) : ?>  <!--   A lovely greeting to my girl, registered with ID 3   -->
 		
-			<h2 class="love">CIAO AMORE HO CAMBIATO LA SCRITTA<br> <!--<span>❤</span>--></h2>
+			<h2 class="love"><br> <!--<span>❤</span>--></h2>
+		  	<img src="assets/img/french.png" alt="" width="250px">
 		
 		<?php endif ?>
 		<style>
@@ -348,5 +391,16 @@ include('functions.php');
 		<a href="admin">Admin</a> | &copy <?php echo $year ?> | <a href="api">API</a> | This project is open source on <a href="https://github.com/skebby11/Fata-View/" target="_blank">GitHub</a> | Made by <a href="https://www.sebastianoriva.it" target="_blank">Sebastiano Riva</a>
 	</div>
 
+	
+	
+	
+	<script type="text/javascript">
+    $(document).ready(function () {
+
+    $('#memberModal').modal('show');
+
+});
+</script>
+	
 </body>
 </html>
