@@ -13,6 +13,7 @@ if(isset($_POST["addfilm"])) {
 	
 $titolo = e($_POST["titolo"]);
 $descr = e($_POST["descr"]);
+$link = e($_POST["link"]); // 
 $linksv = e($_POST["linksv"]); // speedvideo
 $linkverys = e($_POST["linkverys"]); // verystream
 $linkmd = e($_POST["linkmd"]); // mix drop
@@ -64,7 +65,41 @@ $query = "INSERT INTO film (titolo, descr, poster, link, linksv, linkverys, link
 						  VALUES('$titolo', '$descr', '/poster/$dest_filename', '$link', '$linksv', '$linkverys', '$linkmd', '$linkgu')";
 mysqli_query($db, $query); 
 
+	
 $_SESSION['success']  = "FILM AGGIUNTO!";
+	
+	
+	
+// Invia messaggio Telegram
+	
+	
+  $nomefilm = "SELECT id, titolo, poster FROM film WHERE titolo='$titolo'";
+  $result = mysqli_query($db, $nomefilm);
+	
+  while($row = mysqli_fetch_assoc($result)) {
+  	$idfilm = $row["id"];
+  	$titolofilm = $row["titolo"];
+  	$poster = $row["poster"];
+  }
+	
+  $botToken="1250602787:AAELRszwAOyJM2uKCt8TdNCdqfgQg81epJ4";
+
+  $website="https://api.telegram.org/bot".$botToken;
+  $chatId=-1001315498220;  //** ===>>>NOTE: this chatId MUST be the chat_id of a person, NOT another bot chatId !!!**
+  $params=[
+      'chat_id'=>$chatId, 
+      'parse_mode' => 'markdown',
+      'text'=>"[​​​​​​​​​​​](https://fatastreaming2.altervista.org$poster)E' appena stato aggiunto il film $titolofilm.
+Guardalo ora su https://fatastreaming2.altervista.org/film?id=$idfilm",
+  ];
+  $ch = curl_init($website . '/sendMessage');
+  curl_setopt($ch, CURLOPT_HEADER, false);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, ($params));
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+  $result = curl_exec($ch);
+  curl_close($ch);
 	
 } else {
 	echo "errore";
@@ -80,10 +115,6 @@ $_SESSION['success']  = "FILM AGGIUNTO!";
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="assets/chosen/docsupport/style.css">
-    <link rel="stylesheet" href="assets/chosen/docsupport/prism.css">
-    <link rel="stylesheet" href="assets/chosen/chosen.css">
 	
 	<link rel="stylesheet" type="text/css" href="css/admin.css?0.004">
 	

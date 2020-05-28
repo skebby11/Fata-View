@@ -165,11 +165,11 @@ document.oncontextmenu=new Function("return false");
 				}
 				if(!empty($v)){ // openload
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
-   				  </span><iframe src='https://openload.co/embed/$v'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
+   				  </span><iframe src='https://supervideo.tv/embed-$v.html' scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
 				}
 				if(!empty($sv)){ // speedvideo
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
-   				  </span><iframe src='https://speedvideo.net/$sv'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
+   				  </span><iframe src='https://speedvideo.net/embed-$sv-607x360.html'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true' style='width:45%!important;height:50%!important'></iframe></a><bold></bold>";
 				}
 				if(!empty($md)){ //mixdrop
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
