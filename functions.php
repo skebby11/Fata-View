@@ -5,6 +5,8 @@
     'cookie_lifetime' => 2592000,
 	]);
 
+	$baseurl = "https://fatastreaming2.altervista.org/";
+
 	// connect to database
 	$db = mysqli_connect('localhost', 'fatastreaming2', '', 'my_fatastreaming2');
 
@@ -28,10 +30,54 @@
 		login();
 	}
 
+	// call the removeserie() function if removeserie_btn is clicked
+	if (isset($_POST['removeserie_btn'])) {
+		removeserie();
+	}
+
+	// call the login() function if register_btn is clicked
+	if (isset($_POST['removeepisode_btn'])) {
+		removeepisode();
+	}
+
 	if (isset($_GET['logout'])) {
 		session_destroy();
 		unset($_SESSION['user']);
 		header("location: login");
+	}
+
+	// REMOVE SERIE
+	function removeserie(){
+		
+		global $db;
+		
+		$serietodel = e($_POST['serietodel']);
+		$requestinguser = e(($_POST['requestinguser']));
+		
+		if($requestinguser == $_SESSION['user']['id']) {
+		
+			$query = "DELETE FROM `epseen` WHERE `serie` = $serietodel AND user = $requestinguser";
+			mysqli_query($db, $query);
+		} else {
+			echo "Not allowed.";
+		}
+	}
+
+	// REMOVE EPI
+	function removeepisode(){
+		
+		global $db;
+		
+		$eptodel = e($_POST['eptodel']);
+		$requestinguser = e(($_POST['requestinguser']));
+		
+		if($requestinguser == $_SESSION['user']['id']) {
+		
+			$query = "DELETE FROM `epseen` WHERE `epid` = $eptodel AND user = $requestinguser";
+			mysqli_query($db, $query);
+		} else {
+			echo "Not allowed.";
+		}
 	}
 
 	// REGISTER USER

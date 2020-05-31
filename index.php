@@ -1,34 +1,26 @@
 <?php
 include('functions.php');
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Home - Fata Streaming</title>
+
+<?php
+
+$pagetitle = "Home - Fata Streaming";
+
+include('inc/sections/head.php');
+?>
+
 	
-	<script
-    type="text/javascript"
-    src="//code.jquery.com/jquery-2.1.0.js"></script>
-	
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?0.0.1">
-	
-	
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.5.25">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<style>
-	/* modal */
-		.close-modal {
-			background-color: #00aeef;
-			background: #00aeef;
-			color: #fff;
-		}
-		.btn-telegram {
-			
-		}
-	</style>
-</head>
+<style>
+/* modal */
+    .close-modal {
+        background-color: #00aeef;
+        background: #00aeef;
+        color: #fff;
+    }
+    .btn-telegram {
+
+    }
+</style>
 <body>
 	
 <!-- Modal -->
@@ -51,39 +43,12 @@ include('functions.php');
     </div>
 </div>
 	
-	<div class="header">
-		<img src="assets/img/FATASlogo.png">
-	</div>
-		<div class="menu">
-		<ul>
- 		 <li><a class="active" href="/">Home</a></li>
- 		 <li><a href="lista-serie">Serie</a></li>
- 		 <li><a href="lista-film">Film</a></li>
-		 <li class="search"><form action="search" method="post"><input type="text" name="s" placeholder="Cerca film e serie..."></form></li>
-		</ul>
-		<!-- logged in user information -->
-		<div class="profile_info" align="right"> 
+<?php
 
-			<div>
-				<?php  if (isset($_SESSION['user'])) : ?>
-					<strong><?php echo $_SESSION['user']['username']; ?></strong>
+$active = 1;
 
-					<small>
-						<i  style="color: #888;">(<?php echo ucfirst($_SESSION['user']['user_type']); ?>)</i> 
-						<br>
-						<a href="?logout='1'" style="color: red;">logout</a>
-					</small>
-
-				<?php else : ?>
-				<ul class="login">
- 		 		<li class="login"><a href="login">Login</a></li>
-  		 		<li class="login"><a href="register">Signup</a></li>
-				</ul>
-
-				<?php endif ?>
-			</div>
-		</div>
-	</div>
+include('inc/sections/header.php');
+?>
 
 	<form>
 	  <div class="container">
@@ -188,7 +153,7 @@ include('functions.php');
 			}
 				
 			
-			echo "<div class='serie'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
+			echo "<div class='serie animated fadeInDown'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
 			}
 			}
 			
@@ -229,7 +194,7 @@ include('functions.php');
 
 			}
 			
-			echo "<div class='serie'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
+			echo "<div class='serie animated fadeInDown'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
 			}
 		}
 			
@@ -270,7 +235,7 @@ include('functions.php');
 				
 			}
 			
-			echo "<div class='serie'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
+			echo "<div class='serie animated fadeInDown'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
 			}
 		}
 		
@@ -312,7 +277,7 @@ include('functions.php');
 				
 			}
 			
-			echo "<div class='serie'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
+			echo "<div class='serie animated fadeInDown'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
 			}
 		}
 		
@@ -326,7 +291,7 @@ include('functions.php');
 		$query = "SELECT id, nome, descr, poster, stagioni FROM serie ORDER BY id DESC LIMIT 4";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
-			echo "<div class='serie'><a href='serie?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p>" . $row["nome"] ."</p></a></div>";
+			echo "<div class='serie animated fadeInDown'><a href='serie?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p>" . $row["nome"] ."</p></a></div>";
 		}		
 		?>
 		</div>
@@ -337,7 +302,7 @@ include('functions.php');
 		$query = "SELECT * FROM film ORDER BY id DESC LIMIT 4";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
-			echo "<div class='serie'><a href='film?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p>" . $row["titolo"] ."</p></a></div>";
+			echo "<div class='serie animated fadeInDown'><a href='film?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p>" . $row["titolo"] ."</p></a></div>";
 		}		
 		?>
 		</div>
@@ -387,20 +352,11 @@ include('functions.php');
 	  </div>
 	</form>
 	
-	<div class="footer">
-		<a href="admin">Admin</a> | &copy <?php echo $year ?> | <a href="api">API</a> | This project is open source on <a href="https://github.com/skebby11/Fata-View/" target="_blank">GitHub</a> | Made by <a href="https://www.sebastianoriva.it" target="_blank">Sebastiano Riva</a>
-	</div>
-
-	
-	
-	
 	<script type="text/javascript">
     $(document).ready(function () {
 
     $('#memberModal').modal('show');
 
-});
-</script>
-	
-</body>
-</html>
+	});
+	</script>
+<?php include('inc/sections/footer.php') ?>

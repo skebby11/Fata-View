@@ -1,53 +1,16 @@
 <?php
 include('functions.php');
 
-
 $keyword = $_POST["s"];
 
+$pagetitle = "Risultati ricerca - Fata Streaming";
+
+include('inc/sections/head.php');
+
+$active = 0;
+
+include('inc/sections/header.php');
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Risultati ricerca - Fata Streaming</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.5.24.43">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-
-	<div class="header">
-		<img src="assets/img/FATASlogo.png">
-	</div>
-		<div class="menu">
-		<ul>
- 		 <li><a href="/">Home</a></li>
- 		 <li><a href="lista-serie">Serie</a></li>
- 		 <li><a href="lista-film">Film</a></li>
-		 <li class="search"><form action="search" method="post"><input type="text" name="s" placeholder="Cerca film e serie..."></form></li>
-		</ul>
-		<!-- logged in user information -->
-		<div class="profile_info" align="right"> 
-
-			<div>
-				<?php  if (isset($_SESSION['user'])) : ?>
-					<strong><?php echo $_SESSION['user']['username']; ?></strong>
-
-					<small>
-						<i  style="color: #888;">(<?php echo ucfirst($_SESSION['user']['user_type']); ?>)</i> 
-						<br>
-						<a href="?logout='1'" style="color: red;">logout</a>
-					</small>
-
-				<?php else : ?>
-				<ul class="login">
- 		 		<li class="login"><a href="login">Login</a></li>
-  		 		<li class="login"><a href="register">Signup</a></li>
-				</ul>
-
-				<?php endif ?>
-			</div>
-		</div>
-	</div>
 
 	<form>
 	  <div class="container">
@@ -72,12 +35,12 @@ $keyword = $_POST["s"];
 		
 		if (mysqli_num_rows($result1) > 0) {
 		while($row = mysqli_fetch_assoc($result1)) {
-			echo "<div class='serierow'><a href='serie?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p><strong>" . $row["nome"] ."</strong><br><br>" . substr($row["descr"], 0, 500) ."...</p></a></div>";
+			echo "<div class='serierow animated fadeInDown'><a href='serie?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p><strong>" . $row["nome"] ."</strong><br><br>" . substr($row["descr"], 0, 500) ."...</p></a></div>";
 		}
 		}
 		elseif (mysqli_num_rows($result2) > 0) {
 		while($row = mysqli_fetch_assoc($result2)) {
-			echo "<div class='serierow'><a href='film?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p><strong>" . $row["titolo"] ."</strong><br><br>" . substr($row["descr"], 0, 500) ."...</p></a></div>";
+			echo "<div class='serierow animated fadeInDown'><a href='film?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p><strong>" . $row["titolo"] ."</strong><br><br>" . substr($row["descr"], 0, 500) ."...</p></a></div>";
 		}
 		} else {
 			echo "Nessun risultato trovato :(";
@@ -86,10 +49,4 @@ $keyword = $_POST["s"];
 		</div>
 	  </div>
 	</form>
-	
-	<div class="footer">
-		&copy <?php echo $year ?> | <a href="api">API</a> | This project is open source on <a href="https://github.com/skebby11/Fata-View/" target="_blank">GitHub</a> | Made by <a href="https://www.sebastianoriva.it" target="_blank">Sebastiano Riva</a>
-	</div>
-
-</body>
-</html>
+<?php include('inc/sections/footer.php') ?>

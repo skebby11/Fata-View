@@ -14,55 +14,15 @@ $query = "SELECT nome, descr, poster FROM serie WHERE id =$idserie";
 		$descrstag = $row["descr"];
 		$poster = $row["poster"];
 }
- 
+
+$pagetitle = "$nomestag - Fata Streaming";
+
+include('inc/sections/head.php');
+
+$active = 0;
+
+include('inc/sections/header.php');
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title><?php echo $nomestag ?> - Fata Streaming</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3.5.24.43">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<script
-  src="http://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-	
-</head>
-<body>
-	<div class="header">
-		<img src="assets/img/FATASlogo.png">
-	</div>
-		<div class="menu">
-		<ul>
- 		 <li><a href="/">Home</a></li>
- 		 <li><a href="lista-serie">Serie</a></li>
- 		 <li><a href="lista-film">Film</a></li>
-		</ul>
-		<!-- logged in user information -->
-		<div class="profile_info" align="right"> 
-
-			<div>
-				<?php  if (isset($_SESSION['user'])) : ?>
-					<strong><?php echo $_SESSION['user']['username']; ?></strong>
-
-					<small>
-						<i  style="color: #888;">(<?php echo ucfirst($_SESSION['user']['user_type']); ?>)</i> 
-						<br>
-						<a href="?logout='1'" style="color: red;">logout</a>
-					</small>
-
-				<?php else : ?>
-				<ul class="login">
- 		 		<li class="login"><a href="login">Login</a></li>
-  		 		<li class="login"><a href="register">Signup</a></li>
-				</ul>
-
-				<?php endif ?>
-			</div>
-		</div>
-	</div>
 
 	<form>
 	<div class="container">
@@ -77,9 +37,9 @@ $query = "SELECT nome, descr, poster FROM serie WHERE id =$idserie";
 		}, 1200);
 	});
 	</script>
-		<h1 class="stagname"><? echo $nomestag ?></h1>
+		<h1 class="stagname animated fadeInDown"><? echo $nomestag ?></h1>
 		
-		<div class="info_wrapper">
+		<div class="info_wrapper animated fadeInDown">
 		<img class="poster" src="<?php echo $poster ?> " alt="<?php echo $nomestag?> poster">
 		<p class="descr"><?php echo $descrstag ?></p>
 		
@@ -132,45 +92,44 @@ $epresult = mysqli_query($db, $epquery);
 	$linkverys = $row["linkverys"];
 	$linkmd = $row["linkmd"];
 	$linkgu = $row["linkgu"];
+		
+		
+	$linkarr = array();
 	
-	if(!empty($linksv)) {  // empty OL	
+	
+	if(!empty($linksv)) { // YES SPEEDVIDEO
 		
-		$link = "<a href='view?sv=$linksv' target='__blank'>Speedvideo</a>";
-		
-		if(!empty($linkmd)) {
-			$link = "<a href='view?sv=$linksv' target='__blank'>Speedvideo</a> / <a href='view?gu=$linkmd' target='__blank'>MixDrop</a>";	
-		}
-		
-	} elseif (!empty($linkmd)) {  // md YES
-		
-		$link = "<a href='view?md=$linkmd' target='__blank'>MixDrop</a>";	
-		
-		if(!empty($linkgu)){    // md yes + gu yes
-		$link = "<a href='view?md=$linkmd' target='__blank'>MixDrop</a> / <a href='view?gu=$linkgu' target='__blank'>GoUnlimited</a>";	
-		}
+		array_push($linkarr, "<a href='view?sv=$linksv' target='__blank'>Speedvideo</a>");
 	}
+				
+	if(!empty($linkmd)) {  // YES MIXDROP
 		
-	elseif(!empty($link)) { // SUPERVIDEO SI
-		$link = "<a href='view?sv=$link' target='__blank'>Supervideo</a>";
+		array_push($linkarr, "<a href='view?md=$linkmd' target='__blank'>MixDrop</a>");
+	}
+			
+	if(!empty($linkgu)) {  // YES GOUNL
 		
-		if(!empty($linkmd)) {
-			$link = "<a href='view?sv=$linksv' target='__blank'>Supervideo</a> / <a href='view?gu=$linkmd' target='__blank'>MixDrop</a>";	
-		}
+		array_push($linkarr, "<a href='view?gu=$linkgu' target='__blank'>GoUnlimited</a>");
+	}
+				
+	if(!empty($link)) { // SUPERVIDEO SI
+		
+		array_push($linkarr, "<a href='view?v=$link' target='__blank'>Supervideo</a>");
 	}
 	
 		
 		
+	echo "<div class='ep'><p class='info'><strong> " . $season . "X" . $ep . "</strong> <br><br> " . $titolo . "</p><p class='link'> ";
 		
-	echo "<div class='ep'><p class='info'><strong> " . $season . "X" . $ep . "</strong> <br><br> " . $titolo . "</p><p class='link'> ".$link."</p></div>";
+		foreach ($linkarr as $linksing){
+		  echo $linksing . '<br>';
+		}
+		
+		
+	echo "</p></div>";
 	
 	} ?>
 	</div>
 	</div>
 	</form>
-	
-	<div class="footer">
-		<a href="admin">Admin</a> | &copy <?php echo $year ?> | <a href="api">API</a> | This project is open source on <a href="https://github.com/skebby11/Fata-View/" target="_blank">GitHub</a> | Made by <a href="https://www.sebastianoriva.it" target="_blank">Sebastiano Riva</a>
-	</div>
-
-</body>
-</html>
+<?php include('inc/sections/footer.php') ?>
