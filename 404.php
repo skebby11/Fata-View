@@ -1,45 +1,23 @@
+<?php 
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>404 - Fata Streaming</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?1.3">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+include('functions.php');
+
+?>
+
+<?php
+
+$pagetitle = "404 - Fata Streaming";
+
+include('inc/sections/head.php');
+?>
+
 <body>
-	<div class="header">
-		<img src="assets/img/FATASlogo.png">
-	</div>
-		<div class="menu">
-		<ul>
- 		 <li><a  href="/">Home</a></li>
- 		 <li><a href="lista-serie">Serie</a></li>
- 		 <li><a href="lista-film">Film</a></li>
-		 <li class="search"><form action="search" method="post"><input type="text" name="s" placeholder="Cerca film e serie..."></form></li>
-		</ul>
-		<!-- logged in user information -->
-		<div class="profile_info" align="right"> 
+<?php
 
-			<div>
-				<?php  if (isset($_SESSION['user'])) : ?>
-					<strong><?php echo $_SESSION['user']['username']; ?></strong>
 
-					<small>
-						<i  style="color: #888;">(<?php echo ucfirst($_SESSION['user']['user_type']); ?>)</i> 
-						<br>
-						<a href="?logout='1'" style="color: red;">logout</a>
-					</small>
+include('inc/sections/header.php');
+?>
 
-				<?php else : ?>
-				<ul class="login">
- 		 		<li class="login"><a href="login">Login</a></li>
-  		 		<li class="login"><a href="register">Signup</a></li>
-				</ul>
-
-				<?php endif ?>
-			</div>
-		</div>
-	</div>
 
 	<form style="text-align: center">
 		
@@ -51,9 +29,5 @@
 		
 	</form>
 	
-	<div class="footer">
-	
-	</div>
 
-</body>
-</html>
+<?php include('inc/sections/footer.php') ?>
