@@ -167,7 +167,7 @@ document.oncontextmenu=new Function("return false");
 				if(!empty($s || $v || $p || $sv || $md || $gu)){
 				if(!empty($s)){
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
-   				  </span><iframe src='https://streamango.com/embed/$s'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
+   				  </span><iframe src='https://streamango.com/embed/$s' scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
 				}
 				if(!empty($p)){
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
@@ -179,15 +179,15 @@ document.oncontextmenu=new Function("return false");
 				}
 				if(!empty($sv)){ // speedvideo
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
-   				  </span><iframe src='https://speedvideo.net/embed-$sv-607x360.html'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true' style='width:45%!important;height:50%!important'></iframe></a><bold></bold>";
+   				  </span><iframe src='https://speedvideo.net/embed-$sv-607x360.html' scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true' style='width:45%!important;height:50%!important'></iframe></a><bold></bold>";
 				}
 				if(!empty($md)){ //mixdrop
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
-   				  </span><iframe src='http://mixdrop.co/e/$md'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
+   				  </span><iframe src='https://mixdrop.co/e/$md' scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
 				}
 				if(!empty($gu)){ // go unlimited
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
-   				  </span><iframe src='https://gounlimited.to/embed-$gu.html'/ scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
+   				  </span><iframe src='https://gounlimited.to/embed-$gu.html' scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
 				}}
 				else{
 					echo "</a><h1 style='color:fff'>Si &egrave verificato un errore</h1>
