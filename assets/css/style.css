@@ -300,6 +300,23 @@ input[type="text"]:disabled {
 	margin: 4px 2px;
 }
 
+.serie-slider .serie{
+    max-width: 250px;
+}
+
+.nextArrowBtn{
+    position: absolute;
+    z-index: 1000;
+    top: 50%;
+    right: -50px;
+}
+.prevArrowBtn{
+    position: absolute;
+    z-index: 1000;
+    top: 50%;
+    left: -50px;
+}
+
 /*SERIE and FILM*/
 
 .poster {
@@ -707,6 +724,20 @@ table.seen-eps-list tr.eps:hover {
 	ul.login {
 		width: 100%;
 	}
+	
+    .serie-slider .serie{
+            margin: 0px auto;
+    }
+        .serie img {
+            margin: 0 auto;
+        }
+
+        .nextArrowBtn{
+        right: -5px;
+    }
+    .prevArrowBtn{
+        left: -5px;
+    }
 	
 	.input-group {
 		margin: 10px 0px 40px 0px;

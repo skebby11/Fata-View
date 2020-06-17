@@ -8,7 +8,6 @@
     src="//code.jquery.com/jquery-2.1.0.js"></script>
 	
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="<?php echo $baseurl?>assets/bootstrap/css/bootstrap.min.css?0.0.1">
 	
 	<link rel="stylesheet" href="<?php echo $baseurl?>assets/flexboxgrid/flexboxgrid.css">
 	
@@ -16,6 +15,8 @@
 	
 	<link rel="stylesheet" type="text/css" href="<?php echo $baseurl?>assets/css/style.css?1.3.5.25">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<?php echo $customadd; ?>
 	
 	
 	<meta property="og:image" content="<?php echo $poster ?>" />

@@ -6,12 +6,43 @@ include('functions.php');
 
 $pagetitle = "Home - Fata Streaming";
 
-$customadd = "<link rel='stylesheet' type='text/css' href='//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css'/>";
-
 include('inc/sections/head.php');
 ?>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
+	
+<style>
+/* modal */
+    .close-modal {
+        background-color: #00aeef;
+        background: #00aeef;
+        color: #fff;
+    }
+    .btn-telegram {
+
+    }
+</style>
 <body>
+	
+<!-- Modal -->
+<div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="memberModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                 <h4 class="modal-title" id="memberModalLabel">Grazie di essere un utente Fata Streaming</h4>
+
+            </div>
+            <div class="modal-body">
+                <p>Stiamo continuando a lavorare per migliorare sempre di pi&ugrave; il servizio di Fata Streaming.</p>
+                  <BR>   <p>Da oggi puoi entrare nel nostro canale Telegram per rimanere aggiornato con tutte le uscite del sito.</p> <br>
+                <a href="https://t.me/fatastreaming" target="_blank" style="color: #00aeef"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1024px-Telegram_logo.svg.png" width="40px" alt=""> Entra ora</a>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn close-modal" data-dismiss="modal">Chiudi</button>
+            </div>
+        </div>
+    </div>
+</div>
 	
 <?php
 
@@ -256,9 +287,26 @@ include('inc/sections/header.php');
 		</div>
 		
 		<h3 class="lasttext">Ultime serie aggiunte</h3>
+		<div class="lastseries">
+		<?php
+		$query = "SELECT id, nome, descr, poster, stagioni FROM serie ORDER BY id DESC LIMIT 4";
+		$result = mysqli_query($db,$query);
+		while($row = mysqli_fetch_assoc($result)) {
+			echo "<div class='serie animated fadeInDown'><a href='serie?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p>" . $row["nome"] ."</p></a></div>";
+		}		
+		?>
+		</div>
+		
+		<style>
+			.serie-slider {
+				max-width: 250px;
+			}
+		</style>
+		
+		<h3 class="lasttext">Ultime serie aggiunte slick</h3>
 		<div class="lastseries serie-slider">
 		<?php
-		$query = "SELECT id, nome, descr, poster, stagioni FROM serie ORDER BY id DESC LIMIT 20";
+		$query = "SELECT id, nome, descr, poster, stagioni FROM serie ORDER BY id DESC";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
 			
@@ -276,9 +324,9 @@ include('inc/sections/header.php');
 		
 		
 		<h3 class="lasttext">Ultimi film aggiunti</h3>
-		<div class="lastseries serie-slider">
+		<div class="lastseries">
 		<?php
-		$query = "SELECT * FROM film ORDER BY id DESC  LIMIT 20";
+		$query = "SELECT * FROM film ORDER BY id DESC LIMIT 4";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
 			echo "<div class='serie animated fadeInDown'><a href='film?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p>" . $row["titolo"] ."</p></a></div>";
@@ -287,9 +335,9 @@ include('inc/sections/header.php');
 		</div>
 		
 		<h3 class="lasttext">Ultimi episodi aggiunti</h3>
-		<div class="lastseries ultimi-episodi-slider">
+		<div class="lastseries">
 		<?php
-		$query = "SELECT * FROM episodi ORDER BY id DESC LIMIT 20";
+		$query = "SELECT * FROM episodi ORDER BY id DESC LIMIT 4";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
 			
@@ -331,7 +379,55 @@ include('inc/sections/header.php');
 	  </div>
 	</form>
 	
-	<script src="/assets/js/home-slick.js"></script>
-<?php $footeradd = "<script type='text/javascript' src='//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js'></script>" ?>
-<?php include('inc/sections/footer.php') ?>
+	<script type="text/javascript">
+    $(document).ready(function () {
+
+    $('#memberModal').modal('show');
+
+	});
+	</script>
 	
+	<script>
+	
+		$(document).ready(function(){
+		  $('.serie-slider').slick({
+			  dots: false,
+			  infinite: false,
+			  speed: 300,
+			  slidesToShow: 4,
+			  slidesToScroll: 4,
+			  responsive: [
+				{
+				  breakpoint: 1024,
+				  settings: {
+					slidesToShow: 3,
+					slidesToScroll: 3,
+					infinite: true,
+					dots: true
+				  }
+				},
+				{
+				  breakpoint: 600,
+				  settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2
+				  }
+				},
+				{
+				  breakpoint: 480,
+				  settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				  }
+				}
+				// You can unslick at a given breakpoint now by adding:
+				// settings: "unslick"
+				// instead of a settings object
+			  ]
+			});
+		});
+	
+	</script>
+	
+<?php include('inc/sections/footer.php') ?>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
