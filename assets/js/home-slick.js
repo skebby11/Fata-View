@@ -4,7 +4,7 @@
 			  nextArrow: '<div class="nextArrowBtn"><img src=/assets/img/prossimo.png width=40px></div>',
     		  prevArrow: '<div class="prevArrowBtn"><img src=/assets/img/precedente.png width=40px></div>',
 			  dots: false,
-			  infinite: false,
+			  infinite: true,
 			  speed: 300,
 			  slidesToShow: 4,
 			  slidesToScroll: 4,

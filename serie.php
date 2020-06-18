@@ -69,66 +69,100 @@ include('inc/sections/header.php');
 	<?php endif ?>
 		</div>
 		<div class="epsds">
-<?php	
-$seriedetailsquery = "SELECT id, nome, descr, stagioni FROM serie where id='$idserie'";
-$seriedetailsresult = mysqli_query($db, $seriedetailsquery);
-
-    while($row = mysqli_fetch_assoc($seriedetailsresult)) {
-	$seasonid = $row["id"];
-	$seasonname = $row["nome"];
-	$seasondesc = $row["desc"];
-	$seasons = $row["stagioni"];
-	}
-
-$epquery = "SELECT * FROM episodi WHERE serie='$idserie' ORDER BY stagione ASC, episodio ASC";
-$epresult = mysqli_query($db, $epquery);
-
-    while($row = mysqli_fetch_assoc($epresult)) {
-	$season = $row["stagione"];
-	$ep = $row["episodio"];
-	$titolo = $row["titolo"];
-	$link = $row["link"];
-	$linksv = $row["linksv"];
-	$linkverys = $row["linkverys"];
-	$linkmd = $row["linkmd"];
-	$linkgu = $row["linkgu"];
-		
-		
-	$linkarr = array();
-	
-	
-	if(!empty($linksv)) { // YES SPEEDVIDEO
-		
-		array_push($linkarr, "<a href='view?sv=$linksv' target='__blank'>Speedvideo</a>");
-	}
-				
-	if(!empty($linkmd)) {  // YES MIXDROP
-		
-		array_push($linkarr, "<a href='view?md=$linkmd' target='__blank'>MixDrop</a>");
-	}
 			
-	if(!empty($linkgu)) {  // YES GOUNL
-		
-		array_push($linkarr, "<a href='view?gu=$linkgu' target='__blank'>GoUnlimited</a>");
-	}
-				
-	if(!empty($link)) { // SUPERVIDEO SI
-		
-		array_push($linkarr, "<a href='view?v=$link' target='__blank'>Supervideo</a>");
-	}
+			<?php
+				$nstagionion = "SELECT COUNT(stagione) FROM episodi WHERE serie = $idserie GROUP BY stagione";
+				$result = mysqli_query($db, $nstagionion);
+			
+				$num_stagionion = mysqli_num_rows($result);
+			
+				$stagionipresenti = "SELECT stagione FROM `episodi` WHERE serie = $idserie GROUP BY stagione";
+				$result = mysqli_query($db, $stagionipresenti);
+			
+			
+				while( $row = mysqli_fetch_assoc( $result)){
+					$arr_stagioni[] = $row["stagione"]; // Inside while loop
+				}
+			
+				echo "<div class='container-stagioni'>
+				<h4>Stagioni Disponibili</h4>";
+				foreach ($arr_stagioni as list($a)) {
+						echo "<div class='box-stagioni'><a href='#stagione$a'>$a</a></div>";
+				}
+				echo "</div>";
+			
+				foreach ($arr_stagioni as list($a)) {
+					echo "<div id='stagione$a'><h2>Stagione $a</h2></div>";
+					
+						
+				$seriedetailsquery = "SELECT id, nome, descr, stagioni FROM serie where id='$idserie'";
+				$seriedetailsresult = mysqli_query($db, $seriedetailsquery);
+
+					while($row = mysqli_fetch_assoc($seriedetailsresult)) {
+					$seasonid = $row["id"];
+					$seasonname = $row["nome"];
+					$seasondesc = $row["desc"];
+					$seasons = $row["stagioni"];
+
+						$epquery = "SELECT * FROM episodi WHERE serie='$idserie' AND stagione = '$a' ORDER BY stagione ASC, episodio ASC ";
+				$epresult = mysqli_query($db, $epquery);
+
+					while($row = mysqli_fetch_assoc($epresult)) {
+					$season = $row["stagione"];
+					$ep = $row["episodio"];
+					$titolo = $row["titolo"];
+					$link = $row["link"];
+					$linksv = $row["linksv"];
+					$linkverys = $row["linkverys"];
+					$linkmd = $row["linkmd"];
+					$linkgu = $row["linkgu"];
+
+
+					$linkarr = array();
+
+
+					if(!empty($linksv)) { // YES SPEEDVIDEO
+
+						array_push($linkarr, "<a href='view?sv=$linksv' target='__blank'>Speedvideo</a>");
+					}
+
+					if(!empty($linkmd)) {  // YES MIXDROP
+
+						array_push($linkarr, "<a href='view?md=$linkmd' target='__blank'>MixDrop</a>");
+					}
+
+					if(!empty($linkgu)) {  // YES GOUNL
+
+						array_push($linkarr, "<a href='view?gu=$linkgu' target='__blank'>GoUnlimited</a>");
+					}
+
+					if(!empty($link)) { // SUPERVIDEO SI
+
+						array_push($linkarr, "<a href='view?v=$link' target='__blank'>Supervideo</a>");
+					}
+
+
+
+					echo "<div class='ep'><p class='info'><strong> " . $season . "X" . $ep . "</strong> <br><br> " . $titolo . "</p><p class='link'> ";
+
+						foreach ($linkarr as $linksing){
+						  echo $linksing . '<br>';
+						}
+
+					echo "</p></div>";
+
+					} 
+					}
+
+					echo "<hr class='stag-spacer'>";
+					
+				}
 	
-		
-		
-	echo "<div class='ep'><p class='info'><strong> " . $season . "X" . $ep . "</strong> <br><br> " . $titolo . "</p><p class='link'> ";
-		
-		foreach ($linkarr as $linksing){
-		  echo $linksing . '<br>';
-		}
-		
-		
-	echo "</p></div>";
-	
-	} ?>
+	?>
+			
+
+
+
 	</div>
 	</div>
 	</form>

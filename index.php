@@ -247,13 +247,12 @@ include('inc/sections/header.php');
 				
 			}
 			
-			echo "<div class='serie animated fadeInDown'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
+			echo "<div class='serie animated fadeInDown'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div></div>";
 			}
 		}
 		
 		}
 		?>
-		</div>
 		
 		<h3 class="lasttext">Ultime serie aggiunte</h3>
 		<div class="lastseries serie-slider">

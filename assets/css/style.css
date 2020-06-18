@@ -334,6 +334,29 @@ input[type="text"]:disabled {
 	max-width: 50%;
 	text-align: left;
 } 
+
+.container-stagioni {
+    margin: 40px 5px 60px;
+}
+.box-stagioni {
+    display: inline;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    margin: 0 5px;
+}
+.box-stagioni a{
+    text-decoration: none;
+}
+.container-stagioni h4 {
+    margin-bottom: 40px;
+}
+hr.stag-spacer {
+    margin: 80px 0;
+}
+hr.stag-spacer:last-child {
+    display: none;
+}		
+
 .epsds {
 	margin-top: 50px;
 	font-size: 110%;
@@ -524,6 +547,21 @@ form {
 	text-decoration: none;
 	color: white;
 }
+
+/* Solve problem on a non-solid background */
+.serie img:hover { 
+  outline: 3px solid #00aeef; 
+} 
+
+/* Solve problem where border size changes on hover */
+.serie img { 
+  border: 0px solid ; 
+  border-color: #00aeef;
+} 
+.serie img:hover { 
+  outline: 2px solid #00aeef; 
+} 
+
 .lastseries::after {
 	content: "";
 	clear: both;
