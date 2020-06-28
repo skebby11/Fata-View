@@ -13,8 +13,8 @@ $action = $_GET["action"];
 
 
 if (count($errors) == 0) {
-$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkverys, linkmd, linkgu) 
-						  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkverys', '$linkmd', '$linkgu')";
+$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkmd, linkgu, fataplayer) 
+						  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkmd', '$linkgu', , '0')";
 mysqli_query($db, $query); 
 
 }
@@ -27,11 +27,11 @@ if(isset($_POST['aggiornaep'])){
 	$uptitolo = e($_POST['uptitolo']);
 	$uplink = e($_POST['uplink']);
 	$uplinksv = e($_POST['uplinksv']);
-	$uplinkvery = e($_POST['uplinkvery']);
 	$uplinkmd = e($_POST['uplinkmd']);
 	$uplinkgu = e($_POST['uplinkgu']);
 	
-	$query = "UPDATE episodi SET stagione = " . $upstagione . ", episodio = '$upepisodio', serie = ".$_POST['upserie']." , titolo = '$uptitolo', link = '".$_POST['uplink']."', linksv = '$uplinksv', linkverys = '$uplinkvery', linkmd = '$uplinkmd', linkgu = '$uplinkgu' WHERE id = $selepid";
+	
+	$query = "UPDATE episodi SET stagione = " . $upstagione . ", episodio = '$upepisodio', serie = ".$_POST['upserie']." , titolo = '$uptitolo', link = '".$_POST['uplink']."', linksv = '$uplinksv', linkmd = '$uplinkmd', linkgu = '$uplinkgu', fataplayer = 0 WHERE id = $selepid";
 	mysqli_query($db, $query);
 	$_SESSION['success']  = "Episodio aggiornato";
 }
@@ -88,11 +88,13 @@ html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% i
 	</style>
 	
 
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
+    <link rel="stylesheet" href="assets/chosen/docsupport/prism.css">
+    <link rel="stylesheet" href="assets/chosen/chosen.css">
 	<!--<script src="../ckeditor/ckeditor.js"></script>-->
 	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<title>Aggiungi episodio</title>
 
 <?php
@@ -193,7 +195,7 @@ tr:nth-child(even) {
     <th>titolo</th>
     <th>supervideo</th>
     <th>speedvideo</th>
-    <th>verystream</th>
+    <th>fata</th>
 	<th>mixdrop</th>
 	<th>gounlimited</th>
     <th></th>
@@ -212,7 +214,7 @@ tr:nth-child(even) {
     <td>".$row['titolo']."</td>
     <td>".$row['link']."</td>
     <td>".$row['linksv']."</td>
-	<td>".$row['linkverys']."</td>
+	<td>".$row['fataplayer']."</td>
     <td>".$row['linkmd']."</td>
     <td>".$row['linkgu']."</td>
     <td><a class='button_hover' href='editep.php?action=edit&id_ep=".$row['id']."'>Modifica</a></td>
@@ -237,9 +239,9 @@ tr:nth-child(even) {
 					$titolo = $row['titolo'];
 					$link = $row['link'];
 					$linksv = $row['linksv'];
-					$linkverys = $row['linkverys'];
 					$linkmd = $row['linkmd'];
 					$linkgu = $row['linkgu'];
+					$fataplayer = $row['fataplayer'];
 				}
 			}
 	?>
@@ -248,13 +250,26 @@ tr:nth-child(even) {
 	<input value="<? echo $epid ?>" name="selepid" style="display: none">
 	<strong>Stagione</strong> <br><input id='editor1' name="upstagione" value="<?php echo $stagione ?>"><br><br>
 	<strong>Episodio</strong> <br><input id='editor2' name="upepisodio" value="<?php echo $episodio ?>"><br><br>
-	<strong>Serie</strong> <br><input id='editor3' name="upserie" value="<?php echo $serie ?>"><br><br>
+	<strong>Serie</strong> <br> <select data-placeholder="<?php echo $serie ?>" class="chosen-select" tabindex="2" name="idserie" value="<?php echo $serie ?>">
+				<option value=""></option>
+				<?php
+				$query = "SELECT nome, id FROM serie ORDER BY nome ASC";
+						$results = mysqli_query($db, $query);
+						if (mysqli_num_rows($results) > 0) {
+							while($row = mysqli_fetch_assoc($results)) {
+								echo "<option value='" . $row['id'] . "'>" . $row['nome'] . "</option>',
+								";
+							}
+						}
+	
+				?>
+				</select><br><br>
 	<strong>Titolo</strong> <br><input id='editor4' name="uptitolo" value="<?php echo $titolo ?>"><br><br>
 	<strong>Link Supervideo</strong> <br><input id='editor5' name="uplink" value="<?php echo $link ?>"><br><br>
 	<strong>Link Speed Video</strong> <br><input id='editor6' name="uplinksv" value="<?php echo $linksv ?>"><br><br>
-	<strong>Link VeryStream</strong> <br><input id='editor7' name="uplinkvery" value="<?php echo $linkverys ?>"><br><br>
 	<strong>Link MixDrop</strong> <br><input id='editor8' name="uplinkmd" value="<?php echo $linkmd ?>"><br><br>
-	<strong>Link GoUnl</strong> <br><input id='editor9' name="uplinkgu" value="<?php echo $linkgu ?>"><br><br><br>
+	<strong>Link GoUnl</strong> <br><input id='editor9' name="uplinkgu" value="<?php echo $linkgu ?>"><br><br>
+	<strong>Link GoUnl</strong> <br><input id='editor9' name="uplinkfata" value="<?php echo $fataplayer ?>"><br><br><br>
 	
 	<button type="submit" name="aggiornaep" value="Salva">Salva</button>
 	</form>
@@ -282,4 +297,12 @@ CKEDITOR.add
 CKEDITOR.replace( 'editor6', { width: 700, height: 60 } );
 CKEDITOR.add
 </script>-->
+
+
+  <script src="assets/chosen/docsupport/jquery-3.2.1.min.js" type="text/javascript"></script>
+  <script src="assets/chosen/chosen.jquery.js" type="text/javascript"></script>
+  <script src="assets/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
+  <script src="assets/chosen/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
+	
+	
 </body>

@@ -8,6 +8,7 @@ $p = $_GET['p']; // speedvideo
 $sv = $_GET['sv']; // speedvideo
 $md = $_GET['md']; // mixdrop
 $gu = $_GET['gu']; // gounl
+$fataplayer = $_GET['fp']; // gounl
 
 
 include('functions.php');
@@ -27,6 +28,9 @@ $epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi whe
 if(!empty($gu)){
 $epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi where linkgu='$gu'";
 }
+if(!empty($fataplayer)){
+$epdetailsquery = "SELECT id, stagione, episodio, serie, titolo FROM episodi where fataplayer='$fataplayer'";
+}
 $epdetailsresult = mysqli_query($db, $epdetailsquery);
     while($row = mysqli_fetch_assoc($epdetailsresult)) {
 	$epid = $row["id"];
@@ -35,6 +39,14 @@ $epdetailsresult = mysqli_query($db, $epdetailsquery);
 	$idserie = $row["serie"];
 	$titolo = $row["titolo"];
 	} 
+
+if(!empty($_GET['fp'])){
+
+	
+	
+}
+
+
 // call the seenep() function if seenep_btn is clicked
 	if (isset($_POST["seenep_btn"])) {
 		seenep();
@@ -49,9 +61,7 @@ function seenep() {
 } ?>
 <!-- 
 
-Fata Streaming 2018 / Made by www.sebastianoriva.it
-
-ESKERE
+Fata Streaming 2018-2020 / Made by www.sebastianoriva.it
 
 !-->
 <html>
@@ -81,6 +91,10 @@ document.onmousedown=nrcNS;
 document.oncontextmenu=new Function("return false");
 </script> -->
 
+<script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+	
+	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!--  Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101768560-3"></script>
@@ -101,32 +115,10 @@ document.oncontextmenu=new Function("return false");
     <h3 style="color:#d6d6d6; font-family: 'PT Sans', sans-serif;">LE TUE SERIE COME PER MAGIA</h3><br>
     
     
-    <div align="center"><script type="text/javascript">
-	/* <![CDATA[ */
-	document.write('<s'+'cript type="text/javascript" src="//ad.altervista.org/js.ad/size=300X250/?ref='+encodeURIComponent(location.hostname+location.pathname)+'&r='+new Date().getTime()+'"></s'+'cript>');
-	/* ]]> */
-	</script>	
+    <div align="center">
+		<script>!function(d,l,e,s,c){e=d.createElement("script");e.src="//ad.altervista.org/js.ad/size=300X250/?ref="+encodeURIComponent(l.hostname+l.pathname)+"&r="+Date.now();s=d.scripts;c=d.currentScript||s[s.length-1];c.parentNode.insertBefore(e,c)}(document,location)</script>
 	</div><br>
-         
-	<?php if(!empty($v)): ?>
-     <script>	
-//	$.get( "https://api.openload.co/1/file/info?file=<?php //echo $v; ?>&login=7f53b6aa27b38c73&key=euZmu1Un", function( response ) {
-//	$("#msg").text(response.msg);
-//    $("#status").text(response.status);
-//    $("#episodio").text(response.result.<?php //echo $v; ?>.name);
-//	}, "json" );
-//	  </script>
-	<?php endif; ?>
-	   
-	<?php if(!empty($vs)): ?>
-     <script>	
-	$.get( "https://api.verystream.com/file/info?file=<?php echo $vs; ?>&login=920e4e64bfafd40ac359&key=9Z9vL2iQtFX", function( response ) {
-	$("#msg").text(response.msg);
-    $("#status").text(response.status);
-    $("#episodio").text(response.result.<?php echo $vs; ?>.name);
-	}, "json" );
-	  </script>
-	<?php endif; ?>
+
 
 	<div class="titlewrap">
 		<h1 style="color: darkgray"><?php echo $stagione . "X" . $episodio . " - " .$titolo; ?></h2>
@@ -143,7 +135,7 @@ document.oncontextmenu=new Function("return false");
 		</script>
 		
 		<?php 	
-				if(!empty($s || $v || $vs || $md || $gu)){
+				if(!empty($s || $v || $p || $sv || $md || $gu || $fataplayer)){
       			echo "<div class='main-container'>";
 				}
 				else{
@@ -164,7 +156,7 @@ document.oncontextmenu=new Function("return false");
 				
 				<?php 	
 
-				if(!empty($s || $v || $p || $sv || $md || $gu)){
+				if(!empty($s || $v || $p || $sv || $md || $gu || $fataplayer)){
 				if(!empty($s)){
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
    				  </span><iframe src='https://streamango.com/embed/$s' scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
@@ -189,6 +181,27 @@ document.oncontextmenu=new Function("return false");
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
    				  </span><iframe src='https://gounlimited.to/embed-$gu.html' scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
 				}}
+				
+				if(!empty($fataplayer)){
+					
+					$fpdetails = "SELECT fpposter, fpmp4, fpwebm FROM fataplayer WHERE id='$fataplayer'";
+					$fpresult = mysqli_query($db, $fpdetails);
+	
+					while($row = mysqli_fetch_assoc($fpresult)) {
+					$fpposter = $row["fpposter"];
+					$fpmp4 = $row["fpmp4"];
+					$fpwebm = $row["fpwebm"];
+					} 
+					
+					echo "
+					<span class='play1' id='play1' onclick='hide()' ;>
+   				  </span><video id='player' playsinline controls data-poster='$fpposter'>
+							  <source src='$fpmp4' type='video/mp4' />
+  							  <source src='$fpwebm' type='video/webm' />
+							</video></a><bold></bold>
+					";
+				}
+				
 				else{
 					echo "</a><h1 style='color:fff'>Si &egrave verificato un errore</h1>
 					<h3 style='color:fff'>Probabilmente hai seguito un collegamento sbagliato.</h3></div>";
@@ -234,6 +247,10 @@ document.oncontextmenu=new Function("return false");
 				<?php endif ?>
 		<div class="footer" style="height: 200px;"> </div>
       </div>
+	
+	<script>
+      const player = new Plyr('#player');
+    </script>
 </body>
 </center>
 </html>

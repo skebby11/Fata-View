@@ -7,10 +7,10 @@ include('../functions.php');
 
 $idutente = $_SESSION['user']['id'];
 
-if ($idutente != 2) {
+
+if ($_SESSION['user']['user_type'] != 'admin' ) {
 	header('location: /login');
 }
-
 
 $stagione = $_POST["stagione"];
 $episodio = $_POST["episodio"];
@@ -21,6 +21,14 @@ $linksv = e($_POST["linksv"]);
 $linkverys = e($_POST["linkverys"]);
 $linkmd = e($_POST["linkmd"]);
 $linkgu = e($_POST["linkgu"]);
+
+//Fata Player
+
+$fpmp4 = e($_POST["fpmp4"]);
+$fpwebm = e($_POST["fpwebm"]);
+$fpposter = e($_POST["fpposter"]);
+
+$unique = bin2hex(openssl_random_pseudo_bytes(4));
 
 
 // form validation: ensure that the form is correctly filled
@@ -39,9 +47,30 @@ $linkgu = e($_POST["linkgu"]);
 
 
 if (count($errors) == 0) {
-$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkverys, linkmd, linkgu) 
-						  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkverys', '$linkmd', '$linkgu')";
-mysqli_query($db, $query); 
+	
+	if (empty($fpmp4)) {
+
+		$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkmd, linkgu, fataplayer) 
+								  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkmd', '$linkgu', '0')";
+				
+					
+					mysqli_query($db, $query); 
+		echo "1" . $query . $fpmp4 . $fpwebm . $fpposter;
+		
+	} elseif (!empty($fpmp4)) {
+		$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkmd, linkgu, fataplayer) 
+								  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkmd', '$linkgu', '$unique')";
+		
+							mysqli_query($db, $query);
+		echo "2" . $query;
+		
+		$query = "INSERT INTO fataplayer (id, fpmp4, fpposter, fpwebm)
+								  VALUES('$unique', '$fpmp4', '$fpposter', '$fpwebm')";
+
+							mysqli_query($db, $query); 
+	echo "3" . $query;
+	}
+	
 	
 
 $_SESSION['success']  = "EPISODIO AGGIUNTO!";
@@ -57,7 +86,7 @@ $_SESSION['success']  = "EPISODIO AGGIUNTO!";
   	$poster = $row["poster"];
   }
 	
-  $botToken="1250602787:AAELRszwAOyJM2uKCt8TdNCdqfgQg81epJ4";
+  //$botToken="1250602787:AAELRszwAOyJM2uKCt8TdNCdqfgQg81epJ4";
 
   $website="https://api.telegram.org/bot".$botToken;
   $chatId=-1001315498220;  //** ===>>>NOTE: this chatId MUST be the chat_id of a person, NOT another bot chatId !!!**
@@ -153,7 +182,7 @@ Guardalo ora su https://fatastreaming2.altervista.org/serie?id=$idserie",
 	ID serie: <select data-placeholder="Seleziona la serie" class="chosen-select" tabindex="2" name="idserie">
 				<option value=""></option>
 				<?php
-				$query = "SELECT nome, id FROM serie";
+				$query = "SELECT nome, id FROM serie ORDER BY nome ASC";
 						$results = mysqli_query($db, $query);
 						if (mysqli_num_rows($results) > 0) {
 							while($row = mysqli_fetch_assoc($results)) {
@@ -169,9 +198,9 @@ Guardalo ora su https://fatastreaming2.altervista.org/serie?id=$idserie",
 	Titolo: <input type="text" name="titolo"><br><br>
 	Supervideo: <input type="text" name="link"><br><br>
 	SpeedVideo: <input type="text" name="linksv"><br><br>
-	VeryStream: <input type="text" name="linkverys"><br><br>
 	MixDrop: <input type="text" name="linkmd"><br><br>
-	GoUnlimited: <input type="text" name="linkgu"><br><br><br>
+	GoUnlimited: <input type="text" name="linkgu"><br><br>
+	FataPlayer Mp4: <input type="text" name="fpmp4" style="width: 25%"> WebM: <input type="text" name="fpwebm" style="width: 25%"> Poster: <input type="text" name="fpposter" style="width: 25%"><br><br><br>
 	
 	<button type="submit" name="Invia" value="Invia">Invia</button>
 

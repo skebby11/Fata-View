@@ -86,12 +86,12 @@ include('inc/sections/header.php');
 			
 				echo "<div class='container-stagioni'>
 				<h4>Stagioni Disponibili</h4>";
-				foreach ($arr_stagioni as list($a)) {
+				foreach ($arr_stagioni as $a) {
 						echo "<div class='box-stagioni'><a href='#stagione$a'>$a</a></div>";
 				}
 				echo "</div>";
 			
-				foreach ($arr_stagioni as list($a)) {
+				foreach ($arr_stagioni as $a) {
 					echo "<div id='stagione$a'><h2>Stagione $a</h2></div>";
 					
 						
@@ -116,6 +116,7 @@ include('inc/sections/header.php');
 					$linkverys = $row["linkverys"];
 					$linkmd = $row["linkmd"];
 					$linkgu = $row["linkgu"];
+					$fataplayer = $row["fataplayer"];
 
 
 					$linkarr = array();
@@ -140,6 +141,11 @@ include('inc/sections/header.php');
 
 						array_push($linkarr, "<a href='view?v=$link' target='__blank'>Supervideo</a>");
 					}
+					
+					if(!empty($fataplayer)) { // FATAPLAYER SI
+
+							array_push($linkarr, "<a href='view?fp=$fataplayer' target='__blank'>FataPlayer</a>");
+						}
 
 
 
