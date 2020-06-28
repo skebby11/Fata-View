@@ -36,6 +36,16 @@ if(isset($_POST['aggiornaep'])){
 	$_SESSION['success']  = "Episodio aggiornato";
 }
 
+if(isset($_POST['deleteep_btn'])){
+	
+	  $eptodel = e($_POST['eptodel']);
+	
+          $query = "DELETE FROM `episodi` WHERE `id` = $eptodel";
+          mysqli_query($db, $query);
+
+}
+
+
 ?>
 
 <head>
@@ -247,7 +257,7 @@ tr:nth-child(even) {
 	?>
 	<a class="button_hover" href="editep.php?action=view">Indietro</a><br><br><br>
 	<form action="editep.php?action=view" method="post">
-	<input value="<? echo $epid ?>" name="selepid" style="display: none">
+	<input value="<?php echo $epid ?>" name="selepid" style="display: none">
 	<strong>Stagione</strong> <br><input id='editor1' name="upstagione" value="<?php echo $stagione ?>"><br><br>
 	<strong>Episodio</strong> <br><input id='editor2' name="upepisodio" value="<?php echo $episodio ?>"><br><br>
 	<strong>Serie</strong> <br> <select data-placeholder="<?php echo $serie ?>" class="chosen-select" tabindex="2" name="idserie" value="<?php echo $serie ?>">
@@ -272,6 +282,13 @@ tr:nth-child(even) {
 	<strong>Link GoUnl</strong> <br><input id='editor9' name="uplinkfata" value="<?php echo $fataplayer ?>"><br><br><br>
 	
 	<button type="submit" name="aggiornaep" value="Salva">Salva</button>
+	</form>
+	
+	<form action="editep.php?action=view" method="post">
+	
+		<input type="hidden" value="<?php echo $epid ?>" name="eptodel">
+		<input type="submit" class="delete-serie-btn" name="deleteep_btn" value="Elimina Episodio">
+		
 	</form>
 	
 	

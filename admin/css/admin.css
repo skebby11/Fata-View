@@ -25,13 +25,13 @@ a,button{outline:0;}
 }
 /*---------------------------------------------------------------*/
 pre{position:relative;z-index:+1000;background:#ffffff;}
-div.logo{width:50%;font-size:25px;color:#ffffff;margin-left:10px;float:left;}
+div.logo{width:50%;font-size:25px;color:#ffffff;margin-left:10px;float:left;height: 30px;}
 div.control_utenti{top:5px;}
 div.container{width:96%;margin:0 auto;}
 
 div.head{padding:10px 0px;background:#1E1E1E;width:100%;float:left;}
 div.footer{padding:5px 0px;background:#dddddd; border-top:1px solid #aaaaaa;clear:both;}
-div.sx{width:19%;height:100%; background:#3C3C3C;position:fixed;top:50px;padding:0px}
+div.sx{width:19%;height:100%; background:#3C3C3C;position:fixed;top:50px; padding:0px}
 div.dx{width:81%;border:0px solid #ffffff; padding:0%;float:left;margin-left:19%;overflow-y:scroll;height:88%;}
 div.dx div.title{width:100%;float:left;padding:15px 0px;background:#ffffff;border-bottom:4px solid #e5e5e5;}
 div.title h1{font-size:30px;font-weight:300;color:#565656;margin:0px;line-height:30px;}
@@ -117,6 +117,22 @@ a.red_button:hover {
 
 a.button_hover i{margin-right:5px;display:inline-block;}
 a.menu_element i{margin-right:5px;display:inline-block;}
+
+input.delete-serie-btn {
+	background: #B80003;
+    color: #ffffff;
+    padding: 10px 0px;
+    border-radius: 0px;
+    cursor: pointer;
+    color: #fff;
+    width: 160px;
+    text-align: center;
+    text-decoration: none;
+    border: 0px;
+    font-size: 14px;
+    line-height: 14px;
+	margin: 40px 0;
+}
 
 ul.elenco{margin:0px;padding:0px;margin-bottom:20px;float:left;width:100%;}
 ul.elenco li{list-style-type:none;margin:0px;padding:0px;padding-left:10px;padding:10px 0px;border-left:2px solid #1880d7;float:left;width:100%;}
