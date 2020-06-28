@@ -4,8 +4,8 @@ include('../functions.php');
 
 $idutente = $_SESSION['user']['id'];
 
-if ($idutente != 2) {
-	header('location: ../login.php');
+if ($_SESSION['user']['user_type'] != 'admin' ) {
+	header('location: /login');
 }
 
 

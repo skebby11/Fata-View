@@ -7,7 +7,7 @@ $activepage = "4";
 	
 $idutente = $_SESSION['user']['id'];
 
-if ($idutente != 2) {
+if ($_SESSION['user']['user_type'] != 'admin' ) {
 	header('location: /login');
 }
 
