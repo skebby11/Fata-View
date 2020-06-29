@@ -24,15 +24,46 @@ a,button{outline:0;}
                                   supported by Chrome and Opera */
 }
 /*---------------------------------------------------------------*/
+
+.success {
+		align-content: center;
+		font-size: 120%;
+		width: 100%;
+		background-color: mediumseagreen;
+		border-radius: 5px;
+		color: white;
+		margin: 20px auto;
+}
+
+.success h3 {
+		padding: 0 40px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
 pre{position:relative;z-index:+1000;background:#ffffff;}
 div.logo{width:50%;font-size:25px;color:#ffffff;margin-left:10px;float:left;height: 30px;}
 div.control_utenti{top:5px;}
-div.container{width:96%;margin:0 auto;}
+div.container{width:99%;margin:0 auto;}
 
 div.head{padding:10px 0px;background:#1E1E1E;width:100%;float:left;}
 div.footer{padding:5px 0px;background:#dddddd; border-top:1px solid #aaaaaa;clear:both;}
-div.sx{width:19%;height:100%; background:#3C3C3C;position:fixed;top:50px; padding:0px}
-div.dx{width:81%;border:0px solid #ffffff; padding:0%;float:left;margin-left:19%;overflow-y:scroll;height:88%;}
+div.sx{width:15%;height:100%; background:#3C3C3C;position:fixed;top:50px; padding:0px}
+div.dx{width:85%;border:0px solid #ffffff; padding:0%;float:left;margin-left:15%;overflow-y:scroll;height:88%;}
 div.dx div.title{width:100%;float:left;padding:15px 0px;background:#ffffff;border-bottom:4px solid #e5e5e5;}
 div.title h1{font-size:30px;font-weight:300;color:#565656;margin:0px;line-height:30px;}
 ul.sx_menu {

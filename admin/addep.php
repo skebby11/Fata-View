@@ -55,20 +55,17 @@ if (count($errors) == 0) {
 				
 					
 					mysqli_query($db, $query); 
-		echo "1" . $query . $fpmp4 . $fpwebm . $fpposter;
 		
 	} elseif (!empty($fpmp4)) {
 		$query = "INSERT INTO episodi (stagione, episodio, serie, titolo, link, linksv, linkmd, linkgu, fataplayer) 
 								  VALUES('$stagione', '$episodio', '$idserie', '$titolo', '$link', '$linksv', '$linkmd', '$linkgu', '$unique')";
 		
 							mysqli_query($db, $query);
-		echo "2" . $query;
 		
 		$query = "INSERT INTO fataplayer (id, fpmp4, fpposter, fpwebm)
 								  VALUES('$unique', '$fpmp4', '$fpposter', '$fpwebm')";
 
 							mysqli_query($db, $query); 
-	echo "3" . $query;
 	}
 	
 	
@@ -127,18 +124,6 @@ Guardalo ora su https://fatastreaming2.altervista.org/serie?id=$idserie",
 	
 	<title>Aggiungi episodio</title>
 
-
-	
-<style>
-
-	.success {
-		align-content: center;
-		font-size: 120%;
-		width: 450px;
-		background-color: mediumseagreen;
-	}
-	
-</style>
 	
 </head>
 
