@@ -185,7 +185,7 @@ Guardalo ora su https://fatastreaming2.altervista.org/serie?id=$idserie",
 	SpeedVideo: <input type="text" name="linksv"><br><br>
 	MixDrop: <input type="text" name="linkmd"><br><br>
 	GoUnlimited: <input type="text" name="linkgu"><br><br>
-	FataPlayer Mp4: <input type="text" name="fpmp4" style="width: 25%"> WebM: <input type="text" name="fpwebm" style="width: 25%"> Poster: <input type="text" name="fpposter" style="width: 25%"><br><br><br>
+	FataPlayer Mp4: <input type="text" name="fpmp4"> <br><br><br>
 	
 	<button type="submit" name="Invia" value="Invia">Invia</button>
 

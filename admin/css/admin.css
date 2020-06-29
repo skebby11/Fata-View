@@ -39,6 +39,16 @@ a,button{outline:0;}
 		padding: 0 40px;
 }
 
+div.torna-leftmenu {
+    position: absolute;
+    bottom: 0;
+    width: 99%;
+    left: 0;
+}
+a.torna-leftmenu {
+    padding: 15px;
+}
+
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;

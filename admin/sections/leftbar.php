@@ -21,8 +21,9 @@
 	</ul>
 	<div style="float: left; height: 65%; margin: 2px; padding: 10px; width: 100%; position:relative; ">
 	<ul class="sx_menu" >
-	<div style='position:absolute;bottom:0;'>
-		<a class="menu_element product " href="../">Torna al sito</a>
+
+	<div class='torna-leftmenu'>
+		<a class="menu_element product torna-leftmenu" href="../">Torna al sito</a>
 	</div>
 	
 
