@@ -108,6 +108,7 @@ include('inc/sections/header.php');
 				$epresult = mysqli_query($db, $epquery);
 
 					while($row = mysqli_fetch_assoc($epresult)) {
+					$iduniep = $row["id"];
 					$season = $row["stagione"];
 					$ep = $row["episodio"];
 					$titolo = $row["titolo"];
@@ -149,7 +150,7 @@ include('inc/sections/header.php');
 
 
 
-					echo "<div class='ep'><p class='info'><strong> " . $season . "X" . $ep . "</strong> <br><br> " . $titolo . "</p><p class='link'> ";
+					echo "<div class='ep' id='$iduniep'><p class='info'><strong> " . $season . "X" . $ep . "</strong> <br><br> " . $titolo . "</p><p class='link'> ";
 
 						foreach ($linkarr as $linksing){
 						  echo $linksing . '<br>';

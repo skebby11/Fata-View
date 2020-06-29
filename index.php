@@ -29,21 +29,6 @@ include('inc/sections/header.php');
 		  	<img src="assets/img/french.png" alt="" width="250px">
 		
 		<?php endif ?>
-		<style>
-		/* Solve problem on a non-solid background */
-		.serie img:hover { 
-		  outline: 3px solid #00aeef; 
-		} 
-
-		/* Solve problem where border size changes on hover */
-		.serie img { 
-		  border: 0px solid ; 
-		  border-color: #00aeef;
-		} 
-		.serie img:hover { 
-		  outline: 2px solid #00aeef; 
-		} 
-		</style>
 		
 		<?php
 			
@@ -105,13 +90,6 @@ include('inc/sections/header.php');
 			$linkmd = $row["linkmd"];
 			$linkgu = $row["linkgu"];
 				
-			if(!empty($link)){
-				$link = "v=".$link;
-			} elseif (!empty($linksv)){
-				$link = "sv=".$linksv;
-			} elseif (!empty($linkmd)) {
-				$link = "md=".$linkmd;
-			}
 				
 				$query2 = "SELECT nome, poster FROM serie WHERE id='". $serieid ."'";
 				$result2 = mysqli_query($db,$query2);
@@ -123,7 +101,7 @@ include('inc/sections/header.php');
 			}
 				
 			
-			echo "<div class='serie animated fadeInDown'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
+			echo "<div class='serie animated fadeInDown'><a href='serie?id=". $serieid . "#$idep'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
 			}
 			}
 			
@@ -146,14 +124,6 @@ include('inc/sections/header.php');
 			$linkmd = $row["linkmd"];
 			$linkgu = $row["linkgu"];
 				
-			if(!empty($link)){
-				$link = "v=".$link;
-			} elseif (!empty($linksv)){
-				$link = "sv=".$linksv;
-			} elseif (!empty($linkmd)) {
-				$link = "md=".$linkmd;
-			}
-				
 				$query2 = "SELECT nome, poster FROM serie WHERE id='". $serieid ."'";
 				$result2 = mysqli_query($db,$query2);
 				while($row = mysqli_fetch_assoc($result2)) {
@@ -164,7 +134,7 @@ include('inc/sections/header.php');
 
 			}
 			
-			echo "<div class='serie animated fadeInDown'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
+			echo "<div class='serie animated fadeInDown'><a href='serie?id=". $serieid . "#$idep'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
 			}
 		}
 			
@@ -187,14 +157,6 @@ include('inc/sections/header.php');
 			$linkmd = $row["linkmd"];
 			$linkgu = $row["linkgu"];
 				
-			if(!empty($link)){
-				$link = "v=".$link;
-			} elseif (!empty($linksv)){
-				$link = "sv=".$linksv;
-			} elseif (!empty($linkmd)) {
-				$link = "md=".$linkmd;
-			}
-				
 				$query2 = "SELECT nome, poster FROM serie WHERE id='". $serieid ."'";
 				$result2 = mysqli_query($db,$query2);
 				while($row = mysqli_fetch_assoc($result2)) {
@@ -205,7 +167,7 @@ include('inc/sections/header.php');
 				
 			}
 			
-			echo "<div class='serie animated fadeInDown'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
+			echo "<div class='serie animated fadeInDown'><a href='serie?id=". $serieid . "#$idep'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div>";
 			}
 		}
 		
@@ -228,15 +190,6 @@ include('inc/sections/header.php');
 			$linkmd = $row["linkmd"];
 			$linkgu = $row["linkgu"];
 				
-				
-			if(!empty($link)){
-				$link = "v=".$link;
-			} elseif (!empty($linksv)){
-				$link = "sv=".$linksv;
-			} elseif (!empty($linkmd)) {
-				$link = "md=".$linkmd;
-			}
-				
 				$query2 = "SELECT nome, poster FROM serie WHERE id='". $serieid ."'";
 				$result2 = mysqli_query($db,$query2);
 				while($row = mysqli_fetch_assoc($result2)) {
@@ -247,7 +200,7 @@ include('inc/sections/header.php');
 				
 			}
 			
-			echo "<div class='serie animated fadeInDown'><a href='view?". $link . "'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div></div>";
+			echo "<div class='serie animated fadeInDown'><a href='serie?id=". $serieid . "#$idep'><img src='" . $poster ."'><p>".$stagionen."X".$episodion." - ".$titolo."</p></a></div></div>";
 			}
 		}
 		
