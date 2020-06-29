@@ -24,6 +24,12 @@ $active = 0;
 include('inc/sections/header.php');
 ?>
 
+<button onclick="topFunction()" id="topBtn" title="Go to top"> 
+
+<img src="assets/img/top-button.png" alt="">
+	
+</button>
+
 	<form>
 	<div class="container">
 	
@@ -173,4 +179,5 @@ include('inc/sections/header.php');
 	</div>
 	</div>
 	</form>
+	<script src="assets/js/topbtn.js"></script>
 <?php include('inc/sections/footer.php') ?>
