@@ -8,7 +8,7 @@ $p = $_GET['p']; // speedvideo
 $sv = $_GET['sv']; // speedvideo
 $md = $_GET['md']; // mixdrop
 $gu = $_GET['gu']; // gounl
-$fataplayer = $_GET['fp']; // gounl
+$fataplayer = $_GET['fp']; // fata player
 
 
 include('functions.php');
@@ -180,7 +180,7 @@ document.oncontextmenu=new Function("return false");
 				if(!empty($gu)){ // go unlimited
       			echo "<span class='play1' id='play1' onclick='hide()' ;>
    				  </span><iframe src='https://gounlimited.to/embed-$gu.html' scrolling='no' frameborder='0' width='100%' height='100%' allowfullscreen='true' webkitallowfullscreen='true' mozallowfullscreen='true'></iframe></a><bold></bold>";
-				}}
+				}
 				
 				if(!empty($fataplayer)){
 					
@@ -200,7 +200,7 @@ document.oncontextmenu=new Function("return false");
   							  <source src='$fpwebm' type='video/webm' />
 							</video></a><bold></bold>
 					";
-				}
+				}}
 				
 				else{
 					echo "</a><h1 style='color:fff'>Si &egrave verificato un errore</h1>
