@@ -11,15 +11,18 @@ if ($_SESSION['user']['user_type'] != 'admin' ) {
 
 
 ?>
-
+<head>
     <link rel="stylesheet" href="assets/chosen/docsupport/style.css">
     <link rel="stylesheet" href="assets/chosen/docsupport/prism.css">
     <link rel="stylesheet" href="assets/chosen/chosen.css">
 	<link rel="stylesheet" type="text/css" href="css/admin.css?0.004">
+	
+	<title>Bacheca</title>
 
+</head>
 
-
-<div class="head"><div class="logo">FATA STREAMING</div></div>
+<body>
+<?php include('sections/head.php'); ?>
 
 <?php
 	$activepage = "index"; include('sections/leftbar.php'); ?>

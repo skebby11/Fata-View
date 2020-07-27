@@ -5,5 +5,7 @@
 
 	<?php echo $footeradd ?>
 
+	<script src="https://www.sebastianoriva.it/assets/js/SmoothScroll.js"></script>
+
 </body>
 </html>
