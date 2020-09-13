@@ -213,9 +213,9 @@ include('inc/sections/header.php');
 		?>
 		
 		<h3 class="lasttext">Ultime serie aggiunte</h3>
-		<div class="lastseries serie-slider">
+		<div class="lastseries ultime-serie-slider">
 		<?php
-		$query = "SELECT id, nome, descr, poster, stagioni FROM serie ORDER BY id DESC LIMIT 20";
+		$query = "SELECT id, nome, descr, poster, stagioni FROM serie ORDER BY id DESC LIMIT 15";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
 			
@@ -224,7 +224,7 @@ include('inc/sections/header.php');
 			
 			<?php
 			
-			echo "<div class='serie animated fadeInDown'><a href='serie?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p>" . $row["nome"] ."</p></a></div>";
+			echo "<div class='serie animated fadeInDown'><a href='serie?id=". $row["id"] ."'><img data-lazy='" . $row["poster"] ."'><p>" . $row["nome"] ."</p></a></div>";
 		}		
 		?>
 		</div>
@@ -233,12 +233,12 @@ include('inc/sections/header.php');
 		
 		
 		<h3 class="lasttext">Ultimi film aggiunti</h3>
-		<div class="lastseries serie-slider">
+		<div class="lastseries ultimi-film-slider">
 		<?php
-		$query = "SELECT * FROM film ORDER BY id DESC  LIMIT 20";
+		$query = "SELECT * FROM film ORDER BY id DESC  LIMIT 15";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
-			echo "<div class='serie animated fadeInDown'><a href='film?id=". $row["id"] ."'><img src='" . $row["poster"] ."'><p>" . $row["titolo"] ."</p></a></div>";
+			echo "<div class='serie animated fadeInDown'><a href='film?id=". $row["id"] ."'><img data-lazy='" . $row["poster"] ."' alt='" . $row["titolo"] ."' title='" . $row["titolo"] ."'><p>" . $row["titolo"] ."</p></a></div>";
 		}		
 		?>
 		</div>
@@ -246,7 +246,7 @@ include('inc/sections/header.php');
 		<h3 class="lasttext">Ultimi episodi aggiunti</h3>
 		<div class="lastseries ultimi-episodi-slider">
 		<?php
-		$query = "SELECT * FROM episodi ORDER BY id DESC LIMIT 20";
+		$query = "SELECT * FROM episodi ORDER BY id DESC LIMIT 15";
 		$result = mysqli_query($db,$query);
 		while($row = mysqli_fetch_assoc($result)) {
 			
@@ -289,6 +289,7 @@ include('inc/sections/header.php');
 	</form>
 	
 	<script src="/assets/js/home-slick.js"></script>
-<?php $footeradd = "<script type='text/javascript' src='//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js'></script>" ?>
+<?php $footeradd = "<script type='text/javascript' src='//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js'></script>"
+ ?>
 <?php include('inc/sections/footer.php') ?>
 	

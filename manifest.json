@@ -1,0 +1,46 @@
+{
+    "dir": "ltr",
+    "lang": "it",
+    "name": "Home - Fata Streaming",
+    "short_name": "Fata Streaming",
+    "scope": "/",
+    "display": "fullscreen",
+    "start_url": "https://fatastreaming2.altervista.org/",
+    "background_color": "#F8F8FF",
+    "theme_color": "#F8F8FF",
+    "description": "Le tue serie e film preferiti come per magia.",
+    "orientation": "any",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "https://fatastreaming2.altervista.org/assets/img/fata512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "https://fatastreaming2.altervista.org/assets/img/fata126.png",
+            "sizes": "126x126",
+            "type": "image/png"
+        },
+        {
+            "src": "https://fatastreaming2.altervista.org/assets/img/icons/fata192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://fatastreaming2.altervista.org/assets/img/icons/maskable_icon.png",
+            "sizes": "682x682",
+            "type": "image/png",
+			"purpose": "any maskable"
+        }
+    ],
+    "url": "https://fatastreaming2.altervista.org/",
+    "screenshots": [
+        {
+            "src": "https://fatastreaming2.altervista.org/assets/img/screenshot.png",
+            "sizes": "1280x800",
+            "type": "image/png"
+        }
+    ]
+}
